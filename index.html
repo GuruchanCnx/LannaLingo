@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LannaLingo - Yi Peng Festival & Northern Thai Language</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* iOS 26 Liquid Glass Design System */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        :root {
+            /* Light Theme Variables */
+            --primary: #c1121f;
+            --secondary: #e6af2e;
+            --light: #f8f9fa;
+            --dark: #1d3557;
+            --accent: #a8dadc;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --glass-backdrop: blur(24px);
+            --university-blue: #2c5aa0;
+            --ai-blue: #4361ee;
+            --ai-purple: #7209b7;
+            --success: #4caf50;
+            --error: #f44336;
+            --nav-text: #1d3557;
+            --festival-gold: #ffd700;
+            --festival-red: #c1121f;
+        }
+        
+        .dark-theme {
+            /* Dark Theme Variables */
+            --primary: #e63946;
+            --secondary: #ffd700;
+            --light: #1b263b;
+            --dark: #f1faee;
+            --accent: #457b9d;
+            --glass-bg: rgba(30, 30, 46, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --university-blue: #64b5f6;
+            --ai-blue: #4cc9f0;
+            --ai-purple: #bd5fff;
+            --festival-gold: #ffd700;
+            --festival-red: #e63946;
+            --nav-text: #f1faee;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e6f0fa 0%, #d1e3f5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+        }
+        
+        .dark-theme body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+        }
+        
+        /* Thai Font Support */
+        .thai-text {
+            font-family: 'TH Sarabun New', 'Sukhumvit Set', 'Kanit', sans-serif;
+        }
+        
+        /* iOS 26 Liquid Glass Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 0 0 24px 24px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            text-shadow: 0 2px 8px rgba(230, 175, 46, 0.3);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 22px;
+        }
+        
+        .nav-item {
+            padding: 10px 20px;
+            border-radius: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: transparent;
+            border: 1px solid transparent;
+            font-size: 1.05rem;
+            color: var(--nav-text);
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--glass-border);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .theme-toggle, .language-toggle {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            width: 52px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-left: 15px;
+        }
+        
+        .theme-toggle:hover, .language-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .theme-toggle i {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-toggle:hover i {
+            transform: rotate(20deg);
+        }
+        
+        .language-toggle i {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 140px 24px 60px;
+        }
+        
+        .section {
+            margin-bottom: 70px;
+            scroll-margin-top: 120px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        .section-header h2 {
+            font-size: 2.4rem;
+            color: var(--primary);
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(193, 18, 31, 0.1);
+        }
+        
+        .intro {
+            background: var(--glass-bg);
+            border-radius: 28px;
+            padding: 35px;
+            margin-bottom: 2.5rem;
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+        
+        .festival-hero {
+            background: linear-gradient(135deg, rgba(193, 18, 31, 0.1) 0%, rgba(230, 175, 46, 0.1) 100%);
+            border-radius: 28px;
+            padding: 40px;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+        
+        .festival-hero h1 {
+            font-size: 2.8rem;
+            color: var(--festival-red);
+            margin-bottom: 20px;
+            font-family: 'TH Sarabun New', sans-serif;
+        }
+        
+        .festival-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 24px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.09);
+            text-align: center;
+            min-width: 140px;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s ease;
+        }
+        
+        .dark-theme .stat-card {
+            background: #1b263b;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card .number {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .stat-card .label {
+            font-size: 1rem;
+            color: var(--nav-text);
+        }
+        
+        /* Festival Content Sections */
+        .festival-section {
+            background: var(--glass-bg);
+            border-radius: 28px;
+            padding: 35px;
+            margin-top: 50px;
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+        
+        .festival-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .festival-card {
+            background: white;
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        
+        .dark-theme .festival-card {
+            background: #1b263b;
+        }
+        
+        .festival-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.2);
+        }
+        
+        .festival-card h3 {
+            color: var(--festival-red);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.4rem;
+        }
+        
+        .festival-card .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: rgba(193, 18, 31, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--festival-red);
+            font-size: 1.4rem;
+        }
+        
+        /* Language Content */
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 3rem 0;
+        }
+        
+        .language-card {
+            background: var(--glass-bg);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+        }
+        
+        .language-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+        }
+        
+        .language-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .language-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: rgba(44, 90, 160, 0.15);
+            color: var(--university-blue);
+        }
+        
+        .language-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* Points System */
+        .points-system {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 14px 20px;
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            box-shadow: var(--glass-shadow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 998;
+        }
+        
+        .points-icon {
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+        
+        .points-value {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 35px;
+            margin-top: 70px;
+            border-radius: 28px 28px 0 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 14px 18px;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.7rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .container {
+                padding: 120px 18px 40px;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .festival-hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS 26 Liquid Glass Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-language logo-icon"></i>
+            <span id="app-title">LannaLingo</span>
+        </div>
+        <div class="nav-menu">
+            <div class="nav-item active" data-target="festival">Yi Peng</div>
+            <div class="nav-item" data-target="traditions">Traditions</div>
+            <div class="nav-item" data-target="language">Language</div>
+            <div class="nav-item" data-target="expressions">Expressions</div>
+            <div class="nav-item" data-target="about">About</div>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <div class="language-toggle" id="language-toggle">
+                <i class="fas fa-language"></i>
+            </div>
+            <div class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Points System -->
+    <div class="points-system">
+        <div class="points-icon">
+            <i class="fas fa-medal"></i>
+        </div>
+        <div>
+            <div>Points</div>
+            <div class="points-value" id="points-count">0</div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Yi Peng Festival Hero Section -->
+        <section id="festival" class="section">
+            <div class="festival-hero">
+                <h1>ประเพณียี่เป็งล้านนา<br><span style="font-size: 1.8rem; color: var(--festival-gold);">Yi Peng Lanna Festival</span></h1>
+                <p id="festival-desc">The sacred festival of light in Northern Thailand, where thousands of lanterns illuminate the night sky in honor of the Buddha and ancestral spirits.</p>
+            </div>
+        </section>
+        
+        <!-- Yi Peng Traditions Section -->
+        <section id="traditions" class="section">
+            <div class="section-header">
+                <i class="fas fa-lamp"></i>
+                <h2 id="traditions-title">Yi Peng Traditions & Rituals</h2>
+            </div>
+            
+            <div class="festival-section">
+                <div class="festival-grid">
+                    <div class="festival-card">
+                        <div class="icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 id="lanterns-title">Lanna Lanterns (Khom Fai)</h3>
+                        <p id="lanterns-desc">In the period before the full moon day of the second month, Lanna people with skilled craftsmanship create various shaped lamps to prepare for worship at temples. These lanterns are hung at relics and chedis in front of temples, and nowadays are popular as building decorations.</p>
+                    </div>
+                    
+                    <div class="festival-card">
+                        <div class="icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 id="merit-making-title">Merit-Making Events</h3>
+                        <p id="merit-making-desc">During Yi Peng, Lanna people hold major merit-making events. From the 13th evening (Dhammawat sermon) to the 14th evening (thousand verses sermon), culminating on the 15th evening with the Mahachat Vessantara Jataka sermon. Temples are decorated with royal fences and forest gates modeled after Phra Vessantara's exile.</p>
+                    </div>
+                    
+                    <div class="festival-card">
+                        <div class="icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h3 id="tung-title">Tung Lanna</h3>
+                        <p id="tung-desc">Tung are decorative sheets made of cloth, paper, wood, metal, brass, or palm leaves, used in Lanna rituals. They are offered to Buddha in both auspicious and inauspicious ceremonies. Northerners believe that donating Tung brings great merit and benefits.</p>
+                    </div>
+                    
+                    <div class="festival-card">
+                        <div class="icon">
+                            <i class="fas fa-candle"></i>
+                        </div>
+                        <h3 id="candles-title">Yi Peng Merit Candles</h3>
+                        <p id="candles-desc">Lanna people light candles to worship the five gods according to the legend of Mae Ka Phueak. Candles are placed at house doors, wells, barns, stoves, stairs, and windows as worship of light, believed to bring intelligence and brightness to one's life.</p>
+                    </div>
+                    
+                    <div class="festival-card">
+                        <div class="icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h3 id="krathong-title">Krathong Offerings</h3>
+                        <p id="krathong-desc">Krathongs are shaped like blooming lotuses to pay homage to the Ganga River and ask forgiveness. They contain incense sticks, candles, and traditionally include cut nails and hair to release suffering and illness. Baht coins are also placed in krathongs before floating them on rivers.</p>
+                    </div>
+                    
+                    <div class="festival-card">
+                        <div class="icon">
+                            <i class="fas fa-ship"></i>
+                        </div>
+                        <h3 id="floating-title">Floating Lanterns (Long La Pao)</h3>
+                        <p id="floating-desc">Also known as Sai Ruea Sai Fai, this tradition dates back to the Hariphunchai period (14th century). During cholera outbreaks, people who migrated to Hongsawadee would float offerings with flowers, incense, candles, and consumer goods down the Mae Ping and Mae Kuang Rivers to remember relatives still living there.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Language & Expressions Section -->
+        <section id="language" class="section">
+            <div class="section-header">
+                <i class="fas fa-language"></i>
+                <h2 id="language-title">Yi Peng Related Expressions</h2>
+            </div>
+            
+            <div class="language-grid">
+                <div class="language-card">
+                    <div class="language-header">
+                        <div class="language-icon">
+                            <i class="fas fa-lamp"></i>
+                        </div>
+                        <h3>ยี่เป็ง (Yi Peng)</h3>
+                    </div>
+                    <p><strong>Meaning:</strong> The full moon day of the second lunar month in Lanna calendar</p>
+                    <p><strong>Usage:</strong> "วันยี่เป็งปีนี้จะไปวัดพระสิงห์" (This Yi Peng, I'll go to Wat Phra Singh)</p>
+                </div>
+                
+                <div class="language-card">
+                    <div class="language-header">
+                        <div class="language-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>โคมไฟ (Khom Fai)</h3>
+                    </div>
+                    <p><strong>Meaning:</strong> Traditional Lanna lanterns</p>
+                    <p><strong>Usage:</strong> "ช่างทำโคมไฟมีฝีมือมาก" (The lantern maker is very skilled)</p>
+                </div>
+                
+                <div class="language-card">
+                    <div class="language-header">
+                        <div class="language-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h3>ตุง (Tung)</h3>
+                    </div>
+                    <p><strong>Meaning:</strong> Decorative ritual banners</p>
+                    <p><strong>Usage:</strong> "ตุงที่วัดมีหลายแบบ" (The temple has many types of Tung)</p>
+                </div>
+                
+                <div class="language-card">
+                    <div class="language-header">
+                        <div class="language-icon">
+                            <i class="fas fa-candle"></i>
+                        </div>
+                        <h3>เทียนยี่เป็ง (Thian Yi Peng)</h3>
+                    </div>
+                    <p><strong>Meaning:</strong> Yi Peng merit candles</p>
+                    <p><strong>Usage:</strong> "จุดเทียนยี่เป็งที่บ้านให้สว่าง" (Light Yi Peng candles at home to make it bright)</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Expressions Section -->
+        <section id="expressions" class="section">
+            <div class="section-header">
+                <i class="fas fa-comments"></i>
+                <h2 id="expressions-title">Traditional Lanna Expressions</h2>
+            </div>
+            
+            <div class="festival-section">
+                <div class="festival-grid">
+                    <div class="festival-card">
+                        <h3>กิ๋นข้าวแล้วบ่?</h3>
+                        <p><strong>Meaning:</strong> Have you eaten yet? (Traditional greeting)</p>
+                        <p><strong>Context:</strong> Used during Yi Peng when visiting neighbors</p>
+                    </div>
+                    
+                    <div class="festival-card">
+                        <h3>บ่เป็นหยัง</h3>
+                        <p><strong>Meaning:</strong> It's nothing / Don't worry about it</p>
+                        <p><strong>Context:</strong> Common response during festival preparations</p>
+                    </div>
+                    
+                    <div class="festival-card">
+                        <h3>เฮา</h3>
+                        <p><strong>Meaning:</strong> We / Us (Lanna pronoun)</p>
+                        <p><strong>Context:</strong> "เฮาไปลอยกระทงกัน" (Let's go float krathongs together)</p>
+                    </div>
+                    
+                    <div class="festival-card">
+                        <h3>ม่วน</h3>
+                        <p><strong>Meaning:</strong> Fun, enjoyable</p>
+                        <p><strong>Context:</strong> "งานยี่เป็งม่วนหลาย" (The Yi Peng festival is very fun)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-header">
+                <i class="fas fa-info-circle"></i>
+                <h2 id="about-title">About This Project</h2>
+            </div>
+            
+            <div class="intro">
+                <p id="about-desc">This project preserves and shares the authentic Yi Peng festival traditions of Northern Thailand, based on historical documents from Lanna Kingdom. The content is sourced from university archives and verified by cultural experts to ensure accuracy and respect for Lanna heritage.</p>
+                <p id="about-desc2">All expressions and traditions are presented with proper cultural context to help visitors and language enthusiasts connect more deeply with Northern Thai culture during this sacred festival of light.</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>LannaLingo &copy; 2023 | Preserving Northern Thai Cultural Heritage</p>
+        <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">Content sourced from authentic Lanna documents and verified by cultural experts</p>
+    </footer>
+
+    <script>
+        // Initialize points
+        let userPoints = 0;
+        const pointsCount = document.getElementById('points-count');
+        
+        // Update points display
+        function updatePoints(amount = 0) {
+            userPoints += amount;
+            pointsCount.textContent = userPoints;
+        }
+        
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeIcon.className = 'fas fa-moon';
+            } else {
+                document.body.classList.remove('dark-theme');
+                themeIcon.className = 'fas fa-sun';
+            }
+            localStorage.setItem('theme', theme);
+        }
+        
+        // Initialize theme
+        applyTheme(currentTheme);
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(currentTheme);
+        });
+        
+        // Language translations
+        const translations = {
+            en: {
+                appTitle: "LannaLingo",
+                festivalDesc: "The sacred festival of light in Northern Thailand, where thousands of lanterns illuminate the night sky in honor of the Buddha and ancestral spirits.",
+                traditionsTitle: "Yi Peng Traditions & Rituals",
+                lanternsTitle: "Lanna Lanterns (Khom Fai)",
+                lanternsDesc: "In the period before the full moon day of the second month, Lanna people with skilled craftsmanship create various shaped lamps to prepare for worship at temples. These lanterns are hung at relics and chedis in front of temples, and nowadays are popular as building decorations.",
+                meritMakingTitle: "Merit-Making Events",
+                meritMakingDesc: "During Yi Peng, Lanna people hold major merit-making events. From the 13th evening (Dhammawat sermon) to the 14th evening (thousand verses sermon), culminating on the 15th evening with the Mahachat Vessantara Jataka sermon. Temples are decorated with royal fences and forest gates modeled after Phra Vessantara's exile.",
+                tungTitle: "Tung Lanna",
+                tungDesc: "Tung are decorative sheets made of cloth, paper, wood, metal, brass, or palm leaves, used in Lanna rituals. They are offered to Buddha in both auspicious and inauspicious ceremonies. Northerners believe that donating Tung brings great merit and benefits.",
+                candlesTitle: "Yi Peng Merit Candles",
+                candlesDesc: "Lanna people light candles to worship the five gods according to the legend of Mae Ka Phueak. Candles are placed at house doors, wells, barns, stoves, stairs, and windows as worship of light, believed to bring intelligence and brightness to one's life.",
+                krathongTitle: "Krathong Offerings",
+                krathongDesc: "Krathongs are shaped like blooming lotuses to pay homage to the Ganga River and ask forgiveness. They contain incense sticks, candles, and traditionally include cut nails and hair to release suffering and illness. Baht coins are also placed in krathongs before floating them on rivers.",
+                floatingTitle: "Floating Lanterns (Long La Pao)",
+                floatingDesc: "Also known as Sai Ruea Sai Fai, this tradition dates back to the Hariphunchai period (14th century). During cholera outbreaks, people who migrated to Hongsawadee would float offerings with flowers, incense, candles, and consumer goods down the Mae Ping and Mae Kuang Rivers to remember relatives still living there.",
+                languageTitle: "Yi Peng Related Expressions",
+                expressionsTitle: "Traditional Lanna Expressions",
+                aboutTitle: "About This Project",
+                aboutDesc: "This project preserves and shares the authentic Yi Peng festival traditions of Northern Thailand, based on historical documents from Lanna Kingdom. The content is sourced from university archives and verified by cultural experts to ensure accuracy and respect for Lanna heritage.",
+                aboutDesc2: "All expressions and traditions are presented with proper cultural context to help visitors and language enthusiasts connect more deeply with Northern Thai culture during this sacred festival of light."
+            },
+            th: {
+                appTitle: "ภาษาล้านนา",
+                festivalDesc: "เทศกาลศักดิ์สิทธิ์แห่งแสงสว่างในภาคเหนือของไทย ที่โคมไฟนับพันจะส่องสว่างท้องฟ้ายามค่ำคืนเพื่อบูชาพระพุทธเจ้าและดวงวิญญาณบรรพชน",
+                traditionsTitle: "ประเพณียี่เป็งและพิธีกรรม",
+                lanternsTitle: "โคมไฟล้านนา (Khom Fai)",
+                lanternsDesc: "ในช่วงก่อนวันเพ็ญเดือนสอง ชาวล้านนาผู้มีฝีมือจะสร้างโคมไฟรูปแบบต่างๆ เพื่อเตรียมใช้ในการจุดบูชาที่วัดในวันเพ็ญ โดยแขวนโคมที่พระสถูปเจดีย์หน้าวัด ปัจจุบันนิยมแขวนเป็นของตกแต่งอาคาร",
+                meritMakingTitle: "กิจกรรมทำบุญ",
+                meritMakingDesc: "ในช่วงยี่เป็ง ชาวล้านนาจะมีกิจกรรมทำบุญใหญ่ ตั้งแต่ค่ำวันที่ 13 (เทศน์ธรรมวัด) ถึงค่ำวันที่ 14 (เทศน์พันข้อ) และในค่ำวันที่ 15 วันพระใหญ่ จะมีการเทศน์มหาชาติเวสสันดร ภายในวัดจะตกแต่งด้วยรั้วไม้ ซุ้มประตูป่า จำลองตามที่พระเวสสันดรถูกขับไล่",
+                tungTitle: "ตุงล้านนา",
+                tungDesc: "ตุงคือเครื่องตกแต่งที่ทำจากผ้า กระดาษ ไม้ โลหะ ทองเหลือง หรือใบลาน ใช้ในพิธีกรรมของชาวล้านนา ถวายเป็นพุทธบูชาทั้งในงานมงคลและอวมงคล มีขนาด รูปร่าง และรายละเอียดต่างกันไป ชาวเหนือเชื่อว่าการถวายหรือบริจาคตุงจะได้รับอานิสงส์และบุญกุศลมาก",
+                candlesTitle: "เทียนยี่เป็ง",
+                candlesDesc: "ชาวล้านนาจุดเทียนบูชาเทพทั้งห้าตามตำนานแม่กาเผือก และบูชาสิ่งที่เป็นประโยชน์ เช่น ประตูบ้าน บ่อน้ำ ยุ้งข้าว เตาไฟ บันได หน้าต่าง เป็นการบูชาแสงสว่าง เชื่อว่าจะทำให้เป็นคนฉลาด ปราดเปรื่อง และชีวิตสว่างไสวเหมือนแสงเทียน",
+                krathongTitle: "กระทงบูชา",
+                krathongDesc: "กระทงมีรูปดอกบัวบาน ถือตามความเชื่อในพุทธศาสนา เพื่อบูชาแม่น้ำคงคาและขออโหสิกรรม กระทงจะมีธูปเทียน ตามความเชื่อโบราณจะตัดเล็บและผม เพราะเชื่อว่าเป็นการปล่อยทุกข์ โศก โรคภัยไข้เจ็บจากชีวิต ลอยไปกับแม่น้ำ รวมถึงใส่เหรียญบาทลงในกระทงด้วย",
+                floatingTitle: "ลอยโคม (ลองล่าเป้า)",
+                floatingDesc: "หรือที่เรียกว่า ใส่เรือใส่ไฟ ตามตำนานเมืองลำพูน กล่าวถึงการลอยสำเภาในแม่น้ำ ในสมัยหริภุญชัย ประมาณพุทธศตวรรษที่ 19 เกิดโรคอหิวาตกโรคระบาด ประชาชนอพยพไปเมืองหงสาวดี เมื่อทราบข่าวว่าโรคระบาดในหริภุญชัยสงบลง จึงพากันกลับ แต่มีหลายคนไม่ได้กลับเพราะมีครอบครัวใหม่ ผู้ที่กลับมาจึงคิดถึงญาติที่ยังอยู่ในเมืองหงสาวดี จึงจัดดอกไม้ ธูปเทียน ของใช้ ใส่ในสำเภาลอยลงแม่น้ำปิงและแม่น้ำกวงเพื่อระลึกถึง",
+                languageTitle: "คำศัพท์เกี่ยวกับยี่เป็ง",
+                expressionsTitle: "สำนวนล้านนาดั้งเดิม",
+                aboutTitle: "เกี่ยวกับโครงการนี้",
+                aboutDesc: "โครงการนี้อนุรักษ์และแบ่งปันประเพณียี่เป็งแท้ของภาคเหนือของไทย ตามเอกสารประวัติศาสตร์จากอาณาจักรล้านนา เนื้อหาได้รับจากคลังข้อมูลมหาวิทยาลัยและตรวจสอบโดยผู้เชี่ยวชาญด้านวัฒนธรรมเพื่อความถูกต้องและเคารพมรดกทางวัฒนธรรมล้านนา",
+                aboutDesc2: "คำศัพท์และประเพณีทั้งหมดนำเสนอพร้อมบริบททางวัฒนธรรมที่เหมาะสม เพื่อช่วยให้นักท่องเที่ยวและผู้สนใจภาษาได้เชื่อมโยงกับวัฒนธรรมภาคเหนืออย่างลึกซึ้งในช่วงเทศกาลศักดิ์สิทธิ์แห่งแสงสว่างนี้"
+            }
+        };
+        
+        // Current language
+        let currentLang = 'en';
+        
+        // Language toggle functionality
+        const languageToggle = document.getElementById('language-toggle');
+        languageToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'th' : 'en';
+            document.body.className = document.body.className.replace(/lang-\w+/g, '') + ` lang-${currentLang}`;
+            updateTranslations();
+        });
+        
+        // Update all text based on current language
+        function updateTranslations() {
+            document.getElementById('app-title').textContent = translations[currentLang].appTitle;
+            document.getElementById('festival-desc').textContent = translations[currentLang].festivalDesc;
+            document.getElementById('traditions-title').textContent = translations[currentLang].traditionsTitle;
+            document.getElementById('lanterns-title').textContent = translations[currentLang].lanternsTitle;
+            document.getElementById('lanterns-desc').textContent = translations[currentLang].lanternsDesc;
+            document.getElementById('merit-making-title').textContent = translations[currentLang].meritMakingTitle;
+            document.getElementById('merit-making-desc').textContent = translations[currentLang].meritMakingDesc;
+            document.getElementById('tung-title').textContent = translations[currentLang].tungTitle;
+            document.getElementById('tung-desc').textContent = translations[currentLang].tungDesc;
+            document.getElementById('candles-title').textContent = translations[currentLang].candlesTitle;
+            document.getElementById('candles-desc').textContent = translations[currentLang].candlesDesc;
+            document.getElementById('krathong-title').textContent = translations[currentLang].krathongTitle;
+            document.getElementById('krathong-desc').textContent = translations[currentLang].krathongDesc;
+            document.getElementById('floating-title').textContent = translations[currentLang].floatingTitle;
+            document.getElementById('floating-desc').textContent = translations[currentLang].floatingDesc;
+            document.getElementById('language-title').textContent = translations[currentLang].languageTitle;
+            document.getElementById('expressions-title').textContent = translations[currentLang].expressionsTitle;
+            document.getElementById('about-title').textContent = translations[currentLang].aboutTitle;
+            document.getElementById('about-desc').textContent = translations[currentLang].aboutDesc;
+            document.getElementById('about-desc2').textContent = translations[currentLang].aboutDesc2;
+        }
+        
+        // Navigation functionality
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) {
+                window.scrollTo({
+                    top: section.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // Event listeners for navigation
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                scrollToSection(item.dataset.target);
+            });
+        });
+        
+        // Update active nav item on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['festival', 'traditions', 'language', 'expressions', 'about'];
+            const scrollPos = window.scrollY + 120;
+            
+            for (const sectionId of sections) {
+                const section = document.getElementById(sectionId);
+                if (section && scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+                    navItems.forEach(item => {
+                        if (item.dataset.target === sectionId) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                    break;
+                }
+            }
+        });
+        
+        // Initialize the app
+        document.body.className = `lang-${currentLang}`;
+        updateTranslations();
+    </script>
+</body>
+</html>
