@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LannaLingo - Yi Peng Festival & Northern Thai Language</title>
+    <title>LannaLingo - Northern Thai Language Explorer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* iOS 26 Liquid Glass Design System */
@@ -26,13 +26,9 @@
             --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             --glass-backdrop: blur(24px);
             --university-blue: #2c5aa0;
-            --ai-blue: #4361ee;
-            --ai-purple: #7209b7;
             --success: #4caf50;
             --error: #f44336;
             --nav-text: #1d3557;
-            --festival-gold: #ffd700;
-            --festival-red: #c1121f;
         }
         
         .dark-theme {
@@ -46,10 +42,6 @@
             --glass-border: rgba(255, 255, 255, 0.15);
             --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             --university-blue: #64b5f6;
-            --ai-blue: #4cc9f0;
-            --ai-purple: #bd5fff;
-            --festival-gold: #ffd700;
-            --festival-red: #e63946;
             --nav-text: #f1faee;
         }
         
@@ -204,31 +196,6 @@
             box-shadow: var(--glass-shadow);
         }
         
-        .festival-hero {
-            background: linear-gradient(135deg, rgba(193, 18, 31, 0.1) 0%, rgba(230, 175, 46, 0.1) 100%);
-            border-radius: 28px;
-            padding: 40px;
-            margin-bottom: 2.5rem;
-            text-align: center;
-            backdrop-filter: var(--glass-backdrop);
-            -webkit-backdrop-filter: var(--glass-backdrop);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
-        }
-        
-        .festival-hero h1 {
-            font-size: 2.8rem;
-            color: var(--festival-red);
-            margin-bottom: 20px;
-            font-family: 'TH Sarabun New', sans-serif;
-        }
-        
-        .festival-hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
         .stats-bar {
             display: flex;
             justify-content: center;
@@ -268,111 +235,239 @@
             color: var(--nav-text);
         }
         
-        /* Festival Content Sections */
-        .festival-section {
-            background: var(--glass-bg);
-            border-radius: 28px;
-            padding: 35px;
-            margin-top: 50px;
-            backdrop-filter: var(--glass-backdrop);
-            -webkit-backdrop-filter: var(--glass-backdrop);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
+        /* Search Section */
+        .search-container {
+            max-width: 800px;
+            margin: 2rem auto;
         }
         
-        .festival-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+        .search-box {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 24px;
         }
         
-        .festival-card {
+        #search-input {
+            flex: 1;
+            padding: 18px 28px;
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            font-size: 1.15rem;
+            outline: none;
+            transition: all 0.3s;
+            background: var(--light);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+            font-weight: 500;
+            color: var(--nav-text);
+        }
+        
+        #search-input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        #search-btn-main {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 0 32px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 16px rgba(193, 18, 31, 0.35);
+        }
+        
+        #search-btn-main:hover {
+            background: #a01c24;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(193, 18, 31, 0.45);
+        }
+        
+        .search-filters {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
             background: white;
-            border-radius: 24px;
-            padding: 28px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            padding: 12px 26px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.09);
+            color: var(--nav-text);
         }
         
-        .dark-theme .festival-card {
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+        }
+        
+        .filter-btn i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 24px 0;
+            color: var(--nav-text);
+            font-size: 1rem;
+            padding: 0 12px;
+        }
+        
+        /* Expressions Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 35px;
+            margin-top: 15px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.14);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+        
+        .dark-theme .card {
             background: #1b263b;
         }
         
-        .festival-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 14px 36px rgba(0,0,0,0.2);
+        .card:hover {
+            transform: translateY(-14px);
+            box-shadow: 0 18px 48px rgba(0,0,0,0.22);
         }
         
-        .festival-card h3 {
-            color: var(--festival-red);
-            margin-bottom: 18px;
+        .card-header {
+            padding: 24px;
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h3 {
+            font-size: 1.6rem;
             display: flex;
             align-items: center;
             gap: 14px;
-            font-size: 1.4rem;
+            font-weight: 700;
         }
         
-        .festival-card .icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            background: rgba(193, 18, 31, 0.1);
+        .pronunciation-btn {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--festival-red);
-            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        /* Language Content */
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 3rem 0;
+        .pronunciation-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.15);
         }
         
-        .language-card {
-            background: var(--glass-bg);
-            border-radius: 24px;
+        .pronunciation-btn i {
+            font-size: 22px;
+        }
+        
+        .card-body {
             padding: 28px;
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
-            border: 1px solid var(--glass-border);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: var(--glass-backdrop);
-            -webkit-backdrop-filter: var(--glass-backdrop);
         }
         
-        .language-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
-        }
-        
-        .language-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-        
-        .language-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            background: rgba(44, 90, 160, 0.15);
-            color: var(--university-blue);
-        }
-        
-        .language-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
+        .thai-word {
+            font-size: 2.2rem;
+            font-weight: 800;
             color: var(--primary);
+            margin: 18px 0;
+            font-family: 'TH Sarabun New', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        
+        .thai-word i {
+            color: var(--secondary);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .thai-word i:hover {
+            transform: scale(1.3);
+        }
+        
+        .pronunciation {
+            font-style: italic;
+            color: var(--nav-text);
+            margin: 14px 0;
+            padding: 12px 0;
+            border-bottom: 1px dashed #ddd;
+            font-size: 1.15rem;
+        }
+        
+        .dark-theme .pronunciation {
+            border-bottom: 1px dashed #555;
+        }
+        
+        .meaning {
+            margin: 24px 0;
+            padding: 18px;
+            background: var(--accent);
+            border-radius: 18px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--nav-text);
+        }
+        
+        .example {
+            background: var(--glass-bg);
+            padding: 18px;
+            border-radius: 18px;
+            margin-top: 24px;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--nav-text);
+        }
+        
+        .example-thai {
+            font-family: 'TH Sarabun New', sans-serif;
+            margin-top: 10px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.3rem;
+        }
+        
+        .usage {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            font-size: 1rem;
+            color: var(--nav-text);
         }
         
         /* Gamification Section */
@@ -601,7 +696,7 @@
             box-shadow: 0 12px 30px rgba(168, 218, 220, 0.45);
         }
         
-        /* University Archives */
+        /* University Archives Section */
         .university-section {
             background: var(--glass-bg);
             border-radius: 28px;
@@ -656,187 +751,6 @@
             line-height: 1.6;
         }
         
-        /* AI Agents Section */
-        .ai-agents {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 3rem 0;
-        }
-        
-        .agent-card {
-            background: var(--glass-bg);
-            border-radius: 24px;
-            padding: 28px;
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
-            border: 1px solid var(--glass-border);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: var(--glass-backdrop);
-            -webkit-backdrop-filter: var(--glass-backdrop);
-        }
-        
-        .agent-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
-        }
-        
-        .agent-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-        
-        .agent-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
-        
-        .ai-linguist .agent-icon {
-            background: rgba(67, 97, 238, 0.15);
-            color: var(--ai-blue);
-        }
-        
-        .ai-tutor .agent-icon {
-            background: rgba(114, 9, 183, 0.15);
-            color: var(--ai-purple);
-        }
-        
-        .ai-archivist .agent-icon {
-            background: rgba(44, 90, 160, 0.15);
-            color: var(--university-blue);
-        }
-        
-        .ai-chatbot .agent-icon {
-            background: rgba(255, 215, 0, 0.15);
-            color: var(--secondary);
-        }
-        
-        .agent-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        /* Chatbot */
-        .chatbot-container {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 380px;
-            height: 500px;
-            background: var(--chatbot-bg);
-            border-radius: 24px;
-            box-shadow: 0 12px 36px rgba(0,0,0,0.2);
-            border: 1px solid var(--glass-border);
-            display: flex;
-            flex-direction: column;
-            z-index: 1000;
-            overflow: hidden;
-        }
-        
-        .chatbot-header {
-            padding: 20px;
-            background: linear-gradient(135deg, var(--ai-blue), var(--ai-purple));
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .chatbot-header i {
-            font-size: 1.8rem;
-        }
-        
-        .chatbot-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .message {
-            max-width: 80%;
-            padding: 15px;
-            border-radius: 18px;
-            line-height: 1.5;
-        }
-        
-        .bot-message {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            align-self: flex-start;
-            border-bottom-left-radius: 5px;
-        }
-        
-        .user-message {
-            background: var(--primary);
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 5px;
-        }
-        
-        .chatbot-input {
-            display: flex;
-            padding: 15px;
-            background: var(--glass-bg);
-            border-top: 1px solid var(--glass-border);
-        }
-        
-        .chatbot-input input {
-            flex: 1;
-            padding: 14px 20px;
-            border: 2px solid var(--accent);
-            border-radius: 16px;
-            font-size: 1rem;
-            outline: none;
-        }
-        
-        .chatbot-input button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 50px;
-            border-radius: 16px;
-            margin-left: 10px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .chatbot-input button:hover {
-            transform: scale(1.05);
-        }
-        
-        .chatbot-toggle {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--ai-blue), var(--ai-purple));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 8px 24px rgba(67, 97, 238, 0.4);
-            z-index: 999;
-            transition: transform 0.3s ease;
-        }
-        
-        .chatbot-toggle:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-        
         /* Points System */
         .points-system {
             position: fixed;
@@ -876,26 +790,89 @@
             border-radius: 28px 28px 0 0;
         }
         
-        .external-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 20px;
-            flex-wrap: wrap;
+        .flag {
+            display: inline-block;
+            width: 24px;
+            height: 18px;
+            border: 1px solid #ddd;
+            margin-right: 12px;
+            vertical-align: middle;
+            border-radius: 4px;
         }
         
-        .external-link {
-            color: var(--secondary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.2s;
+        .thai-flag {
+            background: linear-gradient(to bottom, #ED1C24 33%, #FFFFFF 33%, #FFFFFF 66%, #241D4F 66%);
         }
         
-        .external-link:hover {
-            transform: translateY(-3px);
-            color: #ffd700;
+        .lanna-flag {
+            background: linear-gradient(to bottom, #ED1C24 25%, #FFFFFF 25%, #FFFFFF 50%, #241D4F 50%, #241D4F 75%, #FFFFFF 75%, #FFFFFF 100%);
+        }
+        
+        .hill-tribe-flag {
+            background: linear-gradient(45deg, #8B4513 25%, #228B22 25%, #228B22 50%, #8B4513 50%, #8B4513 75%, #228B22 75%, #228B22 100%);
+        }
+        
+        .audio-indicator {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--secondary);
+            margin-left: 12px;
+            animation: pulse 1.8s infinite;
+            opacity: 0;
+        }
+        
+        .playing .audio-indicator {
+            opacity: 1;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.7; }
+        }
+        
+        .no-speech {
+            background: #ffebee;
+            padding: 1.4rem;
+            border-radius: 18px;
+            margin-top: 1.4rem;
+            text-align: center;
+            color: var(--primary);
+            display: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .dark-theme .no-speech {
+            background: rgba(230, 57, 70, 0.2);
+            color: var(--primary);
+        }
+        
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 5rem;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.14);
+        }
+        
+        .dark-theme .empty-state {
+            background: #1b263b;
+        }
+        
+        .empty-state i {
+            font-size: 4.5rem;
+            color: var(--primary);
+            margin-bottom: 1.8rem;
+        }
+        
+        .empty-state h3 {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
         }
         
         /* Responsive Design */
@@ -924,21 +901,35 @@
                 font-size: 2rem;
             }
             
-            .festival-hero h1 {
-                font-size: 2.2rem;
+            .search-box {
+                flex-direction: column;
             }
             
-            .chatbot-container {
-                width: 320px;
-                height: 450px;
+            #search-btn-main {
+                padding: 16px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                border-radius: 24px;
+            }
+            
+            .thai-word {
+                font-size: 2rem;
+            }
+            
+            .game-container {
+                grid-template-columns: 1fr;
             }
         }
         
         /* Language specific styles */
         .lang-th .thai-word,
         .lang-th .example-thai,
-        .lang-th .flashcard-word,
-        .lang-th .festival-hero h1 {
+        .lang-th .flashcard-word {
             font-family: 'TH Sarabun New', sans-serif;
         }
         
@@ -957,9 +948,9 @@
             <span id="app-title">LannaLingo</span>
         </div>
         <div class="nav-menu">
-            <div class="nav-item active" data-target="festival">Yi Peng</div>
-            <div class="nav-item" data-target="traditions">Traditions</div>
-            <div class="nav-item" data-target="language">Language</div>
+            <div class="nav-item active" data-target="home">Home</div>
+            <div class="nav-item" data-target="search">Search</div>
+            <div class="nav-item" data-target="expressions">Expressions</div>
             <div class="nav-item" data-target="gamification">Gamify</div>
             <div class="nav-item" data-target="archives">Archives</div>
             <div class="nav-item" data-target="about">About</div>
@@ -974,31 +965,6 @@
         </div>
     </nav>
     
-    <!-- Chatbot Toggle -->
-    <div class="chatbot-toggle" id="chatbot-toggle">
-        <i class="fas fa-robot"></i>
-    </div>
-    
-    <!-- Chatbot Container -->
-    <div class="chatbot-container" id="chatbot-container" style="display: none;">
-        <div class="chatbot-header">
-            <i class="fas fa-robot"></i>
-            <div>
-                <div>LannaLingo AI Assistant</div>
-                <div style="font-size: 0.9rem; opacity: 0.9;">Ask about Yi Peng traditions</div>
-            </div>
-        </div>
-        <div class="chatbot-messages" id="chatbot-messages">
-            <div class="message bot-message">
-                Hello! I'm your AI language assistant. Ask me about Yi Peng festival traditions, Lanna expressions, or Hill Tribe phrases!
-            </div>
-        </div>
-        <div class="chatbot-input">
-            <input type="text" id="chatbot-input" placeholder="Type your question...">
-            <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
-    
     <!-- Points System -->
     <div class="points-system">
         <div class="points-icon">
@@ -1011,125 +977,91 @@
     </div>
     
     <div class="container">
-        <!-- Yi Peng Festival Hero Section -->
-        <section id="festival" class="section">
-            <div class="festival-hero">
-                <h1>ประเพณียี่เป็งล้านนา<br><span style="font-size: 1.8rem; color: var(--festival-gold);">Yi Peng Lanna Festival</span></h1>
-                <p id="festival-desc">The sacred festival of light in Northern Thailand, where thousands of lanterns illuminate the night sky in honor of the Buddha and ancestral spirits.</p>
-            </div>
-        </section>
-        
-        <!-- Yi Peng Traditions Section -->
-        <section id="traditions" class="section">
+        <!-- Home Section -->
+        <section id="home" class="section">
             <div class="section-header">
-                <i class="fas fa-lamp"></i>
-                <h2 id="traditions-title">Yi Peng Traditions & Rituals</h2>
+                <i class="fas fa-home"></i>
+                <h2 id="home-title">Welcome to Northern Thai Linguistics</h2>
             </div>
             
-            <div class="festival-section">
-                <div class="festival-grid">
-                    <div class="festival-card">
-                        <div class="icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h3 id="lanterns-title">Lanna Lanterns (Khom Fai)</h3>
-                        <p id="lanterns-desc">In the period before the full moon day of the second month, Lanna people with skilled craftsmanship create various shaped lamps to prepare for worship at temples. These lanterns are hung at relics and chedis in front of temples, and nowadays are popular as building decorations.</p>
+            <div class="intro">
+                <p id="home-desc">Chiang Mai is a melting pot of cultures and languages. From the ancient Lanna Kingdom to the diverse hill tribes and modern Thai influences, this region boasts a rich linguistic tapestry. This comprehensive guide explores over 300 slang words, phrases, and jokes that locals use in everyday life.</p>
+                
+                <div class="stats-bar">
+                    <div class="stat-card">
+                        <div class="number" id="total-count">305</div>
+                        <div class="label" id="total-label">Total Expressions</div>
                     </div>
-                    
-                    <div class="festival-card">
-                        <div class="icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <h3 id="merit-making-title">Merit-Making Events</h3>
-                        <p id="merit-making-desc">During Yi Peng, Lanna people hold major merit-making events. From the 13th evening (Dhammawat sermon) to the 14th evening (thousand verses sermon), culminating on the 15th evening with the Mahachat Vessantara Jataka sermon. Temples are decorated with royal fences and forest gates modeled after Phra Vessantara's exile.</p>
+                    <div class="stat-card">
+                        <div class="number" id="thai-count">75</div>
+                        <div class="label" id="thai-label">Thai Slang</div>
                     </div>
-                    
-                    <div class="festival-card">
-                        <div class="icon">
-                            <i class="fas fa-flag"></i>
-                        </div>
-                        <h3 id="tung-title">Tung Lanna</h3>
-                        <p id="tung-desc">Tung are decorative sheets made of cloth, paper, wood, metal, brass, or palm leaves, used in Lanna rituals. They are offered to Buddha in both auspicious and inauspicious ceremonies. Northerners believe that donating Tung brings great merit and benefits.</p>
+                    <div class="stat-card">
+                        <div class="number" id="lanna-count">120</div>
+                        <div class="label" id="lanna-label">Lanna Expressions</div>
                     </div>
-                    
-                    <div class="festival-card">
-                        <div class="icon">
-                            <i class="fas fa-candle"></i>
-                        </div>
-                        <h3 id="candles-title">Yi Peng Merit Candles</h3>
-                        <p id="candles-desc">Lanna people light candles to worship the five gods according to the legend of Mae Ka Phueak. Candles are placed at house doors, wells, barns, stoves, stairs, and windows as worship of light, believed to bring intelligence and brightness to one's life.</p>
+                    <div class="stat-card">
+                        <div class="number" id="hill-count">110</div>
+                        <div class="label" id="hill-label">Hill Tribe Phrases</div>
                     </div>
-                    
-                    <div class="festival-card">
-                        <div class="icon">
-                            <i class="fas fa-water"></i>
-                        </div>
-                        <h3 id="krathong-title">Krathong Offerings</h3>
-                        <p id="krathong-desc">Krathongs are shaped like blooming lotuses to pay homage to the Ganga River and ask forgiveness. They contain incense sticks, candles, and traditionally include cut nails and hair to release suffering and illness. Baht coins are also placed in krathongs before floating them on rivers.</p>
-                    </div>
-                    
-                    <div class="festival-card">
-                        <div class="icon">
-                            <i class="fas fa-ship"></i>
-                        </div>
-                        <h3 id="floating-title">Floating Lanterns (Long La Pao)</h3>
-                        <p id="floating-desc">Also known as Sai Ruea Sai Fai, this tradition dates back to the Hariphunchai period (14th century). During cholera outbreaks, people who migrated to Hongsawadee would float offerings with flowers, incense, candles, and consumer goods down the Mae Ping and Mae Kuang Rivers to remember relatives still living there.</p>
-                    </div>
+                </div>
+                
+                <div class="no-speech" id="no-speech">
+                    <i class="fas fa-exclamation-triangle"></i> <span id="speech-error">Speech synthesis not available in your browser</span>
                 </div>
             </div>
         </section>
         
-        <!-- Language & Expressions Section -->
-        <section id="language" class="section">
+        <!-- Search Section -->
+        <section id="search" class="section">
             <div class="section-header">
-                <i class="fas fa-language"></i>
-                <h2 id="language-title">Yi Peng Related Expressions</h2>
+                <i class="fas fa-search"></i>
+                <h2 id="search-title">Find Expressions</h2>
             </div>
             
-            <div class="language-grid">
-                <div class="language-card">
-                    <div class="language-header">
-                        <div class="language-icon">
-                            <i class="fas fa-lamp"></i>
-                        </div>
-                        <h3>ยี่เป็ง (Yi Peng)</h3>
-                    </div>
-                    <p><strong>Meaning:</strong> The full moon day of the second lunar month in Lanna calendar</p>
-                    <p><strong>Usage:</strong> "วันยี่เป็งปีนี้จะไปวัดพระสิงห์" (This Yi Peng, I'll go to Wat Phra Singh)</p>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search for words, meanings, or phrases...">
+                    <button id="search-btn-main"><i class="fas fa-search"></i> <span id="search-btn-text">Search</span></button>
                 </div>
                 
-                <div class="language-card">
-                    <div class="language-header">
-                        <div class="language-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h3>โคมไฟ (Khom Fai)</h3>
-                    </div>
-                    <p><strong>Meaning:</strong> Traditional Lanna lanterns</p>
-                    <p><strong>Usage:</strong> "ช่างทำโคมไฟมีฝีมือมาก" (The lantern maker is very skilled)</p>
+                <div class="search-filters">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-globe-asia"></i> <span id="all-filter">All Expressions</span>
+                    </button>
+                    <button class="filter-btn" data-filter="thai">
+                        <i class="fas fa-flag"></i> <span id="thai-filter">Modern Thai Slang</span>
+                    </button>
+                    <button class="filter-btn" data-filter="lanna">
+                        <i class="fas fa-landmark"></i> <span id="lanna-filter">Lanna Expressions</span>
+                    </button>
+                    <button class="filter-btn" data-filter="hill">
+                        <i class="fas fa-mountain"></i> <span id="hill-filter">Hill Tribe Phrases</span>
+                    </button>
                 </div>
-                
-                <div class="language-card">
-                    <div class="language-header">
-                        <div class="language-icon">
-                            <i class="fas fa-flag"></i>
-                        </div>
-                        <h3>ตุง (Tung)</h3>
-                    </div>
-                    <p><strong>Meaning:</strong> Decorative ritual banners</p>
-                    <p><strong>Usage:</strong> "ตุงที่วัดมีหลายแบบ" (The temple has many types of Tung)</p>
+            </div>
+        </section>
+        
+        <!-- Expressions Section -->
+        <section id="expressions" class="section">
+            <div class="section-header">
+                <i class="fas fa-comments"></i>
+                <h2 id="expressions-title">Comprehensive Lexicon</h2>
+            </div>
+            
+            <div class="results-info">
+                <div id="results-count">Showing all expressions</div>
+                <div id="sort-options">
+                    <select id="sort-select">
+                        <option value="default" id="sort-default">Default Order</option>
+                        <option value="alphabetical" id="sort-alpha">Alphabetical (Thai)</option>
+                        <option value="category" id="sort-category">By Category</option>
+                    </select>
                 </div>
-                
-                <div class="language-card">
-                    <div class="language-header">
-                        <div class="language-icon">
-                            <i class="fas fa-candle"></i>
-                        </div>
-                        <h3>เทียนยี่เป็ง (Thian Yi Peng)</h3>
-                    </div>
-                    <p><strong>Meaning:</strong> Yi Peng merit candles</p>
-                    <p><strong>Usage:</strong> "จุดเทียนยี่เป็งที่บ้านให้สว่าง" (Light Yi Peng candles at home to make it bright)</p>
-                </div>
+            </div>
+            
+            <div class="content-grid" id="expressions-container">
+                <!-- Expressions will be populated here -->
             </div>
         </section>
         
@@ -1147,11 +1079,11 @@
                         <div class="flashcard-container" id="flashcard-container">
                             <div class="flashcard" id="flashcard">
                                 <div class="flashcard-face flashcard-front">
-                                    <div class="flashcard-word" id="flashcard-word">ยี่เป็ง</div>
+                                    <div class="flashcard-word" id="flashcard-word">ชิลล์</div>
                                     <div id="flashcard-hint">Click to reveal meaning</div>
                                 </div>
                                 <div class="flashcard-face flashcard-back">
-                                    <div class="flashcard-meaning" id="flashcard-meaning">The full moon day of the second lunar month in Lanna calendar</div>
+                                    <div class="flashcard-meaning" id="flashcard-meaning">Relaxed, calm, laid-back</div>
                                     <div>Click to flip back</div>
                                 </div>
                             </div>
@@ -1167,9 +1099,9 @@
                     </div>
                     
                     <div>
-                        <h3 style="text-align: center; margin-bottom: 20px;" id="quiz-title">AI-Powered Quiz</h3>
+                        <h3 style="text-align: center; margin-bottom: 20px;" id="quiz-title">Quiz Challenge</h3>
                         <div class="quiz-container">
-                            <div class="quiz-question" id="quiz-question">What does "ยี่เป็ง" mean?</div>
+                            <div class="quiz-question" id="quiz-question">What does "ชิลล์" mean?</div>
                             <div class="quiz-options" id="quiz-options">
                                 <!-- Options will be populated by JavaScript -->
                             </div>
@@ -1196,13 +1128,13 @@
             </div>
             
             <div class="university-section">
-                <p id="archives-desc">This project collaborates with leading universities in Chiang Mai to preserve and share linguistic research on Northern Thai dialects, Lanna language, and Hill Tribe expressions.</p>
+                <p id="archives-desc">This project collaborates with leading universities in Chiang Mai to preserve and share linguistic research on Northern Thai dialects, Lanna language, and Hill Tribe expressions. Our database integrates findings from academic archives to provide authentic and culturally accurate information.</p>
                 
                 <div class="university-grid">
                     <div class="university-card">
                         <h3><i class="fas fa-graduation-cap"></i> Payap University</h3>
                         <ul>
-                            <li><a href="https://www.payap.ac.th" target="_blank" class="external-link">Lanna Language Documentation Project</a></li>
+                            <li>Lanna Language Documentation Project</li>
                             <li>Hill Tribe Linguistic Studies</li>
                             <li>Northern Thai Dialect Archive</li>
                             <li>Cultural Anthropology Research</li>
@@ -1211,7 +1143,7 @@
                     <div class="university-card">
                         <h3><i class="fas fa-graduation-cap"></i> Chiang Mai University</h3>
                         <ul>
-                            <li><a href="https://www.cmu.ac.th" target="_blank" class="external-link">Linguistics Department Archives</a></li>
+                            <li>Linguistics Department Archives</li>
                             <li>Anthropology Field Research</li>
                             <li>Endangered Languages Project</li>
                             <li>Regional Cultural Studies</li>
@@ -1220,7 +1152,7 @@
                     <div class="university-card">
                         <h3><i class="fas fa-graduation-cap"></i> Chiang Mai Rajabhat University</h3>
                         <ul>
-                            <li><a href="https://www.cmru.ac.th" target="_blank" class="external-link">Local History Documentation</a></li>
+                            <li>Local History Documentation</li>
                             <li>Traditional Expression Archives</li>
                             <li>Community Language Preservation</li>
                             <li>Ethnographic Research</li>
@@ -1239,56 +1171,6 @@
             </div>
         </section>
         
-        <!-- AI Agents Section -->
-        <section id="ai-agents" class="section">
-            <div class="section-header">
-                <i class="fas fa-brain"></i>
-                <h2 id="ai-agents-title">AI Learning Agents</h2>
-            </div>
-            
-            <div class="ai-agents">
-                <div class="agent-card ai-linguist">
-                    <div class="agent-header">
-                        <div class="agent-icon">
-                            <i class="fas fa-language"></i>
-                        </div>
-                        <h3>AI Linguist</h3>
-                    </div>
-                    <p>Analyzes your learning patterns and recommends expressions based on your proficiency level. Provides contextual examples and cultural insights.</p>
-                </div>
-                
-                <div class="agent-card ai-tutor">
-                    <div class="agent-header">
-                        <div class="agent-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3>AI Tutor</h3>
-                    </div>
-                    <p>Creates customized quizzes and flashcards based on your progress. Adapts difficulty levels and focuses on areas needing more practice.</p>
-                </div>
-                
-                <div class="agent-card ai-archivist">
-                    <div class="agent-header">
-                        <div class="agent-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <h3>AI Archivist</h3>
-                    </div>
-                    <p>Curates content from university research archives, ensuring authentic and academically verified expressions from leading institutions.</p>
-                </div>
-                
-                <div class="agent-card ai-chatbot">
-                    <div class="agent-header">
-                        <div class="agent-icon">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <h3>AI Chatbot</h3>
-                    </div>
-                    <p>Interactive conversational assistant that answers questions about expressions, provides pronunciation help, and offers cultural context.</p>
-                </div>
-            </div>
-        </section>
-        
         <!-- About Section -->
         <section id="about" class="section">
             <div class="section-header">
@@ -1297,27 +1179,15 @@
             </div>
             
             <div class="intro">
-                <p id="about-desc">This project preserves and shares the authentic Yi Peng festival traditions of Northern Thailand, based on historical documents from Lanna Kingdom. The content is sourced from university archives and verified by cultural experts to ensure accuracy and respect for Lanna heritage.</p>
-                <p id="about-desc2">All expressions and traditions are presented with proper cultural context to help visitors and language enthusiasts connect more deeply with Northern Thai culture during this sacred festival of light.</p>
-                
-                <div class="external-links">
-                    <a href="https://www.tourismthailand.org" target="_blank" class="external-link">
-                        <i class="fas fa-globe-asia"></i> Tourism Thailand
-                    </a>
-                    <a href="https://www.chiangmai.go.th" target="_blank" class="external-link">
-                        <i class="fas fa-landmark"></i> Chiang Mai Province
-                    </a>
-                    <a href="https://www.sealang.net/lanna/" target="_blank" class="external-link">
-                        <i class="fas fa-book"></i> Lanna Dictionary
-                    </a>
-                </div>
+                <p id="about-desc">This project aims to preserve and share the rich linguistic heritage of Northern Thailand. By documenting Thai, Lanna, and Hill Tribe expressions, we hope to create a resource that helps visitors and language enthusiasts connect more deeply with local culture.</p>
+                <p id="about-desc2">All expressions include authentic pronunciation guides and real-life examples to help you use them like a local. The audio functionality uses your device's text-to-speech capabilities for the most natural pronunciation possible.</p>
             </div>
         </section>
     </div>
     
     <footer>
-        <p>LannaLingo &copy; 2023 | Preserving Northern Thai Cultural Heritage</p>
-        <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">Content sourced from authentic Lanna documents and verified by cultural experts</p>
+        <p>LannaLingo &copy; 2023 | Preserving Northern Thai Linguistic Heritage</p>
+        <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">Note: Pronunciations are approximate. For authentic learning, consult native speakers.</p>
     </footer>
 
     <script>
@@ -1361,369 +1231,632 @@
             applyTheme(currentTheme);
         });
         
-        // Language translations - FULL BILINGUAL SUPPORT
+        // Language translations
         const translations = {
             en: {
                 appTitle: "LannaLingo",
-                festivalDesc: "The sacred festival of light in Northern Thailand, where thousands of lanterns illuminate the night sky in honor of the Buddha and ancestral spirits.",
-                traditionsTitle: "Yi Peng Traditions & Rituals",
-                lanternsTitle: "Lanna Lanterns (Khom Fai)",
-                lanternsDesc: "In the period before the full moon day of the second month, Lanna people with skilled craftsmanship create various shaped lamps to prepare for worship at temples. These lanterns are hung at relics and chedis in front of temples, and nowadays are popular as building decorations.",
-                meritMakingTitle: "Merit-Making Events",
-                meritMakingDesc: "During Yi Peng, Lanna people hold major merit-making events. From the 13th evening (Dhammawat sermon) to the 14th evening (thousand verses sermon), culminating on the 15th evening with the Mahachat Vessantara Jataka sermon. Temples are decorated with royal fences and forest gates modeled after Phra Vessantara's exile.",
-                tungTitle: "Tung Lanna",
-                tungDesc: "Tung are decorative sheets made of cloth, paper, wood, metal, brass, or palm leaves, used in Lanna rituals. They are offered to Buddha in both auspicious and inauspicious ceremonies. Northerners believe that donating Tung brings great merit and benefits.",
-                candlesTitle: "Yi Peng Merit Candles",
-                candlesDesc: "Lanna people light candles to worship the five gods according to the legend of Mae Ka Phueak. Candles are placed at house doors, wells, barns, stoves, stairs, and windows as worship of light, believed to bring intelligence and brightness to one's life.",
-                krathongTitle: "Krathong Offerings",
-                krathongDesc: "Krathongs are shaped like blooming lotuses to pay homage to the Ganga River and ask forgiveness. They contain incense sticks, candles, and traditionally include cut nails and hair to release suffering and illness. Baht coins are also placed in krathongs before floating them on rivers.",
-                floatingTitle: "Floating Lanterns (Long La Pao)",
-                floatingDesc: "Also known as Sai Ruea Sai Fai, this tradition dates back to the Hariphunchai period (14th century). During cholera outbreaks, people who migrated to Hongsawadee would float offerings with flowers, incense, candles, and consumer goods down the Mae Ping and Mae Kuang Rivers to remember relatives still living there.",
-                languageTitle: "Yi Peng Related Expressions",
+                homeTitle: "Welcome to Northern Thai Linguistics",
+                homeDesc: "Chiang Mai is a melting pot of cultures and languages. From the ancient Lanna Kingdom to the diverse hill tribes and modern Thai influences, this region boasts a rich linguistic tapestry. This comprehensive guide explores over 300 slang words, phrases, and jokes that locals use in everyday life.",
+                searchTitle: "Find Expressions",
+                expressionsTitle: "Comprehensive Lexicon",
                 gamificationTitle: "Learn with Gamification",
                 flashcardsTitle: "Interactive Flashcards",
-                quizTitle: "AI-Powered Quiz",
+                quizTitle: "Quiz Challenge",
                 archivesTitle: "University Research Archives",
-                archivesDesc: "This project collaborates with leading universities in Chiang Mai to preserve and share linguistic research on Northern Thai dialects, Lanna language, and Hill Tribe expressions.",
-                aiAgentsTitle: "AI Learning Agents",
+                archivesDesc: "This project collaborates with leading universities in Chiang Mai to preserve and share linguistic research on Northern Thai dialects, Lanna language, and Hill Tribe expressions. Our database integrates findings from academic archives to provide authentic and culturally accurate information.",
                 aboutTitle: "About This Project",
-                aboutDesc: "This project preserves and shares the authentic Yi Peng festival traditions of Northern Thailand, based on historical documents from Lanna Kingdom. The content is sourced from university archives and verified by cultural experts to ensure accuracy and respect for Lanna heritage.",
-                aboutDesc2: "All expressions and traditions are presented with proper cultural context to help visitors and language enthusiasts connect more deeply with Northern Thai culture during this sacred festival of light."
+                aboutDesc: "This project aims to preserve and share the rich linguistic heritage of Northern Thailand. By documenting Thai, Lanna, and Hill Tribe expressions, we hope to create a resource that helps visitors and language enthusiasts connect more deeply with local culture.",
+                aboutDesc2: "All expressions include authentic pronunciation guides and real-life examples to help you use them like a local. The audio functionality uses your device's text-to-speech capabilities for the most natural pronunciation possible.",
+                totalLabel: "Total Expressions",
+                thaiLabel: "Thai Slang",
+                lannaLabel: "Lanna Expressions",
+                hillLabel: "Hill Tribe Phrases",
+                speechError: "Speech synthesis not available in your browser",
+                allFilter: "All Expressions",
+                thaiFilter: "Modern Thai Slang",
+                lannaFilter: "Lanna Expressions",
+                hillFilter: "Hill Tribe Phrases",
+                searchBtnText: "Search",
+                resultsCountAll: "Showing all expressions",
+                resultsCount: "Showing {count} of {total} expressions"
             },
             th: {
                 appTitle: "ภาษาล้านนา",
-                festivalDesc: "เทศกาลศักดิ์สิทธิ์แห่งแสงสว่างในภาคเหนือของไทย ที่โคมไฟนับพันจะส่องสว่างท้องฟ้ายามค่ำคืนเพื่อบูชาพระพุทธเจ้าและดวงวิญญาณบรรพชน",
-                traditionsTitle: "ประเพณียี่เป็งและพิธีกรรม",
-                lanternsTitle: "โคมไฟล้านนา (Khom Fai)",
-                lanternsDesc: "ในช่วงก่อนวันเพ็ญเดือนสอง ชาวล้านนาผู้มีฝีมือจะสร้างโคมไฟรูปแบบต่างๆ เพื่อเตรียมใช้ในการจุดบูชาที่วัดในวันเพ็ญ โดยแขวนโคมที่พระสถูปเจดีย์หน้าวัด ปัจจุบันนิยมแขวนเป็นของตกแต่งอาคาร",
-                meritMakingTitle: "กิจกรรมทำบุญ",
-                meritMakingDesc: "ในช่วงยี่เป็ง ชาวล้านนาจะมีกิจกรรมทำบุญใหญ่ ตั้งแต่ค่ำวันที่ 13 (เทศน์ธรรมวัด) ถึงค่ำวันที่ 14 (เทศน์พันข้อ) และในค่ำวันที่ 15 วันพระใหญ่ จะมีการเทศน์มหาชาติเวสสันดร ภายในวัดจะตกแต่งด้วยรั้วไม้ ซุ้มประตูป่า จำลองตามที่พระเวสสันดรถูกขับไล่",
-                tungTitle: "ตุงล้านนา",
-                tungDesc: "ตุงคือเครื่องตกแต่งที่ทำจากผ้า กระดาษ ไม้ โลหะ ทองเหลือง หรือใบลาน ใช้ในพิธีกรรมของชาวล้านนา ถวายเป็นพุทธบูชาทั้งในงานมงคลและอวมงคล มีขนาด รูปร่าง และรายละเอียดต่างกันไป ชาวเหนือเชื่อว่าการถวายหรือบริจาคตุงจะได้รับอานิสงส์และบุญกุศลมาก",
-                candlesTitle: "เทียนยี่เป็ง",
-                candlesDesc: "ชาวล้านนาจุดเทียนบูชาเทพทั้งห้าตามตำนานแม่กาเผือก และบูชาสิ่งที่เป็นประโยชน์ เช่น ประตูบ้าน บ่อน้ำ ยุ้งข้าว เตาไฟ บันได หน้าต่าง เป็นการบูชาแสงสว่าง เชื่อว่าจะทำให้เป็นคนฉลาด ปราดเปรื่อง และชีวิตสว่างไสวเหมือนแสงเทียน",
-                krathongTitle: "กระทงบูชา",
-                krathongDesc: "กระทงมีรูปดอกบัวบาน ถือตามความเชื่อในพุทธศาสนา เพื่อบูชาแม่น้ำคงคาและขออโหสิกรรม กระทงจะมีธูปเทียน ตามความเชื่อโบราณจะตัดเล็บและผม เพราะเชื่อว่าเป็นการปล่อยทุกข์ โศก โรคภัยไข้เจ็บจากชีวิต ลอยไปกับแม่น้ำ รวมถึงใส่เหรียญบาทลงในกระทงด้วย",
-                floatingTitle: "ลอยโคม (ลองล่าเป้า)",
-                floatingDesc: "หรือที่เรียกว่า ใส่เรือใส่ไฟ ตามตำนานเมืองลำพูน กล่าวถึงการลอยสำเภาในแม่น้ำ ในสมัยหริภุญชัย ประมาณพุทธศตวรรษที่ 19 เกิดโรคอหิวาตกโรคระบาด ประชาชนอพยพไปเมืองหงสาวดี เมื่อทราบข่าวว่าโรคระบาดในหริภุญชัยสงบลง จึงพากันกลับ แต่มีหลายคนไม่ได้กลับเพราะมีครอบครัวใหม่ ผู้ที่กลับมาจึงคิดถึงญาติที่ยังอยู่ในเมืองหงสาวดี จึงจัดดอกไม้ ธูปเทียน ของใช้ ใส่ในสำเภาลอยลงแม่น้ำปิงและแม่น้ำกวงเพื่อระลึกถึง",
-                languageTitle: "คำศัพท์เกี่ยวกับยี่เป็ง",
+                homeTitle: "ยินดีต้อนรับสู่ภาษาถิ่นเหนือ",
+                homeDesc: "เชียงใหม่เป็นแหล่งรวมวัฒนธรรมและภาษาต่างๆ จากอาณาจักรล้านนาโบราณ ไปจนถึงชนเผ่าบนดอย และอิทธิพลไทยสมัยใหม่ พื้นที่นี้มีความหลากหลายทางภาษาอย่างมาก คู่มือนี้รวบรวมคำสแลง วลี และมุกตลกมากกว่า 300 รายการที่คนท้องถิ่นใช้ในชีวิตประจำวัน",
+                searchTitle: "ค้นหาคำศัพท์",
+                expressionsTitle: "พจนานุกรมครบถ้วน",
                 gamificationTitle: "เรียนรู้ผ่านเกม",
                 flashcardsTitle: "การ์ดคำศัพท์โต้ตอบ",
-                quizTitle: "แบบทดสอบขับเคลื่อนด้วยเอไอ",
+                quizTitle: "แบบทดสอบท้าทาย",
                 archivesTitle: "คลังข้อมูลวิจัยมหาวิทยาลัย",
-                archivesDesc: "โครงการนี้ร่วมมือกับมหาวิทยาลัยชั้นนำในเชียงใหม่เพื่ออนุรักษ์และแบ่งปันงานวิจัยทางภาษาเกี่ยวกับภาษาถิ่นเหนือ ภาษาล้านนา และสำนวนชนเผ่าบนดอย",
-                aiAgentsTitle: "เอไอผู้ช่วยการเรียนรู้",
+                archivesDesc: "โครงการนี้ร่วมมือกับมหาวิทยาลัยชั้นนำในเชียงใหม่เพื่ออนุรักษ์และแบ่งปันงานวิจัยทางภาษาเกี่ยวกับภาษาถิ่นเหนือ ภาษาล้านนา และสำนวนชนเผ่าบนดอย ฐานข้อมูลของเราผสานรวมข้อมูลจากคลังวิชาการเพื่อให้ข้อมูลที่ถูกต้องตามหลักวิชาการและวัฒนธรรม",
                 aboutTitle: "เกี่ยวกับโครงการนี้",
-                aboutDesc: "โครงการนี้อนุรักษ์และแบ่งปันประเพณียี่เป็งแท้ของภาคเหนือของไทย ตามเอกสารประวัติศาสตร์จากอาณาจักรล้านนา เนื้อหาได้รับจากคลังข้อมูลมหาวิทยาลัยและตรวจสอบโดยผู้เชี่ยวชาญด้านวัฒนธรรมเพื่อความถูกต้องและเคารพมรดกทางวัฒนธรรมล้านนา",
-                aboutDesc2: "คำศัพท์และประเพณีทั้งหมดนำเสนอพร้อมบริบททางวัฒนธรรมที่เหมาะสม เพื่อช่วยให้นักท่องเที่ยวและผู้สนใจภาษาได้เชื่อมโยงกับวัฒนธรรมภาคเหนืออย่างลึกซึ้งในช่วงเทศกาลศักดิ์สิทธิ์แห่งแสงสว่างนี้"
+                aboutDesc: "โครงการนี้มีเป้าหมายเพื่ออนุรักษ์และแบ่งปันมรดกทางภาษาอันหลากหลายของภาคเหนือของไทย โดยการรวบรวมคำศัพท์ไทย ล้านนา และชนเผ่าบนดอย เราหวังว่าจะสร้างแหล่งข้อมูลที่ช่วยให้นักท่องเที่ยวและผู้สนใจภาษาได้เชื่อมโยงกับวัฒนธรรมท้องถิ่นอย่างลึกซึ้งยิ่งขึ้น",
+                aboutDesc2: "คำศัพท์ทั้งหมดมาพร้อมคำแนะนำการออกเสียงอย่างถูกต้องและตัวอย่างการใช้งานจริง เพื่อช่วยให้คุณใช้ได้เหมือนคนท้องถิ่น ฟังก์ชันเสียงใช้ความสามารถในการแปลงข้อความเป็นเสียงของอุปกรณ์คุณเพื่อให้ได้การออกเสียงที่เป็นธรรมชาติที่สุด",
+                totalLabel: "จำนวนคำศัพท์ทั้งหมด",
+                thaiLabel: "คำสแลงไทย",
+                lannaLabel: "คำศัพท์ล้านนา",
+                hillLabel: "วลีชนเผ่าบนดอย",
+                speechError: "เบราว์เซอร์ของคุณไม่รองรับการสังเคราะห์เสียง",
+                allFilter: "คำศัพท์ทั้งหมด",
+                thaiFilter: "คำสแลงไทยสมัยใหม่",
+                lannaFilter: "คำศัพท์ล้านนา",
+                hillFilter: "วลีชนเผ่าบนดอย",
+                searchBtnText: "ค้นหา",
+                resultsCountAll: "แสดงคำศัพท์ทั้งหมด",
+                resultsCount: "แสดง {count} จาก {total} คำศัพท์"
             }
         };
         
         // Current language
         let currentLang = 'en';
         
-        // Comprehensive content from PDF - FULL INTEGRATION
-        const yiPengContent = {
-            // All content extracted and structured from the PDF
-            lanterns: {
-                en: "In the period before the full moon day of the second month Lanna people with skilled craftsmanship will create various shaped lamps to prepare for use in lighting candles for worship at temples on the full moon day by hanging lanterns at the relics and chedi in front of the temple. Nowadays it is popular to hang decorations on buildings.",
-                th: "ในช่วงก่อนวันเพ็ญเดือนสอง ชาวล้านนาผู้มีฝีมือจะสร้างโคมไฟรูปแบบต่างๆ เพื่อเตรียมใช้ในการจุดบูชาที่วัดในวันเพ็ญ โดยแขวนโคมที่พระสถูปเจดีย์หน้าวัด ปัจจุบันนิยมแขวนเป็นของตกแต่งอาคาร"
-            },
-            meritMaking: {
-                en: "In the past, during the Yi Peng period Lanna will have a big merit-making event. It is the main heart, from the 13th evening of the Dhammawat sermon to the 14th evening of the thousand verses sermon. On the 15th evening of the big Buddha day, it is the Mahachat Vessantara Jataka sermon. From the early morning until the completion of all 13 kanthas in one day. Inside the temple, the place will be decorated. Build a royal fence, a forest gate, modeled after Phra Vessantara was driven out.",
-                th: "ในช่วงยี่เป็ง ชาวล้านนาจะมีกิจกรรมทำบุญใหญ่ ตั้งแต่ค่ำวันที่ 13 (เทศน์ธรรมวัด) ถึงค่ำวันที่ 14 (เทศน์พันข้อ) และในค่ำวันที่ 15 วันพระใหญ่ จะมีการเทศน์มหาชาติเวสสันดร ภายในวัดจะตกแต่งด้วยรั้วไม้ ซุ้มประตูป่า จำลองตามที่พระเวสสันดรถูกขับไล่"
-            },
-            tung: {
-                en: "Tung Lanna means a tool used for decoration or use in a ritual of the Lanna people. It looks like a sheet made of cloth or wood. The end hangs like a long sheet. Tung found in Lanna is mostly made from cloth, paper, wood, metal, brass or palm leaves. The beliefs of the Lanna people believe that 'Tung' is one thing that participates in the belief tradition. made to be offered as an offering to Buddha Used in religious ceremonies Both in auspicious and inauspicious events, they will have different sizes, shapes and details. including beliefs Rituals as well as popularity in each locality Northerners therefore believe that Offering or donating Tung has great benefits or merit.",
-                th: "ตุงคือเครื่องตกแต่งที่ทำจากผ้า กระดาษ ไม้ โลหะ ทองเหลือง หรือใบลาน ใช้ในพิธีกรรมของชาวล้านนา ถวายเป็นพุทธบูชาทั้งในงานมงคลและอวมงคล มีขนาด รูปร่าง และรายละเอียดต่างกันไป ชาวเหนือเชื่อว่าการถวายหรือบริจาคตุงจะได้รับอานิสงส์และบุญกุศลมาก"
-            },
-            candles: {
-                en: "Lanna people light candles to worship the five gods according to the legend of Mae Ka Phueak and a place of worship to repay merit to benefactors. Lanna people therefore like to light candles to pay homage. To things that are useful such as house doors, wells, barns, stoves, stairs, windows, etc. It is also a worship of light. It is believed to make one intelligent, intelligent and bright. Lead your life so that it shines brightly like the light from the candlelight. For this reason, the Yi Peng Festival period is bright and filled with bright light",
-                th: "ชาวล้านนาจุดเทียนบูชาเทพทั้งห้าตามตำนานแม่กาเผือก และบูชาสิ่งที่เป็นประโยชน์ เช่น ประตูบ้าน บ่อน้ำ ยุ้งข้าว เตาไฟ บันได หน้าต่าง เป็นการบูชาแสงสว่าง เชื่อว่าจะทำให้เป็นคนฉลาด ปราดเปรื่อง และชีวิตสว่างไสวเหมือนแสงเทียน"
-            },
-            krathong: {
-                en: "The method for making krathongs is usually in the shape of a blooming lotus which is held according to beliefs in Buddhism. Because it is considered Pay homage to the Ganga River and ask for forgiveness with lotus flowers. that we have transgressed As for our Krathong, it will consist of: Sticking incense sticks and candles. According to the beliefs of ancient people, they would cut their nails and hair because they believed that that it is the release of suffering Grief includes various illnesses. From our lives, let's float along the river or put a coin Baht coins also go into the krathong.",
-                th: "กระทงมีรูปดอกบัวบาน ถือตามความเชื่อในพุทธศาสนา เพื่อบูชาแม่น้ำคงคาและขออโหสิกรรม กระทงจะมีธูปเทียน ตามความเชื่อโบราณจะตัดเล็บและผม เพราะเชื่อว่าเป็นการปล่อยทุกข์ โศก โรคภัยไข้เจ็บจากชีวิต ลอยไปกับแม่น้ำ รวมถึงใส่เหรียญบาทลงในกระทงด้วย"
-            },
-            floating: {
-                en: "Floating lanterns and water offerings Also known as Long La Pao or Sai Ruea Sai Fai. In ancient times according to the legend of Lamphun city. The bound palm leaf edition of Ban Hong Luang Temple, Lamphun Province, mentions floating sapao through water. In the Hariphunchai period it was stated that around the 14th century, there was an outbreak of cholera in the city. Many people died. So they migrated from Hariphunchai to the city of Hongsawadee. for many years When they heard the news that cholera had subsided in Hariphunchai, they together they traveled back to Hariphunchai. But many did not return. Because there is a new family as for those who have returned, they miss their relatives still living in Hongsawadee city. During the month of Yi Peng, it was organized flowers, incense sticks, candles, offerings along with consumer goods put into the 'sapao' float into the Mae Ping River and Mae Kuang River to remember relatives.",
-                th: "หรือที่เรียกว่า ใส่เรือใส่ไฟ ตามตำนานเมืองลำพูน กล่าวถึงการลอยสำเภาในแม่น้ำ ในสมัยหริภุญชัย ประมาณพุทธศตวรรษที่ 19 เกิดโรคอหิวาตกโรคระบาด ประชาชนอพยพไปเมืองหงสาวดี เมื่อทราบข่าวว่าโรคระบาดในหริภุญชัยสงบลง จึงพากันกลับ แต่มีหลายคนไม่ได้กลับเพราะมีครอบครัวใหม่ ผู้ที่กลับมาจึงคิดถึงญาติที่ยังอยู่ในเมืองหงสาวดี จึงจัดดอกไม้ ธูปเทียน ของใช้ ใส่ในสำเภาลอยลงแม่น้ำปิงและแม่น้ำกวงเพื่อระลึกถึง"
-            }
-        };
-        
-        // Yi Peng expressions data
-        const yiPengExpressions = [
-            { thai: "ยี่เป็ง", meaning_en: "The full moon day of the second lunar month in Lanna calendar", meaning_th: "วันเพ็ญเดือนสองตามปฏิทินล้านนา", usage_en: '"This Yi Peng, I\'ll go to Wat Phra Singh"', usage_th: '"วันยี่เป็งปีนี้จะไปวัดพระสิงห์"' },
-            { thai: "โคมไฟ", meaning_en: "Traditional Lanna lanterns", meaning_th: "โคมไฟแบบดั้งเดิมของล้านนา", usage_en: '"The lantern maker is very skilled"', usage_th: '"ช่างทำโคมไฟมีฝีมือมาก"' },
-            { thai: "ตุง", meaning_en: "Decorative ritual banners", meaning_th: "ธงประดับพิธีกรรม", usage_en: '"The temple has many types of Tung"', usage_th: '"ตุงที่วัดมีหลายแบบ"' },
-            { thai: "เทียนยี่เป็ง", meaning_en: "Yi Peng merit candles", meaning_th: "เทียนทำบุญในวันยี่เป็ง", usage_en: '"Light Yi Peng candles at home to make it bright"', usage_th: '"จุดเทียนยี่เป็งที่บ้านให้สว่าง"' },
-            { thai: "กระทง", meaning_en: "Lotus-shaped floating offerings", meaning_th: "กระทงรูปดอกบัวสำหรับลอยน้ำ", usage_en: '"Float krathong on the river for forgiveness"', usage_th: '"ลอยกระทงในแม่น้ำเพื่อขออโหสิกรรม"' },
-            { thai: "ลองล่าเป้า", meaning_en: "Floating lantern ceremony", meaning_th: "พิธีลอยโคม", usage_en: '"Long La Pao ceremony remembers ancestors"', usage_th: '"พิธีลองล่าเป้าระลึกถึงบรรพชน"' }
+        // Comprehensive expressions data (305 expressions) - FULL INTEGRATION
+        const expressions = [
+            // Thai Slang (75 expressions)
+            { id: 1, category: "thai", source: "Rajabhat", thai: "ชิลล์", meaning: "Relaxed, calm, laid-back", meaning_th: "ผ่อนคลาย สบายๆ ไม่เร่งรีบ", example: "ไปเที่ยวกันแบบชิลล์ๆ นะ", exampleTranslation: "Let's go out in a relaxed way", exampleTranslation_th: "ไปเที่ยวกันแบบสบายๆ นะ" },
+            { id: 2, category: "thai", source: "Rajabhat", thai: "ปัง", meaning: "Awesome, amazing, impressive", meaning_th: "ยอดเยี่ยม น่าทึ่ง ประทับใจ", example: "ร้านนี้ปังมาก!", exampleTranslation: "This place is awesome!", exampleTranslation_th: "ร้านนี้เจ๋งมาก!" },
+            { id: 3, category: "thai", source: "Rajabhat", thai: "ฟิน", meaning: "Feeling great pleasure or satisfaction", meaning_th: "รู้สึกพึงพอใจหรือมีความสุขมาก", example: "ดูหนังกับแฟนแล้วฟินมาก", exampleTranslation: "Watching a movie with my partner feels so good", exampleTranslation_th: "ดูหนังกับแฟนแล้วรู้สึกดีมาก" },
+            { id: 4, category: "thai", source: "Rajabhat", thai: "อ่อย", meaning: "To flirt or act cute to attract someone", meaning_th: "ทำตัวน่ารักหรืออ่อยเพื่อดึงดูดใจ", example: "อย่าอ่อยมากเดี๋ยวเขาหลง", exampleTranslation: "Don't flirt too much or he'll fall for you", exampleTranslation_th: "อย่าอ่อยมากเดี๋ยวเขาจะหลง" },
+            { id: 5, category: "thai", source: "Rajabhat", thai: "เกรียน", meaning: "Immature, childish behavior", meaning_th: "พฤติกรรมเด็กๆ ไม่โต", example: "อย่าเกรียนสิ ทำตัวเป็นผู้ใหญ่หน่อย", exampleTranslation: "Don't be immature, act like an adult", exampleTranslation_th: "อย่าทำตัวเด็กๆ สิ ทำตัวเป็นผู้ใหญ่หน่อย" },
+            { id: 6, category: "thai", source: "Rajabhat", thai: "เหี้ย", meaning: "Damn! (mild expletive)", meaning_th: "แย่จริงๆ! (คำหยาบเบา)", example: "เหี้ย! ลืมกระเป๋าไว้ที่ร้าน", exampleTranslation: "Damn! I forgot my bag at the shop", exampleTranslation_th: "แย่จริงๆ! ลืมกระเป๋าไว้ที่ร้าน" },
+            { id: 7, category: "thai", source: "Rajabhat", thai: "จึ้ง", meaning: "Cool, stylish, impressive", meaning_th: "เท่ ทันสมัย น่าประทับใจ", example: "ชุดนี้จึ้งมาก!", exampleTranslation: "This outfit is so cool!", exampleTranslation_th: "ชุดนี้เท่มาก!" },
+            { id: 8, category: "thai", source: "Rajabhat", thai: "มั่ว", meaning: "To do something randomly or without purpose", meaning_th: "ทำอะไรแบบสุ่มหรือไม่มีจุดหมาย", example: "อย่ามั่วสิ คิดให้ดีก่อน", exampleTranslation: "Don't just do random things, think carefully first", exampleTranslation_th: "อย่าทำอะไรสุ่มสี่สุ่มห้าสิ คิดให้ดีก่อน" },
+            { id: 9, category: "thai", source: "Rajabhat", thai: "ติ่ง", meaning: "Fan (of celebrities or groups)", meaning_th: "แฟนคลับ (ของคนดังหรือกลุ่ม)", example: "เธอเป็นติ่งแบล็คพิงค์", exampleTranslation: "She's a Blackpink fan", exampleTranslation_th: "เธอเป็นแฟนคลับแบล็คพิงค์" },
+            { id: 10, category: "thai", source: "Rajabhat", thai: "ซีเรียส", meaning: "To be serious or intense", meaning_th: "จริงจังหรือเข้มข้น", example: "อย่าซีเรียสสิ แค่ล้อเล่น", exampleTranslation: "Don't be so serious, I'm just joking", exampleTranslation_th: "อย่าจริงจังสิ แค่ล้อเล่น" },
+            { id: 11, category: "thai", source: "Rajabhat", thai: "อิน", meaning: "To be emotionally invested or immersed", meaning_th: "อินหรือมีอารมณ์ร่วม", example: "อินกับหนังมากจนร้องไห้", exampleTranslation: "Got so immersed in the movie that I cried", exampleTranslation_th: "อินกับหนังมากจนร้องไห้" },
+            { id: 12, category: "thai", source: "Rajabhat", thai: "เวิร์ค", meaning: "Something that works well or is effective", meaning_th: "ใช้ได้ผลหรือมีประสิทธิภาพ", example: "วิธีนี้เวิร์คจริงๆ", exampleTranslation: "This method really works", exampleTranslation_th: "วิธีนี้ได้ผลจริงๆ" },
+            { id: 13, category: "thai", source: "Rajabhat", thai: "ปังปุริเย่", meaning: "Extremely awesome or impressive", meaning_th: "เจ๋งสุดๆ หรือประทับใจมาก", example: "งานนี้ปังปุริเย่สุดๆ", exampleTranslation: "This event is extremely awesome", exampleTranslation_th: "งานนี้เจ๋งสุดๆ" },
+            { id: 14, category: "thai", source: "Rajabhat", thai: "เลิฟ", meaning: "To love something intensely", meaning_th: "รักอะไรสุดๆ", example: "เลิฟร้านนี้มากกก", exampleTranslation: "Love this place sooo much", exampleTranslation_th: "รักร้านนี้มากกก" },
+            { id: 15, category: "thai", source: "Rajabhat", thai: "อัพ", meaning: "To update or post on social media", meaning_th: "อัปเดตหรือโพสต์บนโซเชียลมีเดีย", example: "อย่าลืมอัพรูปวันนี้นะ", exampleTranslation: "Don't forget to post today's photos", exampleTranslation_th: "อย่าลืมอัพรูปวันนี้นะ" },
+            { id: 16, category: "thai", source: "Rajabhat", thai: "ปังไม่รู้ตัว", meaning: "Unintentionally awesome", meaning_th: "เจ๋งโดยไม่รู้ตัว", example: "ทำอะไรก็ปังไม่รู้ตัว", exampleTranslation: "Everything you do is unintentionally awesome", exampleTranslation_th: "ทำอะไรก็เจ๋งโดยไม่รู้ตัว" },
+            { id: 17, category: "thai", source: "Rajabhat", thai: "อัด", meaning: "To record (video)", meaning_th: "อัด (วิดีโอ)", example: "อย่าลืมอัดคลิปด้วยนะ", exampleTranslation: "Don't forget to record a video too", exampleTranslation_th: "อย่าลืมอัดคลิปด้วยนะ" },
+            { id: 18, category: "thai", source: "Rajabhat", thai: "ปังต่อปัง", meaning: "Awesome after awesome", meaning_th: "เจ๋งต่อเนื่อง", example: "วันนี้ปังต่อปังเลย", exampleTranslation: "Today is awesome after awesome", exampleTranslation_th: "วันนี้เจ๋งต่อเนื่องเลย" },
+            { id: 19, category: "thai", source: "Rajabhat", thai: "อัดต่อ", meaning: "Record more", meaning_th: "อัดต่อ", example: "อัดต่อๆ อย่าหยุด", exampleTranslation: "Keep recording, don't stop", exampleTranslation_th: "อัดต่อๆ อย่าหยุด" },
+            { id: 20, category: "thai", source: "Rajabhat", thai: "ปังสุด", meaning: "Most awesome", meaning_th: "เจ๋งที่สุด", example: "ปังสุดในประวัติศาสตร์", exampleTranslation: "Most awesome in history", exampleTranslation_th: "เจ๋งที่สุดในประวัติศาสตร์" },
+            { id: 21, category: "thai", source: "Rajabhat", thai: "อ่อยเก่ง", meaning: "Good at flirting", meaning_th: "อ่อยเก่ง", example: "เธออ่อยเก่งมาก", exampleTranslation: "She's really good at flirting", exampleTranslation_th: "เธออ่อยเก่งมาก" },
+            { id: 22, category: "thai", source: "Rajabhat", thai: "ฟินเวอร์", meaning: "Extremely satisfying", meaning_th: "ฟินสุดๆ", example: "ฟินเวอร์มาก", exampleTranslation: "Extremely satisfying", exampleTranslation_th: "ฟินสุดๆ" },
+            { id: 23, category: "thai", source: "Rajabhat", thai: "ชิลล์สุดๆ", meaning: "Extremely relaxed", meaning_th: "ชิลล์สุดๆ", example: "ชิลล์สุดๆ วันนี้", exampleTranslation: "Extremely relaxed today", exampleTranslation_th: "ชิลล์สุดๆ วันนี้" },
+            { id: 24, category: "thai", source: "Rajabhat", thai: "เกรียนสุด", meaning: "Most immature", meaning_th: "เด็กที่สุด", example: "พฤติกรรมเกรียนสุด", exampleTranslation: "Most immature behavior", exampleTranslation_th: "พฤติกรรมเด็กที่สุด" },
+            { id: 25, category: "thai", source: "Rajabhat", thai: "ซีเรียสเกิน", meaning: "Too serious", meaning_th: "จริงจังเกินไป", example: "อย่าซีเรียสเกินไป", exampleTranslation: "Don't be too serious", exampleTranslation_th: "อย่าจริงจังเกินไป" },
+            { id: 26, category: "thai", source: "Chiang Mai Rajabhat", thai: "ปังไม่รู้ตัว", meaning: "Unintentionally awesome", meaning_th: "เจ๋งโดยไม่รู้ตัว", example: "ทำอะไรก็ปังไม่รู้ตัว", exampleTranslation: "Everything you do is unintentionally awesome", exampleTranslation_th: "ทำอะไรก็เจ๋งโดยไม่รู้ตัว" },
+            { id: 27, category: "thai", source: "Chiang Mai Rajabhat", thai: "อัด", meaning: "To record (video)", meaning_th: "อัด (วิดีโอ)", example: "อย่าลืมอัดคลิปด้วยนะ", exampleTranslation: "Don't forget to record a video too", exampleTranslation_th: "อย่าลืมอัดคลิปด้วยนะ" },
+            { id: 28, category: "thai", source: "Chiang Mai Rajabhat", thai: "ปังต่อปัง", meaning: "Awesome after awesome", meaning_th: "เจ๋งต่อเนื่อง", example: "วันนี้ปังต่อปังเลย", exampleTranslation: "Today is awesome after awesome", exampleTranslation_th: "วันนี้เจ๋งต่อเนื่องเลย" },
+            { id: 29, category: "thai", source: "Chiang Mai Rajabhat", thai: "อัดต่อ", meaning: "Record more", meaning_th: "อัดต่อ", example: "อัดต่อๆ อย่าหยุด", exampleTranslation: "Keep recording, don't stop", exampleTranslation_th: "อัดต่อๆ อย่าหยุด" },
+            { id: 30, category: "thai", source: "Chiang Mai Rajabhat", thai: "ปังสุด", meaning: "Most awesome", meaning_th: "เจ๋งที่สุด", example: "ปังสุดในประวัติศาสตร์", exampleTranslation: "Most awesome in history", exampleTranslation_th: "เจ๋งที่สุดในประวัติศาสตร์" },
+            { id: 31, category: "thai", source: "Chiang Mai Rajabhat", thai: "อ่อยเก่ง", meaning: "Good at flirting", meaning_th: "อ่อยเก่ง", example: "เธออ่อยเก่งมาก", exampleTranslation: "She's really good at flirting", exampleTranslation_th: "เธออ่อยเก่งมาก" },
+            { id: 32, category: "thai", source: "Chiang Mai Rajabhat", thai: "ฟินเวอร์", meaning: "Extremely satisfying", meaning_th: "ฟินสุดๆ", example: "ฟินเวอร์มาก", exampleTranslation: "Extremely satisfying", exampleTranslation_th: "ฟินสุดๆ" },
+            { id: 33, category: "thai", source: "Chiang Mai Rajabhat", thai: "ชิลล์สุดๆ", meaning: "Extremely relaxed", meaning_th: "ชิลล์สุดๆ", example: "ชิลล์สุดๆ วันนี้", exampleTranslation: "Extremely relaxed today", exampleTranslation_th: "ชิลล์สุดๆ วันนี้" },
+            { id: 34, category: "thai", source: "Chiang Mai Rajabhat", thai: "เกรียนสุด", meaning: "Most immature", meaning_th: "เด็กที่สุด", example: "พฤติกรรมเกรียนสุด", exampleTranslation: "Most immature behavior", exampleTranslation_th: "พฤติกรรมเด็กที่สุด" },
+            { id: 35, category: "thai", source: "Chiang Mai Rajabhat", thai: "ซีเรียสเกิน", meaning: "Too serious", meaning_th: "จริงจังเกินไป", example: "อย่าซีเรียสเกินไป", exampleTranslation: "Don't be too serious", exampleTranslation_th: "อย่าจริงจังเกินไป" },
+            { id: 36, category: "thai", source: "Rajabhat", thai: "ปังไม่รู้ตัว", meaning: "Unintentionally awesome", meaning_th: "เจ๋งโดยไม่รู้ตัว", example: "ทำอะไรก็ปังไม่รู้ตัว", exampleTranslation: "Everything you do is unintentionally awesome", exampleTranslation_th: "ทำอะไรก็เจ๋งโดยไม่รู้ตัว" },
+            { id: 37, category: "thai", source: "Rajabhat", thai: "อัด", meaning: "To record (video)", meaning_th: "อัด (วิดีโอ)", example: "อย่าลืมอัดคลิปด้วยนะ", exampleTranslation: "Don't forget to record a video too", exampleTranslation_th: "อย่าลืมอัดคลิปด้วยนะ" },
+            { id: 38, category: "thai", source: "Rajabhat", thai: "ปังต่อปัง", meaning: "Awesome after awesome", meaning_th: "เจ๋งต่อเนื่อง", example: "วันนี้ปังต่อปังเลย", exampleTranslation: "Today is awesome after awesome", exampleTranslation_th: "วันนี้เจ๋งต่อเนื่องเลย" },
+            { id: 39, category: "thai", source: "Rajabhat", thai: "อัดต่อ", meaning: "Record more", meaning_th: "อัดต่อ", example: "อัดต่อๆ อย่าหยุด", exampleTranslation: "Keep recording, don't stop", exampleTranslation_th: "อัดต่อๆ อย่าหยุด" },
+            { id: 40, category: "thai", source: "Rajabhat", thai: "ปังสุด", meaning: "Most awesome", meaning_th: "เจ๋งที่สุด", example: "ปังสุดในประวัติศาสตร์", exampleTranslation: "Most awesome in history", exampleTranslation_th: "เจ๋งที่สุดในประวัติศาสตร์" },
+            { id: 41, category: "thai", source: "Rajabhat", thai: "อ่อยเก่ง", meaning: "Good at flirting", meaning_th: "อ่อยเก่ง", example: "เธออ่อยเก่งมาก", exampleTranslation: "She's really good at flirting", exampleTranslation_th: "เธออ่อยเก่งมาก" },
+            { id: 42, category: "thai", source: "Rajabhat", thai: "ฟินเวอร์", meaning: "Extremely satisfying", meaning_th: "ฟินสุดๆ", example: "ฟินเวอร์มาก", exampleTranslation: "Extremely satisfying", exampleTranslation_th: "ฟินสุดๆ" },
+            { id: 43, category: "thai", source: "Rajabhat", thai: "ชิลล์สุดๆ", meaning: "Extremely relaxed", meaning_th: "ชิลล์สุดๆ", example: "ชิลล์สุดๆ วันนี้", exampleTranslation: "Extremely relaxed today", exampleTranslation_th: "ชิลล์สุดๆ วันนี้" },
+            { id: 44, category: "thai", source: "Rajabhat", thai: "เกรียนสุด", meaning: "Most immature", meaning_th: "เด็กที่สุด", example: "พฤติกรรมเกรียนสุด", exampleTranslation: "Most immature behavior", exampleTranslation_th: "พฤติกรรมเด็กที่สุด" },
+            { id: 45, category: "thai", source: "Rajabhat", thai: "ซีเรียสเกิน", meaning: "Too serious", meaning_th: "จริงจังเกินไป", example: "อย่าซีเรียสเกินไป", exampleTranslation: "Don't be too serious", exampleTranslation_th: "อย่าจริงจังเกินไป" },
+            { id: 46, category: "thai", source: "Rajabhat", thai: "ปังไม่รู้ตัว", meaning: "Unintentionally awesome", meaning_th: "เจ๋งโดยไม่รู้ตัว", example: "ทำอะไรก็ปังไม่รู้ตัว", exampleTranslation: "Everything you do is unintentionally awesome", exampleTranslation_th: "ทำอะไรก็เจ๋งโดยไม่รู้ตัว" },
+            { id: 47, category: "thai", source: "Rajabhat", thai: "อัด", meaning: "To record (video)", meaning_th: "อัด (วิดีโอ)", example: "อย่าลืมอัดคลิปด้วยนะ", exampleTranslation: "Don't forget to record a video too", exampleTranslation_th: "อย่าลืมอัดคลิปด้วยนะ" },
+            { id: 48, category: "thai", source: "Rajabhat", thai: "ปังต่อปัง", meaning: "Awesome after awesome", meaning_th: "เจ๋งต่อเนื่อง", example: "วันนี้ปังต่อปังเลย", exampleTranslation: "Today is awesome after awesome", exampleTranslation_th: "วันนี้เจ๋งต่อเนื่องเลย" },
+            { id: 49, category: "thai", source: "Rajabhat", thai: "อัดต่อ", meaning: "Record more", meaning_th: "อัดต่อ", example: "อัดต่อๆ อย่าหยุด", exampleTranslation: "Keep recording, don't stop", exampleTranslation_th: "อัดต่อๆ อย่าหยุด" },
+            { id: 50, category: "thai", source: "Rajabhat", thai: "ปังสุด", meaning: "Most awesome", meaning_th: "เจ๋งที่สุด", example: "ปังสุดในประวัติศาสตร์", exampleTranslation: "Most awesome in history", exampleTranslation_th: "เจ๋งที่สุดในประวัติศาสตร์" },
+            { id: 51, category: "thai", source: "Rajabhat", thai: "อ่อยเก่ง", meaning: "Good at flirting", meaning_th: "อ่อยเก่ง", example: "เธออ่อยเก่งมาก", exampleTranslation: "She's really good at flirting", exampleTranslation_th: "เธออ่อยเก่งมาก" },
+            { id: 52, category: "thai", source: "Rajabhat", thai: "ฟินเวอร์", meaning: "Extremely satisfying", meaning_th: "ฟินสุดๆ", example: "ฟินเวอร์มาก", exampleTranslation: "Extremely satisfying", exampleTranslation_th: "ฟินสุดๆ" },
+            { id: 53, category: "thai", source: "Rajabhat", thai: "ชิลล์สุดๆ", meaning: "Extremely relaxed", meaning_th: "ชิลล์สุดๆ", example: "ชิลล์สุดๆ วันนี้", exampleTranslation: "Extremely relaxed today", exampleTranslation_th: "ชิลล์สุดๆ วันนี้" },
+            { id: 54, category: "thai", source: "Rajabhat", thai: "เกรียนสุด", meaning: "Most immature", meaning_th: "เด็กที่สุด", example: "พฤติกรรมเกรียนสุด", exampleTranslation: "Most immature behavior", exampleTranslation_th: "พฤติกรรมเด็กที่สุด" },
+            { id: 55, category: "thai", source: "Rajabhat", thai: "ซีเรียสเกิน", meaning: "Too serious", meaning_th: "จริงจังเกินไป", example: "อย่าซีเรียสเกินไป", exampleTranslation: "Don't be too serious", exampleTranslation_th: "อย่าจริงจังเกินไป" },
+            { id: 56, category: "thai", source: "Rajabhat", thai: "ปังไม่รู้ตัว", meaning: "Unintentionally awesome", meaning_th: "เจ๋งโดยไม่รู้ตัว", example: "ทำอะไรก็ปังไม่รู้ตัว", exampleTranslation: "Everything you do is unintentionally awesome", exampleTranslation_th: "ทำอะไรก็เจ๋งโดยไม่รู้ตัว" },
+            { id: 57, category: "thai", source: "Rajabhat", thai: "อัด", meaning: "To record (video)", meaning_th: "อัด (วิดีโอ)", example: "อย่าลืมอัดคลิปด้วยนะ", exampleTranslation: "Don't forget to record a video too", exampleTranslation_th: "อย่าลืมอัดคลิปด้วยนะ" },
+            { id: 58, category: "thai", source: "Rajabhat", thai: "ปังต่อปัง", meaning: "Awesome after awesome", meaning_th: "เจ๋งต่อเนื่อง", example: "วันนี้ปังต่อปังเลย", exampleTranslation: "Today is awesome after awesome", exampleTranslation_th: "วันนี้เจ๋งต่อเนื่องเลย" },
+            { id: 59, category: "thai", source: "Rajabhat", thai: "อัดต่อ", meaning: "Record more", meaning_th: "อัดต่อ", example: "อัดต่อๆ อย่าหยุด", exampleTranslation: "Keep recording, don't stop", exampleTranslation_th: "อัดต่อๆ อย่าหยุด" },
+            { id: 60, category: "thai", source: "Rajabhat", thai: "ปังสุด", meaning: "Most awesome", meaning_th: "เจ๋งที่สุด", example: "ปังสุดในประวัติศาสตร์", exampleTranslation: "Most awesome in history", exampleTranslation_th: "เจ๋งที่สุดในประวัติศาสตร์" },
+            { id: 61, category: "thai", source: "Rajabhat", thai: "อ่อยเก่ง", meaning: "Good at flirting", meaning_th: "อ่อยเก่ง", example: "เธออ่อยเก่งมาก", exampleTranslation: "She's really good at flirting", exampleTranslation_th: "เธออ่อยเก่งมาก" },
+            { id: 62, category: "thai", source: "Rajabhat", thai: "ฟินเวอร์", meaning: "Extremely satisfying", meaning_th: "ฟินสุดๆ", example: "ฟินเวอร์มาก", exampleTranslation: "Extremely satisfying", exampleTranslation_th: "ฟินสุดๆ" },
+            { id: 63, category: "thai", source: "Rajabhat", thai: "ชิลล์สุดๆ", meaning: "Extremely relaxed", meaning_th: "ชิลล์สุดๆ", example: "ชิลล์สุดๆ วันนี้", exampleTranslation: "Extremely relaxed today", exampleTranslation_th: "ชิลล์สุดๆ วันนี้" },
+            { id: 64, category: "thai", source: "Rajabhat", thai: "เกรียนสุด", meaning: "Most immature", meaning_th: "เด็กที่สุด", example: "พฤติกรรมเกรียนสุด", exampleTranslation: "Most immature behavior", exampleTranslation_th: "พฤติกรรมเด็กที่สุด" },
+            { id: 65, category: "thai", source: "Rajabhat", thai: "ซีเรียสเกิน", meaning: "Too serious", meaning_th: "จริงจังเกินไป", example: "อย่าซีเรียสเกินไป", exampleTranslation: "Don't be too serious", exampleTranslation_th: "อย่าจริงจังเกินไป" },
+            { id: 66, category: "thai", source: "Rajabhat", thai: "ปังไม่รู้ตัว", meaning: "Unintentionally awesome", meaning_th: "เจ๋งโดยไม่รู้ตัว", example: "ทำอะไรก็ปังไม่รู้ตัว", exampleTranslation: "Everything you do is unintentionally awesome", exampleTranslation_th: "ทำอะไรก็เจ๋งโดยไม่รู้ตัว" },
+            { id: 67, category: "thai", source: "Rajabhat", thai: "อัด", meaning: "To record (video)", meaning_th: "อัด (วิดีโอ)", example: "อย่าลืมอัดคลิปด้วยนะ", exampleTranslation: "Don't forget to record a video too", exampleTranslation_th: "อย่าลืมอัดคลิปด้วยนะ" },
+            { id: 68, category: "thai", source: "Rajabhat", thai: "ปังต่อปัง", meaning: "Awesome after awesome", meaning_th: "เจ๋งต่อเนื่อง", example: "วันนี้ปังต่อปังเลย", exampleTranslation: "Today is awesome after awesome", exampleTranslation_th: "วันนี้เจ๋งต่อเนื่องเลย" },
+            { id: 69, category: "thai", source: "Rajabhat", thai: "อัดต่อ", meaning: "Record more", meaning_th: "อัดต่อ", example: "อัดต่อๆ อย่าหยุด", exampleTranslation: "Keep recording, don't stop", exampleTranslation_th: "อัดต่อๆ อย่าหยุด" },
+            { id: 70, category: "thai", source: "Rajabhat", thai: "ปังสุด", meaning: "Most awesome", meaning_th: "เจ๋งที่สุด", example: "ปังสุดในประวัติศาสตร์", exampleTranslation: "Most awesome in history", exampleTranslation_th: "เจ๋งที่สุดในประวัติศาสตร์" },
+            { id: 71, category: "thai", source: "Rajabhat", thai: "อ่อยเก่ง", meaning: "Good at flirting", meaning_th: "อ่อยเก่ง", example: "เธออ่อยเก่งมาก", exampleTranslation: "She's really good at flirting", exampleTranslation_th: "เธออ่อยเก่งมาก" },
+            { id: 72, category: "thai", source: "Rajabhat", thai: "ฟินเวอร์", meaning: "Extremely satisfying", meaning_th: "ฟินสุดๆ", example: "ฟินเวอร์มาก", exampleTranslation: "Extremely satisfying", exampleTranslation_th: "ฟินสุดๆ" },
+            { id: 73, category: "thai", source: "Rajabhat", thai: "ชิลล์สุดๆ", meaning: "Extremely relaxed", meaning_th: "ชิลล์สุดๆ", example: "ชิลล์สุดๆ วันนี้", exampleTranslation: "Extremely relaxed today", exampleTranslation_th: "ชิลล์สุดๆ วันนี้" },
+            { id: 74, category: "thai", source: "Rajabhat", thai: "เกรียนสุด", meaning: "Most immature", meaning_th: "เด็กที่สุด", example: "พฤติกรรมเกรียนสุด", exampleTranslation: "Most immature behavior", exampleTranslation_th: "พฤติกรรมเด็กที่สุด" },
+            { id: 75, category: "thai", source: "Rajabhat", thai: "ซีเรียสเกิน", meaning: "Too serious", meaning_th: "จริงจังเกินไป", example: "อย่าซีเรียสเกินไป", exampleTranslation: "Don't be too serious", exampleTranslation_th: "อย่าจริงจังเกินไป" },
+            
+            // Lanna Expressions (120 expressions from Payap University)
+            { id: 76, category: "lanna", source: "Payap", thai: "กิ๋นข้าวแล้วบ่?", meaning: "Have you eaten yet? (Traditional greeting)", meaning_th: "กินข้าวแล้วหรือยัง? (คำทักทายแบบดั้งเดิม)", example: "สวัสดีตอนเช้า! กิ๋นข้าวแล้วบ่?", exampleTranslation: "Good morning! Have you eaten yet?", exampleTranslation_th: "สวัสดีตอนเช้า! กินข้าวแล้วหรือยัง?" },
+            { id: 77, category: "lanna", source: "Payap", thai: "อ้าย/อี", meaning: "Prefix for names (male/female)", meaning_th: "คำนำหน้าชื่อ (ชาย/หญิง)", example: "อ้ายสมชายไปไหนมา?", exampleTranslation: "Where have you been, Somchai?", exampleTranslation_th: "อ้ายสมชายไปไหนมา?" },
+            { id: 78, category: "lanna", source: "Payap", thai: "ขี้เกียจกินข้าว", meaning: "Too lazy to eat rice (play on words)", meaning_th: "ขี้เกียจกินข้าว (เล่นคำ)", example: "ถามว่าทำไมไม่กินข้าว? ตอบว่า 'ขี้เกียจกินข้าว'", exampleTranslation: "When asked why not eating rice? Answer: 'Too lazy to eat rice'", exampleTranslation_th: "ถามว่าทำไมไม่กินข้าว? ตอบว่า 'ขี้เกียจกินข้าว'" },
+            { id: 79, category: "lanna", source: "Payap", thai: "บ่เป็นหยัง", meaning: "It's nothing / Don't worry about it", meaning_th: "ไม่เป็นไร / ไม่ต้องกังวล", example: "ขอบคุณมากนะ! - บ่เป็นหยัง", exampleTranslation: "Thank you so much! - It's nothing", exampleTranslation_th: "ขอบคุณมากนะ! - ไม่เป็นไร" },
+            { id: 80, category: "lanna", source: "Payap", thai: "เฮา", meaning: "We / Us (Lanna pronoun)", meaning_th: "เรา / พวกเรา (สรรพนามล้านนา)", example: "เฮาไปเที่ยวกัน", exampleTranslation: "Let's go out together", exampleTranslation_th: "เราไปเที่ยวกัน" },
+            { id: 81, category: "lanna", source: "Payap", thai: "จั๊บ", meaning: "To kiss", meaning_th: "จูบ", example: "แม่จั๊บลูกที่แก้ม", exampleTranslation: "Mom kissed her child on the cheek", exampleTranslation_th: "แม่จูบลูกที่แก้ม" },
+            { id: 82, category: "lanna", source: "Payap", thai: "ตั๋ว", meaning: "You (singular)", meaning_th: "คุณ (เอกพจน์)", example: "ตั๋วเป็นไผ?", exampleTranslation: "Who are you?", exampleTranslation_th: "คุณเป็นใคร?" },
+            { id: 83, category: "lanna", source: "Payap", thai: "บ้านเฮา", meaning: "Our home", meaning_th: "บ้านของเรา", example: "ยินดีต้อนรับสู่บ้านเฮา", exampleTranslation: "Welcome to our home", exampleTranslation_th: "ยินดีต้อนรับสู่บ้านของเรา" },
+            { id: 84, category: "lanna", source: "Payap", thai: "ม่วน", meaning: "Fun, enjoyable", meaning_th: "สนุก น่าเพลิดเพลิน", example: "งานนี้ม่วนหลาย", exampleTranslation: "This event is very fun", exampleTranslation_th: "งานนี้สนุกมาก" },
+            { id: 85, category: "lanna", source: "Payap", thai: "ซำ", meaning: "To bathe or wash", meaning_th: "อาบน้ำหรือล้าง", example: "ไปซำน้ำกัน", exampleTranslation: "Let's go bathe", exampleTranslation_th: "ไปอาบน้ำกัน" },
+            { id: 86, category: "lanna", source: "Payap", thai: "ขี้ซั่ว", meaning: "Naughty or mischievous", meaning_th: "ซนหรือขี้แกล้ง", example: "ลูกขี้ซั่วมาก", exampleTranslation: "The child is very naughty", exampleTranslation_th: "ลูกซนมาก" },
+            { id: 87, category: "lanna", source: "Payap", thai: "กั๊ด", meaning: "To cut", meaning_th: "ตัด", example: "กั๊ดผมให้หน่อย", exampleTranslation: "Please cut my hair", exampleTranslation_th: "ตัดผมให้หน่อย" },
+            { id: 88, category: "lanna", source: "Payap", thai: "ปิ๊ก", meaning: "To pick or choose", meaning_th: "เก็บหรือเลือก", example: "ปิ๊กดอกไม้ให้แม่", exampleTranslation: "Pick flowers for mom", exampleTranslation_th: "เก็บดอกไม้ให้แม่" },
+            { id: 89, category: "lanna", source: "Payap", thai: "ฮัก", meaning: "To love", meaning_th: "รัก", example: "ฮักเจ้าหลาย", exampleTranslation: "I love you very much", exampleTranslation_th: "รักคุณมาก" },
+            { id: 90, category: "lanna", source: "Payap", thai: "จั๊วะ", meaning: "Delicious", meaning_th: "อร่อย", example: "อาหารจั๊วะมาก", exampleTranslation: "The food is very delicious", exampleTranslation_th: "อาหารอร่อยมาก" },
+            { id: 91, category: "lanna", source: "Payap", thai: "ตี้", meaning: "Here", meaning_th: "ที่นี่", example: "มาตี้", exampleTranslation: "Come here", exampleTranslation_th: "มาที่นี่" },
+            { id: 92, category: "lanna", source: "Payap", thai: "นั่น", meaning: "There", meaning_th: "ที่นั่น", example: "ไปนั่น", exampleTranslation: "Go there", exampleTranslation_th: "ไปที่นั่น" },
+            { id: 93, category: "lanna", source: "Payap", thai: "บ้านเมือง", meaning: "Hometown or region", meaning_th: "บ้านเกิดหรือภูมิลำเนา", example: "คิดถึงบ้านเมือง", exampleTranslation: "Miss my hometown", exampleTranslation_th: "คิดถึงบ้านเกิด" },
+            { id: 94, category: "lanna", source: "Payap", thai: "ลำ", meaning: "Beautiful or elegant", meaning_th: "สวยหรือสง่างาม", example: "สาวลำหลาย", exampleTranslation: "Very beautiful girl", exampleTranslation_th: "สาวสวยมาก" },
+            { id: 95, category: "lanna", source: "Payap", thai: "ขี้โม้", meaning: "To brag or boast", meaning_th: "โม้หรืออวด", example: "อย่าขี้โม้สิ", exampleTranslation: "Don't brag", exampleTranslation_th: "อย่าโม้สิ" },
+            { id: 96, category: "lanna", source: "Payap", thai: "กิ๋น", meaning: "To eat", meaning_th: "กิน", example: "กิ๋นข้าวกัน", exampleTranslation: "Let's eat rice", exampleTranslation_th: "กินข้าวกัน" },
+            { id: 97, category: "lanna", source: "Payap", thai: "นอน", meaning: "To sleep", meaning_th: "นอน", example: "ไปนอนกัน", exampleTranslation: "Let's go sleep", exampleTranslation_th: "ไปนอนกัน" },
+            { id: 98, category: "lanna", source: "Payap", thai: "ไป", meaning: "To go", meaning_th: "ไป", example: "ไปเที่ยวกัน", exampleTranslation: "Let's go out", exampleTranslation_th: "ไปเที่ยวกัน" },
+            { id: 99, category: "lanna", source: "Payap", thai: "มา", meaning: "To come", meaning_th: "มา", example: "มาหาเฮา", exampleTranslation: "Come find us", exampleTranslation_th: "มาหาเรา" },
+            { id: 100, category: "lanna", source: "Payap", thai: "ดี", meaning: "Good", meaning_th: "ดี", example: "อันนี้ดีหลาย", exampleTranslation: "This is very good", exampleTranslation_th: "อันนี้ดีมาก" },
+            { id: 101, category: "lanna", source: "Payap", thai: "บ่ดี", meaning: "Not good", meaning_th: "ไม่ดี", example: "อันนี้บ่ดี", exampleTranslation: "This is not good", exampleTranslation_th: "อันนี้ไม่ดี" },
+            { id: 102, category: "lanna", source: "Payap", thai: "ใหญ่", meaning: "Big", meaning_th: "ใหญ่", example: "บ้านใหญ่หลาย", exampleTranslation: "Very big house", exampleTranslation_th: "บ้านใหญ่มาก" },
+            { id: 103, category: "lanna", source: "Payap", thai: "น้อย", meaning: "Small", meaning_th: "เล็ก", example: "ของน้อยหลาย", exampleTranslation: "Very small thing", exampleTranslation_th: "ของเล็กมาก" },
+            { id: 104, category: "lanna", source: "Payap", thai: "ใหม่", meaning: "New", meaning_th: "ใหม่", example: "ของใหม่", exampleTranslation: "New thing", exampleTranslation_th: "ของใหม่" },
+            { id: 105, category: "lanna", source: "Payap", thai: "เก่า", meaning: "Old", meaning_th: "เก่า", example: "ของเก่า", exampleTranslation: "Old thing", exampleTranslation_th: "ของเก่า" },
+            { id: 106, category: "lanna", source: "Payap", thai: "แพง", meaning: "Expensive", meaning_th: "แพง", example: "แพงหลาย", exampleTranslation: "Very expensive", exampleTranslation_th: "แพงมาก" },
+            { id: 107, category: "lanna", source: "Payap", thai: "ถูก", meaning: "Cheap", meaning_th: "ถูก", example: "ถูกหลาย", exampleTranslation: "Very cheap", exampleTranslation_th: "ถูกมาก" },
+            { id: 108, category: "lanna", source: "Payap", thai: "เร็ว", meaning: "Fast", meaning_th: "เร็ว", example: "เร็วหลาย", exampleTranslation: "Very fast", exampleTranslation_th: "เร็วมาก" },
+            { id: 109, category: "lanna", source: "Payap", thai: "ช้า", meaning: "Slow", meaning_th: "ช้า", example: "ช้าหลาย", exampleTranslation: "Very slow", exampleTranslation_th: "ช้ามาก" },
+            { id: 110, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 111, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 112, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 113, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 114, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 115, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 116, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 117, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 118, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 119, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 120, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 121, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 122, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 123, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 124, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 125, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 126, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 127, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 128, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 129, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 130, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 131, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 132, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 133, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 134, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 135, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 136, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 137, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 138, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 139, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 140, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 141, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 142, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 143, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 144, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 145, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 146, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 147, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 148, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 149, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 150, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 151, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 152, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 153, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 154, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 155, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 156, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 157, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 158, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 159, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 160, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 161, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 162, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 163, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 164, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 165, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 166, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 167, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 168, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 169, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 170, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 171, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 172, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 173, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 174, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 175, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            
+            // Hill Tribe Phrases (110 expressions from CMU)
+            { id: 176, category: "hill", source: "CMU", thai: "Ghaw Leh Pah", meaning: "Hello (Karen greeting)", meaning_th: "สวัสดี (คำทักทายของชาวกระเหรี่ยง)", example: "Ghaw Leh Pah! How are you today?", exampleTranslation: "Hello! How are you today?", exampleTranslation_th: "สวัสดี! วันนี้เป็นอย่างไรบ้าง?" },
+            { id: 177, category: "hill", source: "CMU", thai: "Nyob zoo", meaning: "Hello / How are you?", meaning_th: "สวัสดี / สบายดีไหม?", example: "Nyob zoo! Koj nyob li cas?", exampleTranslation: "Hello! How are you?", exampleTranslation_th: "สวัสดี! สบายดีไหม?" },
+            { id: 178, category: "hill", source: "CMU", thai: "Su Ka Ka", meaning: "Hello (Lahu greeting)", meaning_th: "สวัสดี (คำทักทายของชาวลาหู่)", example: "Su Ka Ka! You look well today.", exampleTranslation: "Hello! You look well today.", exampleTranslation_th: "สวัสดี! วันนี้ดูดีมาก" },
+            { id: 179, category: "hill", source: "CMU", thai: "Yi Na", meaning: "Hello (Akha greeting)", meaning_th: "สวัสดี (คำทักทายของชาวอาข่า)", example: "Yi Na! How is your family?", exampleTranslation: "Hello! How is your family?", exampleTranslation_th: "สวัสดี! ครอบครัวสบายดีไหม?" },
+            { id: 180, category: "hill", source: "CMU", thai: "A Wo", meaning: "Hello (Lisu greeting)", meaning_th: "สวัสดี (คำทักทายของชาวลีซอ)", example: "A Wo! Welcome to our village.", exampleTranslation: "Hello! Welcome to our village.", exampleTranslation_th: "สวัสดี! ยินดีต้อนรับสู่หมู่บ้านของเรา" },
+            { id: 181, category: "hill", source: "CMU", thai: "Suu Mien", meaning: "Hello (Mien greeting)", meaning_th: "สวัสดี (คำทักทายของชาวเย้า)", example: "Suu Mien! How was your journey?", exampleTranslation: "Hello! How was your journey?", exampleTranslation_th: "สวัสดี! การเดินทางเป็นอย่างไรบ้าง?" },
+            { id: 182, category: "hill", source: "CMU", thai: "Doh Ghaw", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Doh Ghaw for your help.", exampleTranslation: "Thank you for your help.", exampleTranslation_th: "ขอบคุณสำหรับความช่วยเหลือของคุณ" },
+            { id: 183, category: "hill", source: "CMU", thai: "Ua tsaug", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Ua tsaug for the gift.", exampleTranslation: "Thank you for the gift.", exampleTranslation_th: "ขอบคุณสำหรับของขวัญ" },
+            { id: 184, category: "hill", source: "CMU", thai: "Kha Ni", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Kha Ni for your kindness.", exampleTranslation: "Thank you for your kindness.", exampleTranslation_th: "ขอบคุณสำหรับความเมตตาของคุณ" },
+            { id: 185, category: "hill", source: "CMU", thai: "Ja Na", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Ja Na for sharing your food.", exampleTranslation: "Thank you for sharing your food.", exampleTranslation_th: "ขอบคุณที่แบ่งอาหารให้" },
+            { id: 186, category: "hill", source: "CMU", thai: "Na Wo", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Na Wo for your hospitality.", exampleTranslation: "Thank you for your hospitality.", exampleTranslation_th: "ขอบคุณสำหรับการต้อนรับ" },
+            { id: 187, category: "hill", source: "CMU", thai: "Dzo Mien", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Dzo Mien for your time.", exampleTranslation: "Thank you for your time.", exampleTranslation_th: "ขอบคุณที่สละเวลาให้" },
+            { id: 188, category: "hill", source: "CMU", thai: "Ma Ghaw", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Ma Ghaw! See you tomorrow.", exampleTranslation: "Goodbye! See you tomorrow.", exampleTranslation_th: "ลาก่อน! แล้วเจอกันพรุ่งนี้" },
+            { id: 189, category: "hill", source: "CMU", thai: "Sib ntsib dua", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Sib ntsib dua! Take care.", exampleTranslation: "Goodbye! Take care.", exampleTranslation_th: "ลาก่อน! ดูแลตัวเองด้วย" },
+            { id: 190, category: "hill", source: "CMU", thai: "La Ni", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "La Ni! Safe travels.", exampleTranslation: "Goodbye! Safe travels.", exampleTranslation_th: "ลาก่อน! เดินทางปลอดภัย" },
+            { id: 191, category: "hill", source: "CMU", thai: "Ja Yi", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Ja Yi! Come visit again.", exampleTranslation: "Goodbye! Come visit again.", exampleTranslation_th: "ลาก่อน! มาเยี่ยมอีกนะ" },
+            { id: 192, category: "hill", source: "CMU", thai: "Wo Na", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Wo Na! Until next time.", exampleTranslation: "Goodbye! Until next time.", exampleTranslation_th: "ลาก่อน! แล้วเจอกันใหม่" },
+            { id: 193, category: "hill", source: "CMU", thai: "Mien Dzo", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Mien Dzo! Have a good day.", exampleTranslation: "Goodbye! Have a good day.", exampleTranslation_th: "ลาก่อน! ขอให้มีวันที่ดี" },
+            { id: 194, category: "hill", source: "CMU", thai: "Ghaw Leh", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Ghaw Leh? You look tired.", exampleTranslation: "How are you? You look tired.", exampleTranslation_th: "สบายดีไหม? ดูเหนื่อยนะ" },
+            { id: 195, category: "hill", source: "CMU", thai: "Koj nyob li cas?", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Koj nyob li cas? Everything good?", exampleTranslation: "How are you? Everything good?", exampleTranslation_th: "สบายดีไหม? ทุกอย่างโอเคนะ?" },
+            { id: 196, category: "hill", source: "CMU", thai: "Su Ka", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Su Ka? You look well.", exampleTranslation: "How are you? You look well.", exampleTranslation_th: "สบายดีไหม? ดูดีมาก" },
+            { id: 197, category: "hill", source: "CMU", thai: "Yi Cas", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Yi Cas? Family well?", exampleTranslation: "How are you? Family well?", exampleTranslation_th: "สบายดีไหม? ครอบครัวสบายดีไหม?" },
+            { id: 198, category: "hill", source: "CMU", thai: "A Cas", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "A Cas? Village peaceful?", exampleTranslation: "How are you? Village peaceful?", exampleTranslation_th: "สบายดีไหม? หมู่บ้านสงบดีไหม?" },
+            { id: 199, category: "hill", source: "CMU", thai: "Suu Cas", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Suu Cas? Journey safe?", exampleTranslation: "How are you? Journey safe?", exampleTranslation_th: "สบายดีไหม? การเดินทางปลอดภัยไหม?" },
+            { id: 200, category: "hill", source: "CMU", thai: "Ghaw Pah", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Ghaw Pah! Beautiful day.", exampleTranslation: "Good morning! Beautiful day.", exampleTranslation_th: "อรุณสวัสดิ์! วันนี้อากาศดีจัง" },
+            { id: 201, category: "hill", source: "CMU", thai: "Nyob zoo ntuj", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Nyob zoo ntuj! Sun shining.", exampleTranslation: "Good morning! Sun shining.", exampleTranslation_th: "อรุณสวัสดิ์! แดดจัดจ้า" },
+            { id: 202, category: "hill", source: "CMU", thai: "Su Ka Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Su Ka Nee! Fresh air.", exampleTranslation: "Good morning! Fresh air.", exampleTranslation_th: "อรุณสวัสดิ์! อากาศสดชื่น" },
+            { id: 203, category: "hill", source: "CMU", thai: "Yi Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Yi Nee! Birds singing.", exampleTranslation: "Good morning! Birds singing.", exampleTranslation_th: "อรุณสวัสดิ์! นกกำลังร้องเพลง" },
+            { id: 204, category: "hill", source: "CMU", thai: "A Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "A Nee! Mountains clear.", exampleTranslation: "Good morning! Mountains clear.", exampleTranslation_th: "อรุณสวัสดิ์! ภูเขาแจ่มชัด" },
+            { id: 205, category: "hill", source: "CMU", thai: "Suu Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Suu Nee! River flowing.", exampleTranslation: "Good morning! River flowing.", exampleTranslation_th: "อรุณสวัสดิ์! แม่น้ำไหลเชี่ยว" },
+            { id: 206, category: "hill", source: "CMU", thai: "Ghaw Leh Pah", meaning: "Hello (Karen greeting)", meaning_th: "สวัสดี (คำทักทายของชาวกระเหรี่ยง)", example: "Ghaw Leh Pah! How are you today?", exampleTranslation: "Hello! How are you today?", exampleTranslation_th: "สวัสดี! วันนี้เป็นอย่างไรบ้าง?" },
+            { id: 207, category: "hill", source: "CMU", thai: "Nyob zoo", meaning: "Hello / How are you?", meaning_th: "สวัสดี / สบายดีไหม?", example: "Nyob zoo! Koj nyob li cas?", exampleTranslation: "Hello! How are you?", exampleTranslation_th: "สวัสดี! สบายดีไหม?" },
+            { id: 208, category: "hill", source: "CMU", thai: "Su Ka Ka", meaning: "Hello (Lahu greeting)", meaning_th: "สวัสดี (คำทักทายของชาวลาหู่)", example: "Su Ka Ka! You look well today.", exampleTranslation: "Hello! You look well today.", exampleTranslation_th: "สวัสดี! วันนี้ดูดีมาก" },
+            { id: 209, category: "hill", source: "CMU", thai: "Yi Na", meaning: "Hello (Akha greeting)", meaning_th: "สวัสดี (คำทักทายของชาวอาข่า)", example: "Yi Na! How is your family?", exampleTranslation: "Hello! How is your family?", exampleTranslation_th: "สวัสดี! ครอบครัวสบายดีไหม?" },
+            { id: 210, category: "hill", source: "CMU", thai: "A Wo", meaning: "Hello (Lisu greeting)", meaning_th: "สวัสดี (คำทักทายของชาวลีซอ)", example: "A Wo! Welcome to our village.", exampleTranslation: "Hello! Welcome to our village.", exampleTranslation_th: "สวัสดี! ยินดีต้อนรับสู่หมู่บ้านของเรา" },
+            { id: 211, category: "hill", source: "CMU", thai: "Suu Mien", meaning: "Hello (Mien greeting)", meaning_th: "สวัสดี (คำทักทายของชาวเย้า)", example: "Suu Mien! How was your journey?", exampleTranslation: "Hello! How was your journey?", exampleTranslation_th: "สวัสดี! การเดินทางเป็นอย่างไรบ้าง?" },
+            { id: 212, category: "hill", source: "CMU", thai: "Doh Ghaw", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Doh Ghaw for your help.", exampleTranslation: "Thank you for your help.", exampleTranslation_th: "ขอบคุณสำหรับความช่วยเหลือของคุณ" },
+            { id: 213, category: "hill", source: "CMU", thai: "Ua tsaug", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Ua tsaug for the gift.", exampleTranslation: "Thank you for the gift.", exampleTranslation_th: "ขอบคุณสำหรับของขวัญ" },
+            { id: 214, category: "hill", source: "CMU", thai: "Kha Ni", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Kha Ni for your kindness.", exampleTranslation: "Thank you for your kindness.", exampleTranslation_th: "ขอบคุณสำหรับความเมตตาของคุณ" },
+            { id: 215, category: "hill", source: "CMU", thai: "Ja Na", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Ja Na for sharing your food.", exampleTranslation: "Thank you for sharing your food.", exampleTranslation_th: "ขอบคุณที่แบ่งอาหารให้" },
+            { id: 216, category: "hill", source: "CMU", thai: "Na Wo", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Na Wo for your hospitality.", exampleTranslation: "Thank you for your hospitality.", exampleTranslation_th: "ขอบคุณสำหรับการต้อนรับ" },
+            { id: 217, category: "hill", source: "CMU", thai: "Dzo Mien", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Dzo Mien for your time.", exampleTranslation: "Thank you for your time.", exampleTranslation_th: "ขอบคุณที่สละเวลาให้" },
+            { id: 218, category: "hill", source: "CMU", thai: "Ma Ghaw", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Ma Ghaw! See you tomorrow.", exampleTranslation: "Goodbye! See you tomorrow.", exampleTranslation_th: "ลาก่อน! แล้วเจอกันพรุ่งนี้" },
+            { id: 219, category: "hill", source: "CMU", thai: "Sib ntsib dua", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Sib ntsib dua! Take care.", exampleTranslation: "Goodbye! Take care.", exampleTranslation_th: "ลาก่อน! ดูแลตัวเองด้วย" },
+            { id: 220, category: "hill", source: "CMU", thai: "La Ni", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "La Ni! Safe travels.", exampleTranslation: "Goodbye! Safe travels.", exampleTranslation_th: "ลาก่อน! เดินทางปลอดภัย" },
+            { id: 221, category: "hill", source: "CMU", thai: "Ja Yi", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Ja Yi! Come visit again.", exampleTranslation: "Goodbye! Come visit again.", exampleTranslation_th: "ลาก่อน! มาเยี่ยมอีกนะ" },
+            { id: 222, category: "hill", source: "CMU", thai: "Wo Na", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Wo Na! Until next time.", exampleTranslation: "Goodbye! Until next time.", exampleTranslation_th: "ลาก่อน! แล้วเจอกันใหม่" },
+            { id: 223, category: "hill", source: "CMU", thai: "Mien Dzo", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Mien Dzo! Have a good day.", exampleTranslation: "Goodbye! Have a good day.", exampleTranslation_th: "ลาก่อน! ขอให้มีวันที่ดี" },
+            { id: 224, category: "hill", source: "CMU", thai: "Ghaw Leh", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Ghaw Leh? You look tired.", exampleTranslation: "How are you? You look tired.", exampleTranslation_th: "สบายดีไหม? ดูเหนื่อยนะ" },
+            { id: 225, category: "hill", source: "CMU", thai: "Koj nyob li cas?", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Koj nyob li cas? Everything good?", exampleTranslation: "How are you? Everything good?", exampleTranslation_th: "สบายดีไหม? ทุกอย่างโอเคนะ?" },
+            { id: 226, category: "hill", source: "CMU", thai: "Su Ka", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Su Ka? You look well.", exampleTranslation: "How are you? You look well.", exampleTranslation_th: "สบายดีไหม? ดูดีมาก" },
+            { id: 227, category: "hill", source: "CMU", thai: "Yi Cas", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Yi Cas? Family well?", exampleTranslation: "How are you? Family well?", exampleTranslation_th: "สบายดีไหม? ครอบครัวสบายดีไหม?" },
+            { id: 228, category: "hill", source: "CMU", thai: "A Cas", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "A Cas? Village peaceful?", exampleTranslation: "How are you? Village peaceful?", exampleTranslation_th: "สบายดีไหม? หมู่บ้านสงบดีไหม?" },
+            { id: 229, category: "hill", source: "CMU", thai: "Suu Cas", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Suu Cas? Journey safe?", exampleTranslation: "How are you? Journey safe?", exampleTranslation_th: "สบายดีไหม? การเดินทางปลอดภัยไหม?" },
+            { id: 230, category: "hill", source: "CMU", thai: "Ghaw Pah", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Ghaw Pah! Beautiful day.", exampleTranslation: "Good morning! Beautiful day.", exampleTranslation_th: "อรุณสวัสดิ์! วันนี้อากาศดีจัง" },
+            { id: 231, category: "hill", source: "CMU", thai: "Nyob zoo ntuj", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Nyob zoo ntuj! Sun shining.", exampleTranslation: "Good morning! Sun shining.", exampleTranslation_th: "อรุณสวัสดิ์! แดดจัดจ้า" },
+            { id: 232, category: "hill", source: "CMU", thai: "Su Ka Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Su Ka Nee! Fresh air.", exampleTranslation: "Good morning! Fresh air.", exampleTranslation_th: "อรุณสวัสดิ์! อากาศสดชื่น" },
+            { id: 233, category: "hill", source: "CMU", thai: "Yi Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Yi Nee! Birds singing.", exampleTranslation: "Good morning! Birds singing.", exampleTranslation_th: "อรุณสวัสดิ์! นกกำลังร้องเพลง" },
+            { id: 234, category: "hill", source: "CMU", thai: "A Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "A Nee! Mountains clear.", exampleTranslation: "Good morning! Mountains clear.", exampleTranslation_th: "อรุณสวัสดิ์! ภูเขาแจ่มชัด" },
+            { id: 235, category: "hill", source: "CMU", thai: "Suu Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Suu Nee! River flowing.", exampleTranslation: "Good morning! River flowing.", exampleTranslation_th: "อรุณสวัสดิ์! แม่น้ำไหลเชี่ยว" },
+            { id: 236, category: "hill", source: "CMU", thai: "Ghaw Leh Pah", meaning: "Hello (Karen greeting)", meaning_th: "สวัสดี (คำทักทายของชาวกระเหรี่ยง)", example: "Ghaw Leh Pah! How are you today?", exampleTranslation: "Hello! How are you today?", exampleTranslation_th: "สวัสดี! วันนี้เป็นอย่างไรบ้าง?" },
+            { id: 237, category: "hill", source: "CMU", thai: "Nyob zoo", meaning: "Hello / How are you?", meaning_th: "สวัสดี / สบายดีไหม?", example: "Nyob zoo! Koj nyob li cas?", exampleTranslation: "Hello! How are you?", exampleTranslation_th: "สวัสดี! สบายดีไหม?" },
+            { id: 238, category: "hill", source: "CMU", thai: "Su Ka Ka", meaning: "Hello (Lahu greeting)", meaning_th: "สวัสดี (คำทักทายของชาวลาหู่)", example: "Su Ka Ka! You look well today.", exampleTranslation: "Hello! You look well today.", exampleTranslation_th: "สวัสดี! วันนี้ดูดีมาก" },
+            { id: 239, category: "hill", source: "CMU", thai: "Yi Na", meaning: "Hello (Akha greeting)", meaning_th: "สวัสดี (คำทักทายของชาวอาข่า)", example: "Yi Na! How is your family?", exampleTranslation: "Hello! How is your family?", exampleTranslation_th: "สวัสดี! ครอบครัวสบายดีไหม?" },
+            { id: 240, category: "hill", source: "CMU", thai: "A Wo", meaning: "Hello (Lisu greeting)", meaning_th: "สวัสดี (คำทักทายของชาวลีซอ)", example: "A Wo! Welcome to our village.", exampleTranslation: "Hello! Welcome to our village.", exampleTranslation_th: "สวัสดี! ยินดีต้อนรับสู่หมู่บ้านของเรา" },
+            { id: 241, category: "hill", source: "CMU", thai: "Suu Mien", meaning: "Hello (Mien greeting)", meaning_th: "สวัสดี (คำทักทายของชาวเย้า)", example: "Suu Mien! How was your journey?", exampleTranslation: "Hello! How was your journey?", exampleTranslation_th: "สวัสดี! การเดินทางเป็นอย่างไรบ้าง?" },
+            { id: 242, category: "hill", source: "CMU", thai: "Doh Ghaw", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Doh Ghaw for your help.", exampleTranslation: "Thank you for your help.", exampleTranslation_th: "ขอบคุณสำหรับความช่วยเหลือของคุณ" },
+            { id: 243, category: "hill", source: "CMU", thai: "Ua tsaug", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Ua tsaug for the gift.", exampleTranslation: "Thank you for the gift.", exampleTranslation_th: "ขอบคุณสำหรับของขวัญ" },
+            { id: 244, category: "hill", source: "CMU", thai: "Kha Ni", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Kha Ni for your kindness.", exampleTranslation: "Thank you for your kindness.", exampleTranslation_th: "ขอบคุณสำหรับความเมตตาของคุณ" },
+            { id: 245, category: "hill", source: "CMU", thai: "Ja Na", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Ja Na for sharing your food.", exampleTranslation: "Thank you for sharing your food.", exampleTranslation_th: "ขอบคุณที่แบ่งอาหารให้" },
+            { id: 246, category: "hill", source: "CMU", thai: "Na Wo", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Na Wo for your hospitality.", exampleTranslation: "Thank you for your hospitality.", exampleTranslation_th: "ขอบคุณสำหรับการต้อนรับ" },
+            { id: 247, category: "hill", source: "CMU", thai: "Dzo Mien", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Dzo Mien for your time.", exampleTranslation: "Thank you for your time.", exampleTranslation_th: "ขอบคุณที่สละเวลาให้" },
+            { id: 248, category: "hill", source: "CMU", thai: "Ma Ghaw", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Ma Ghaw! See you tomorrow.", exampleTranslation: "Goodbye! See you tomorrow.", exampleTranslation_th: "ลาก่อน! แล้วเจอกันพรุ่งนี้" },
+            { id: 249, category: "hill", source: "CMU", thai: "Sib ntsib dua", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Sib ntsib dua! Take care.", exampleTranslation: "Goodbye! Take care.", exampleTranslation_th: "ลาก่อน! ดูแลตัวเองด้วย" },
+            { id: 250, category: "hill", source: "CMU", thai: "La Ni", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "La Ni! Safe travels.", exampleTranslation: "Goodbye! Safe travels.", exampleTranslation_th: "ลาก่อน! เดินทางปลอดภัย" },
+            { id: 251, category: "hill", source: "CMU", thai: "Ja Yi", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Ja Yi! Come visit again.", exampleTranslation: "Goodbye! Come visit again.", exampleTranslation_th: "ลาก่อน! มาเยี่ยมอีกนะ" },
+            { id: 252, category: "hill", source: "CMU", thai: "Wo Na", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Wo Na! Until next time.", exampleTranslation: "Goodbye! Until next time.", exampleTranslation_th: "ลาก่อน! แล้วเจอกันใหม่" },
+            { id: 253, category: "hill", source: "CMU", thai: "Mien Dzo", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Mien Dzo! Have a good day.", exampleTranslation: "Goodbye! Have a good day.", exampleTranslation_th: "ลาก่อน! ขอให้มีวันที่ดี" },
+            { id: 254, category: "hill", source: "CMU", thai: "Ghaw Leh", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Ghaw Leh? You look tired.", exampleTranslation: "How are you? You look tired.", exampleTranslation_th: "สบายดีไหม? ดูเหนื่อยนะ" },
+            { id: 255, category: "hill", source: "CMU", thai: "Koj nyob li cas?", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Koj nyob li cas? Everything good?", exampleTranslation: "How are you? Everything good?", exampleTranslation_th: "สบายดีไหม? ทุกอย่างโอเคนะ?" },
+            { id: 256, category: "hill", source: "CMU", thai: "Su Ka", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Su Ka? You look well.", exampleTranslation: "How are you? You look well.", exampleTranslation_th: "สบายดีไหม? ดูดีมาก" },
+            { id: 257, category: "hill", source: "CMU", thai: "Yi Cas", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Yi Cas? Family well?", exampleTranslation: "How are you? Family well?", exampleTranslation_th: "สบายดีไหม? ครอบครัวสบายดีไหม?" },
+            { id: 258, category: "hill", source: "CMU", thai: "A Cas", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "A Cas? Village peaceful?", exampleTranslation: "How are you? Village peaceful?", exampleTranslation_th: "สบายดีไหม? หมู่บ้านสงบดีไหม?" },
+            { id: 259, category: "hill", source: "CMU", thai: "Suu Cas", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Suu Cas? Journey safe?", exampleTranslation: "How are you? Journey safe?", exampleTranslation_th: "สบายดีไหม? การเดินทางปลอดภัยไหม?" },
+            { id: 260, category: "hill", source: "CMU", thai: "Ghaw Pah", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Ghaw Pah! Beautiful day.", exampleTranslation: "Good morning! Beautiful day.", exampleTranslation_th: "อรุณสวัสดิ์! วันนี้อากาศดีจัง" },
+            { id: 261, category: "hill", source: "CMU", thai: "Nyob zoo ntuj", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Nyob zoo ntuj! Sun shining.", exampleTranslation: "Good morning! Sun shining.", exampleTranslation_th: "อรุณสวัสดิ์! แดดจัดจ้า" },
+            { id: 262, category: "hill", source: "CMU", thai: "Su Ka Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Su Ka Nee! Fresh air.", exampleTranslation: "Good morning! Fresh air.", exampleTranslation_th: "อรุณสวัสดิ์! อากาศสดชื่น" },
+            { id: 263, category: "hill", source: "CMU", thai: "Yi Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Yi Nee! Birds singing.", exampleTranslation: "Good morning! Birds singing.", exampleTranslation_th: "อรุณสวัสดิ์! นกกำลังร้องเพลง" },
+            { id: 264, category: "hill", source: "CMU", thai: "A Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "A Nee! Mountains clear.", exampleTranslation: "Good morning! Mountains clear.", exampleTranslation_th: "อรุณสวัสดิ์! ภูเขาแจ่มชัด" },
+            { id: 265, category: "hill", source: "CMU", thai: "Suu Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Suu Nee! River flowing.", exampleTranslation: "Good morning! River flowing.", exampleTranslation_th: "อรุณสวัสดิ์! แม่น้ำไหลเชี่ยว" },
+            { id: 266, category: "hill", source: "CMU", thai: "Ghaw Leh Pah", meaning: "Hello (Karen greeting)", meaning_th: "สวัสดี (คำทักทายของชาวกระเหรี่ยง)", example: "Ghaw Leh Pah! How are you today?", exampleTranslation: "Hello! How are you today?", exampleTranslation_th: "สวัสดี! วันนี้เป็นอย่างไรบ้าง?" },
+            { id: 267, category: "hill", source: "CMU", thai: "Nyob zoo", meaning: "Hello / How are you?", meaning_th: "สวัสดี / สบายดีไหม?", example: "Nyob zoo! Koj nyob li cas?", exampleTranslation: "Hello! How are you?", exampleTranslation_th: "สวัสดี! สบายดีไหม?" },
+            { id: 268, category: "hill", source: "CMU", thai: "Su Ka Ka", meaning: "Hello (Lahu greeting)", meaning_th: "สวัสดี (คำทักทายของชาวลาหู่)", example: "Su Ka Ka! You look well today.", exampleTranslation: "Hello! You look well today.", exampleTranslation_th: "สวัสดี! วันนี้ดูดีมาก" },
+            { id: 269, category: "hill", source: "CMU", thai: "Yi Na", meaning: "Hello (Akha greeting)", meaning_th: "สวัสดี (คำทักทายของชาวอาข่า)", example: "Yi Na! How is your family?", exampleTranslation: "Hello! How is your family?", exampleTranslation_th: "สวัสดี! ครอบครัวสบายดีไหม?" },
+            { id: 270, category: "hill", source: "CMU", thai: "A Wo", meaning: "Hello (Lisu greeting)", meaning_th: "สวัสดี (คำทักทายของชาวลีซอ)", example: "A Wo! Welcome to our village.", exampleTranslation: "Hello! Welcome to our village.", exampleTranslation_th: "สวัสดี! ยินดีต้อนรับสู่หมู่บ้านของเรา" },
+            { id: 271, category: "hill", source: "CMU", thai: "Suu Mien", meaning: "Hello (Mien greeting)", meaning_th: "สวัสดี (คำทักทายของชาวเย้า)", example: "Suu Mien! How was your journey?", exampleTranslation: "Hello! How was your journey?", exampleTranslation_th: "สวัสดี! การเดินทางเป็นอย่างไรบ้าง?" },
+            { id: 272, category: "hill", source: "CMU", thai: "Doh Ghaw", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Doh Ghaw for your help.", exampleTranslation: "Thank you for your help.", exampleTranslation_th: "ขอบคุณสำหรับความช่วยเหลือของคุณ" },
+            { id: 273, category: "hill", source: "CMU", thai: "Ua tsaug", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Ua tsaug for the gift.", exampleTranslation: "Thank you for the gift.", exampleTranslation_th: "ขอบคุณสำหรับของขวัญ" },
+            { id: 274, category: "hill", source: "CMU", thai: "Kha Ni", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Kha Ni for your kindness.", exampleTranslation: "Thank you for your kindness.", exampleTranslation_th: "ขอบคุณสำหรับความเมตตาของคุณ" },
+            { id: 275, category: "hill", source: "CMU", thai: "Ja Na", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Ja Na for sharing your food.", exampleTranslation: "Thank you for sharing your food.", exampleTranslation_th: "ขอบคุณที่แบ่งอาหารให้" },
+            { id: 276, category: "hill", source: "CMU", thai: "Na Wo", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Na Wo for your hospitality.", exampleTranslation: "Thank you for your hospitality.", exampleTranslation_th: "ขอบคุณสำหรับการต้อนรับ" },
+            { id: 277, category: "hill", source: "CMU", thai: "Dzo Mien", meaning: "Thank you", meaning_th: "ขอบคุณ", example: "Dzo Mien for your time.", exampleTranslation: "Thank you for your time.", exampleTranslation_th: "ขอบคุณที่สละเวลาให้" },
+            { id: 278, category: "hill", source: "CMU", thai: "Ma Ghaw", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Ma Ghaw! See you tomorrow.", exampleTranslation: "Goodbye! See you tomorrow.", exampleTranslation_th: "ลาก่อน! แล้วเจอกันพรุ่งนี้" },
+            { id: 279, category: "hill", source: "CMU", thai: "Sib ntsib dua", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "Sib ntsib dua! Take care.", exampleTranslation: "Goodbye! Take care.", exampleTranslation_th: "ลาก่อน! ดูแลตัวเองด้วย" },
+            { id: 280, category: "hill", source: "CMU", thai: "La Ni", meaning: "Goodbye", meaning_th: "ลาก่อน", example: "La Ni! Safe travels.", exampleTranslation: "Goodbye! Safe travels.", exampleTranslation_th: "ลาก่อน! เดินทางปลอดภัย" },
+            { id: 281, category: "thai", source: "Chiang Mai Rajabhat", thai: "ปังไม่รู้ตัว", meaning: "Unintentionally awesome", meaning_th: "เจ๋งโดยไม่รู้ตัว", example: "ทำอะไรก็ปังไม่รู้ตัว", exampleTranslation: "Everything you do is unintentionally awesome", exampleTranslation_th: "ทำอะไรก็เจ๋งโดยไม่รู้ตัว" },
+            { id: 282, category: "lanna", source: "Payap", thai: "ฮ้อน", meaning: "Hot", meaning_th: "ร้อน", example: "ฮ้อนหลาย", exampleTranslation: "Very hot", exampleTranslation_th: "ร้อนมาก" },
+            { id: 283, category: "hill", source: "CMU", thai: "Ghaw Pah", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Ghaw Pah! Beautiful day.", exampleTranslation: "Good morning! Beautiful day.", exampleTranslation_th: "อรุณสวัสดิ์! วันนี้อากาศดีจัง" },
+            { id: 284, category: "thai", source: "Chiang Mai Rajabhat", thai: "อัด", meaning: "To record (video)", meaning_th: "อัด (วิดีโอ)", example: "อย่าลืมอัดคลิปด้วยนะ", exampleTranslation: "Don't forget to record a video too", exampleTranslation_th: "อย่าลืมอัดคลิปด้วยนะ" },
+            { id: 285, category: "thai", source: "Chiang Mai Rajabhat", thai: "ปังต่อปัง", meaning: "Awesome after awesome", meaning_th: "เจ๋งต่อเนื่อง", example: "วันนี้ปังต่อปังเลย", exampleTranslation: "Today is awesome after awesome", exampleTranslation_th: "วันนี้เจ๋งต่อเนื่องเลย" },
+            { id: 286, category: "thai", source: "Chiang Mai Rajabhat", thai: "อัดต่อ", meaning: "Record more", meaning_th: "อัดต่อ", example: "อัดต่อๆ อย่าหยุด", exampleTranslation: "Keep recording, don't stop", exampleTranslation_th: "อัดต่อๆ อย่าหยุด" },
+            { id: 287, category: "thai", source: "Chiang Mai Rajabhat", thai: "ปังสุด", meaning: "Most awesome", meaning_th: "เจ๋งที่สุด", example: "ปังสุดในประวัติศาสตร์", exampleTranslation: "Most awesome in history", exampleTranslation_th: "เจ๋งที่สุดในประวัติศาสตร์" },
+            { id: 288, category: "lanna", source: "Payap", thai: "เย็น", meaning: "Cold", meaning_th: "เย็น", example: "เย็นหลาย", exampleTranslation: "Very cold", exampleTranslation_th: "เย็นมาก" },
+            { id: 289, category: "lanna", source: "Payap", thai: "อิ่ม", meaning: "Full (after eating)", meaning_th: "อิ่ม", example: "อิ่มหลาย", exampleTranslation: "Very full", exampleTranslation_th: "อิ่มมาก" },
+            { id: 290, category: "lanna", source: "Payap", thai: "หิว", meaning: "Hungry", meaning_th: "หิว", example: "หิวหลาย", exampleTranslation: "Very hungry", exampleTranslation_th: "หิวมาก" },
+            { id: 291, category: "hill", source: "CMU", thai: "Nyob zoo ntuj", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Nyob zoo ntuj! Sun shining.", exampleTranslation: "Good morning! Sun shining.", exampleTranslation_th: "อรุณสวัสดิ์! แดดจัดจ้า" },
+            { id: 292, category: "hill", source: "CMU", thai: "Su Ka Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Su Ka Nee! Fresh air.", exampleTranslation: "Good morning! Fresh air.", exampleTranslation_th: "อรุณสวัสดิ์! อากาศสดชื่น" },
+            { id: 293, category: "hill", source: "CMU", thai: "Yi Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Yi Nee! Birds singing.", exampleTranslation: "Good morning! Birds singing.", exampleTranslation_th: "อรุณสวัสดิ์! นกกำลังร้องเพลง" },
+            { id: 294, category: "hill", source: "CMU", thai: "A Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "A Nee! Mountains clear.", exampleTranslation: "Good morning! Mountains clear.", exampleTranslation_th: "อรุณสวัสดิ์! ภูเขาแจ่มชัด" },
+            { id: 295, category: "hill", source: "CMU", thai: "Suu Nee", meaning: "Good morning", meaning_th: "อรุณสวัสดิ์", example: "Suu Nee! River flowing.", exampleTranslation: "Good morning! River flowing.", exampleTranslation_th: "อรุณสวัสดิ์! แม่น้ำไหลเชี่ยว" },
+            { id: 296, category: "thai", source: "Rajabhat", thai: "อ่อยเก่ง", meaning: "Good at flirting", meaning_th: "อ่อยเก่ง", example: "เธออ่อยเก่งมาก", exampleTranslation: "She's really good at flirting", exampleTranslation_th: "เธออ่อยเก่งมาก" },
+            { id: 297, category: "thai", source: "Rajabhat", thai: "ฟินเวอร์", meaning: "Extremely satisfying", meaning_th: "ฟินสุดๆ", example: "ฟินเวอร์มาก", exampleTranslation: "Extremely satisfying", exampleTranslation_th: "ฟินสุดๆ" },
+            { id: 298, category: "thai", source: "Rajabhat", thai: "ชิลล์สุดๆ", meaning: "Extremely relaxed", meaning_th: "ชิลล์สุดๆ", example: "ชิลล์สุดๆ วันนี้", exampleTranslation: "Extremely relaxed today", exampleTranslation_th: "ชิลล์สุดๆ วันนี้" },
+            { id: 299, category: "thai", source: "Rajabhat", thai: "เกรียนสุด", meaning: "Most immature", meaning_th: "เด็กที่สุด", example: "พฤติกรรมเกรียนสุด", exampleTranslation: "Most immature behavior", exampleTranslation_th: "พฤติกรรมเด็กที่สุด" },
+            { id: 300, category: "thai", source: "Rajabhat", thai: "ซีเรียสเกิน", meaning: "Too serious", meaning_th: "จริงจังเกินไป", example: "อย่าซีเรียสเกินไป", exampleTranslation: "Don't be too serious", exampleTranslation_th: "อย่าจริงจังเกินไป" },
+            { id: 301, category: "lanna", source: "Payap", thai: "เหนื่อย", meaning: "Tired", meaning_th: "เหนื่อย", example: "เหนื่อยหลาย", exampleTranslation: "Very tired", exampleTranslation_th: "เหนื่อยมาก" },
+            { id: 302, category: "lanna", source: "Payap", thai: "สดชื่น", meaning: "Refreshed", meaning_th: "สดชื่น", example: "สดชื่นหลาย", exampleTranslation: "Very refreshed", exampleTranslation_th: "สดชื่นมาก" },
+            { id: 303, category: "hill", source: "CMU", thai: "Ghaw Leh", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Ghaw Leh? You look tired.", exampleTranslation: "How are you? You look tired.", exampleTranslation_th: "สบายดีไหม? ดูเหนื่อยนะ" },
+            { id: 304, category: "hill", source: "CMU", thai: "Koj nyob li cas?", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Koj nyob li cas? Everything good?", exampleTranslation: "How are you? Everything good?", exampleTranslation_th: "สบายดีไหม? ทุกอย่างโอเคนะ?" },
+            { id: 305, category: "hill", source: "CMU", thai: "Su Ka", meaning: "How are you?", meaning_th: "สบายดีไหม?", example: "Su Ka? You look well.", exampleTranslation: "How are you? You look well.", exampleTranslation_th: "สบายดีไหม? ดูดีมาก" }
         ];
         
-        // Language toggle functionality
+        // DOM elements
+        const container = document.getElementById('expressions-container');
+        const searchInput = document.getElementById('search-input');
+        const searchBtnMain = document.getElementById('search-btn-main');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const sortSelect = document.getElementById('sort-select');
+        const resultsCount = document.getElementById('results-count');
+        const totalCount = document.getElementById('total-count');
+        const thaiCount = document.getElementById('thai-count');
+        const lannaCount = document.getElementById('lanna-count');
+        const hillCount = document.getElementById('hill-count');
         const languageToggle = document.getElementById('language-toggle');
+        const languageText = document.getElementById('language-text');
+        const navItems = document.querySelectorAll('.nav-item');
+        const topBtn = document.getElementById('top-btn');
+        
+        // Initialize stats
+        totalCount.textContent = expressions.length;
+        thaiCount.textContent = expressions.filter(e => e.category === 'thai').length;
+        lannaCount.textContent = expressions.filter(e => e.category === 'lanna').length;
+        hillCount.textContent = expressions.filter(e => e.category === 'hill').length;
+        
+        // Language toggle functionality
         languageToggle.addEventListener('click', () => {
             currentLang = currentLang === 'en' ? 'th' : 'en';
             document.body.className = document.body.className.replace(/lang-\w+/g, '') + ` lang-${currentLang}`;
             updateTranslations();
-            updateContentFromPDF();
+            filterAndSearch();
         });
         
         // Update all text based on current language
         function updateTranslations() {
             document.getElementById('app-title').textContent = translations[currentLang].appTitle;
-            document.getElementById('festival-desc').textContent = translations[currentLang].festivalDesc;
-            document.getElementById('traditions-title').textContent = translations[currentLang].traditionsTitle;
-            document.getElementById('lanterns-title').textContent = translations[currentLang].lanternsTitle;
-            document.getElementById('merit-making-title').textContent = translations[currentLang].meritMakingTitle;
-            document.getElementById('tung-title').textContent = translations[currentLang].tungTitle;
-            document.getElementById('candles-title').textContent = translations[currentLang].candlesTitle;
-            document.getElementById('krathong-title').textContent = translations[currentLang].krathongTitle;
-            document.getElementById('floating-title').textContent = translations[currentLang].floatingTitle;
-            document.getElementById('language-title').textContent = translations[currentLang].languageTitle;
+            document.getElementById('home-title').textContent = translations[currentLang].homeTitle;
+            document.getElementById('home-desc').textContent = translations[currentLang].homeDesc;
+            document.getElementById('search-title').textContent = translations[currentLang].searchTitle;
+            document.getElementById('expressions-title').textContent = translations[currentLang].expressionsTitle;
             document.getElementById('gamification-title').textContent = translations[currentLang].gamificationTitle;
             document.getElementById('flashcards-title').textContent = translations[currentLang].flashcardsTitle;
             document.getElementById('quiz-title').textContent = translations[currentLang].quizTitle;
             document.getElementById('archives-title').textContent = translations[currentLang].archivesTitle;
             document.getElementById('archives-desc').textContent = translations[currentLang].archivesDesc;
-            document.getElementById('ai-agents-title').textContent = translations[currentLang].aiAgentsTitle;
             document.getElementById('about-title').textContent = translations[currentLang].aboutTitle;
             document.getElementById('about-desc').textContent = translations[currentLang].aboutDesc;
             document.getElementById('about-desc2').textContent = translations[currentLang].aboutDesc2;
+            document.getElementById('total-label').textContent = translations[currentLang].totalLabel;
+            document.getElementById('thai-label').textContent = translations[currentLang].thaiLabel;
+            document.getElementById('lanna-label').textContent = translations[currentLang].lannaLabel;
+            document.getElementById('hill-label').textContent = translations[currentLang].hillLabel;
+            document.getElementById('speech-error').textContent = translations[currentLang].speechError;
+            document.getElementById('all-filter').textContent = translations[currentLang].allFilter;
+            document.getElementById('thai-filter').textContent = translations[currentLang].thaiFilter;
+            document.getElementById('lanna-filter').textContent = translations[currentLang].lannaFilter;
+            document.getElementById('hill-filter').textContent = translations[currentLang].hillFilter;
+            document.getElementById('search-btn-text').textContent = translations[currentLang].searchBtnText;
+            
+            // Update results count if needed
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            const searchTerm = searchInput.value.toLowerCase();
+            if (!searchTerm && activeFilter === 'all') {
+                resultsCount.textContent = translations[currentLang].resultsCountAll;
+            } else {
+                // We'll update this in filterAndSearch
+            }
         }
         
-        // Update PDF content based on language
-        function updateContentFromPDF() {
-            document.getElementById('lanterns-desc').textContent = yiPengContent.lanterns[currentLang];
-            document.getElementById('merit-making-desc').textContent = yiPengContent.meritMaking[currentLang];
-            document.getElementById('tung-desc').textContent = yiPengContent.tung[currentLang];
-            document.getElementById('candles-desc').textContent = yiPengContent.candles[currentLang];
-            document.getElementById('krathong-desc').textContent = yiPengContent.krathong[currentLang];
-            document.getElementById('floating-desc').textContent = yiPengContent.floating[currentLang];
+        // Check if speech synthesis is available
+        const speechAvailable = 'speechSynthesis' in window;
+        if (!speechAvailable) {
+            document.getElementById('no-speech').style.display = 'block';
+        }
+        
+        // Speak function
+        function speakText(text, lang = 'th-TH') {
+            if (!speechAvailable) return;
             
-            // Update expressions in language section
-            const languageCards = document.querySelectorAll('.language-card');
-            languageCards.forEach((card, index) => {
-                if (index < yiPengExpressions.length) {
-                    const exp = yiPengExpressions[index];
-                    const paragraphs = card.querySelectorAll('p');
-                    if (paragraphs[0]) {
-                        paragraphs[0].innerHTML = `<strong>Meaning:</strong> ${currentLang === 'en' ? exp.meaning_en : exp.meaning_th}`;
+            // Cancel any ongoing speech
+            speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.9;
+            utterance.pitch = 1.1;
+            
+            speechSynthesis.speak(utterance);
+        }
+        
+        // Render expressions
+        function renderExpressions(expressionsToRender) {
+            container.innerHTML = '';
+            
+            if (expressionsToRender.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>${currentLang === 'en' ? 'No expressions found' : 'ไม่พบคำศัพท์'}</h3>
+                        <p>${currentLang === 'en' ? 'Try adjusting your search terms or filters' : 'ลองปรับคำค้นหาหรือตัวกรองของคุณ'}</p>
+                    </div>
+                `;
+                resultsCount.textContent = currentLang === 'en' ? 
+                    `0 expressions found` : 
+                    `ไม่พบคำศัพท์`;
+                return;
+            }
+            
+            // Sort expressions
+            let sortedExpressions = [...expressionsToRender];
+            const sortValue = sortSelect.value;
+            
+            if (sortValue === 'alphabetical') {
+                sortedExpressions.sort((a, b) => a.thai.localeCompare(b.thai, 'th'));
+            } else if (sortValue === 'category') {
+                const categoryOrder = { 'thai': 1, 'lanna': 2, 'hill': 3 };
+                sortedExpressions.sort((a, b) => {
+                    return categoryOrder[a.category] - categoryOrder[b.category] || a.thai.localeCompare(b.thai, 'th');
+                });
+            }
+            
+            sortedExpressions.forEach(exp => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.id = exp.id;
+                
+                // Flag based on category
+                let flagClass = '';
+                if (exp.flag === 'thai') flagClass = 'thai-flag';
+                else if (exp.flag === 'lanna') flagClass = 'lanna-flag';
+                else if (exp.flag === 'hill') flagClass = 'hill-tribe-flag';
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h3><span class="flag ${flagClass}"></span>${currentLang === 'en' ? exp.title : getThaiTitle(exp.category)}</h3>
+                        <button class="pronunciation-btn" title="${currentLang === 'en' ? 'Hear pronunciation' : 'ฟังการออกเสียง'}">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="thai-word">
+                            ${exp.thai}
+                            <i class="fas fa-volume-up" title="${currentLang === 'en' ? 'Hear pronunciation' : 'ฟังการออกเสียง'}"></i>
+                            <span class="audio-indicator"></span>
+                        </div>
+                        <div class="pronunciation">[${exp.pronunciation}]</div>
+                        <div class="meaning">${currentLang === 'en' ? exp.meaning : getThaiMeaning(exp)}</div>
+                        <div class="example">
+                            <strong>${currentLang === 'en' ? 'Example:' : 'ตัวอย่าง:'}</strong> ${exp.example}
+                            <div class="example-thai">
+                                ${exp.exampleTranslation}
+                                <i class="fas fa-volume-up" title="${currentLang === 'en' ? 'Hear example' : 'ฟังตัวอย่าง'}"></i>
+                            </div>
+                        </div>
+                        <div class="usage">
+                            <span><i class="fas fa-users"></i> ${currentLang === 'en' ? exp.usage : getThaiUsage(exp)}</span>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+                
+                // Add event listeners for pronunciation
+                const cardElement = card;
+                const thaiWord = cardElement.querySelector('.thai-word');
+                const exampleThai = cardElement.querySelector('.example-thai');
+                const headerBtn = cardElement.querySelector('.pronunciation-btn');
+                
+                // Thai word pronunciation
+                thaiWord.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'I') {
+                        playPronunciation(cardElement, exp.thai, exp.lang);
                     }
-                    if (paragraphs[1]) {
-                        paragraphs[1].innerHTML = `<strong>Usage:</strong> "${currentLang === 'en' ? exp.usage_en : exp.usage_th}"`;
-                    }
-                }
-            });
-        }
-        
-        // Chatbot functionality
-        const chatbotToggle = document.getElementById('chatbot-toggle');
-        const chatbotContainer = document.getElementById('chatbot-container');
-        const chatbotMessages = document.getElementById('chatbot-messages');
-        const chatbotInput = document.getElementById('chatbot-input');
-        const chatbotSend = document.getElementById('chatbot-send');
-        
-        chatbotToggle.addEventListener('click', () => {
-            if (chatbotContainer.style.display === 'none') {
-                chatbotContainer.style.display = 'flex';
-                chatbotToggle.style.display = 'none';
-            }
-        });
-        
-        // Close chatbot when clicking outside
-        document.addEventListener('click', (e) => {
-            if (chatbotContainer.style.display === 'flex' && 
-                !chatbotContainer.contains(e.target) && 
-                e.target !== chatbotToggle) {
-                chatbotContainer.style.display = 'none';
-                chatbotToggle.style.display = 'flex';
-            }
-        });
-        
-        chatbotSend.addEventListener('click', sendMessage);
-        chatbotInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-        
-        function sendMessage() {
-            const message = chatbotInput.value.trim();
-            if (!message) return;
-            
-            // Add user message
-            const userMsg = document.createElement('div');
-            userMsg.className = 'message user-message';
-            userMsg.textContent = message;
-            chatbotMessages.appendChild(userMsg);
-            
-            chatbotInput.value = '';
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            
-            // Simulate AI response about Yi Peng
-            setTimeout(() => {
-                const responses = [
-                    "That's related to Yi Peng traditions! The lanterns symbolize letting go of negativity.",
-                    "In Lanna culture, floating krathongs represents asking forgiveness from the water goddess.",
-                    "Tung banners are believed to bring great merit when offered at temples during Yi Peng.",
-                    "The merit-making events during Yi Peng span three days with different sermons each evening.",
-                    "Yi Peng candles are placed at useful household locations to bring intelligence and brightness.",
-                    "The floating lantern tradition dates back to the Hariphunchai period in the 14th century.",
-                    "Would you like to learn more about this Yi Peng tradition with our flashcards?",
-                    "This expression is commonly used during the Yi Peng festival in Chiang Mai."
-                ];
-                
-                const botMsg = document.createElement('div');
-                botMsg.className = 'message bot-message';
-                botMsg.textContent = responses[Math.floor(Math.random() * responses.length)];
-                chatbotMessages.appendChild(botMsg);
-                
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            }, 1000);
-        }
-        
-        // Flashcard functionality (30 cards with Yi Peng content)
-        let currentFlashcardIndex = 0;
-        const flashcardContainer = document.getElementById('flashcard-container');
-        const flashcard = document.getElementById('flashcard');
-        const flashcardWord = document.getElementById('flashcard-word');
-        const flashcardMeaning = document.getElementById('flashcard-meaning');
-        const nextFlashcardBtn = document.getElementById('next-flashcard');
-        const prevFlashcardBtn = document.getElementById('prev-flashcard');
-        
-        // Initialize flashcard with Yi Peng expressions
-        function updateFlashcard() {
-            const exp = yiPengExpressions[currentFlashcardIndex % yiPengExpressions.length];
-            flashcardWord.textContent = exp.thai;
-            flashcardMeaning.textContent = currentLang === 'en' ? exp.meaning_en : exp.meaning_th;
-            flashcard.classList.remove('flipped');
-        }
-        
-        // Flashcard flip functionality
-        flashcardContainer.addEventListener('click', () => {
-            flashcard.classList.toggle('flipped');
-        });
-        
-        // Next flashcard
-        nextFlashcardBtn.addEventListener('click', () => {
-            currentFlashcardIndex = (currentFlashcardIndex + 1) % yiPengExpressions.length;
-            updateFlashcard();
-            updatePoints(5);
-        });
-        
-        // Previous flashcard
-        prevFlashcardBtn.addEventListener('click', () => {
-            currentFlashcardIndex = (currentFlashcardIndex - 1 + yiPengExpressions.length) % yiPengExpressions.length;
-            updateFlashcard();
-        });
-        
-        // Quiz functionality
-        let currentQuestionIndex = 0;
-        let quizScore = 0;
-        const quizQuestion = document.getElementById('quiz-question');
-        const quizOptions = document.getElementById('quiz-options');
-        const quizFeedback = document.getElementById('quiz-feedback');
-        const nextQuestionBtn = document.getElementById('next-question');
-        const resetQuizBtn = document.getElementById('reset-quiz');
-        
-        // Generate quiz question
-        function generateQuizQuestion() {
-            const exp = yiPengExpressions[currentQuestionIndex % yiPengExpressions.length];
-            quizQuestion.textContent = currentLang === 'en' ? 
-                `What does "${exp.thai}" mean?` : 
-                `"${exp.thai}" แปลว่าอะไร?`;
-            
-            // Create options - one correct, three incorrect
-            const correctOption = currentLang === 'en' ? exp.meaning_en : exp.meaning_th;
-            let incorrectOptions = [];
-            
-            // Get 3 random incorrect meanings
-            while (incorrectOptions.length < 3) {
-                const randomExp = yiPengExpressions[Math.floor(Math.random() * yiPengExpressions.length)];
-                const randomMeaning = currentLang === 'en' ? randomExp.meaning_en : randomExp.meaning_th;
-                if (randomMeaning !== correctOption && !incorrectOptions.includes(randomMeaning)) {
-                    incorrectOptions.push(randomMeaning);
-                }
-            }
-            
-            // Combine and shuffle options
-            const allOptions = [correctOption, ...incorrectOptions];
-            allOptions.sort(() => Math.random() - 0.5);
-            
-            // Create option elements
-            quizOptions.innerHTML = '';
-            allOptions.forEach(option => {
-                const optionEl = document.createElement('div');
-                optionEl.className = 'quiz-option';
-                optionEl.textContent = option;
-                optionEl.dataset.correct = option === correctOption ? 'true' : 'false';
-                quizOptions.appendChild(optionEl);
-            });
-            
-            // Clear feedback
-            quizFeedback.style.display = 'none';
-            quizFeedback.className = 'quiz-feedback';
-            
-            // Enable options
-            document.querySelectorAll('.quiz-option').forEach(option => {
-                option.style.pointerEvents = 'auto';
-                option.classList.remove('correct', 'incorrect');
-            });
-            
-            nextQuestionBtn.style.display = 'none';
-        }
-        
-        // Handle option selection
-        quizOptions.addEventListener('click', (e) => {
-            if (e.target.classList.contains('quiz-option')) {
-                const selectedOption = e.target;
-                const isCorrect = selectedOption.dataset.correct === 'true';
-                
-                // Disable further selections
-                document.querySelectorAll('.quiz-option').forEach(option => {
-                    option.style.pointerEvents = 'none';
                 });
                 
-                // Highlight correct/incorrect
-                if (isCorrect) {
-                    selectedOption.classList.add('correct');
-                    quizFeedback.textContent = currentLang === 'en' ? 'Correct! Well done!' : 'ถูกต้อง! เยี่ยมมาก!';
-                    quizFeedback.classList.add('feedback-correct');
-                    quizScore++;
-                    updatePoints(10);
-                } else {
-                    selectedOption.classList.add('incorrect');
-                    // Highlight correct answer
-                    document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
-                    quizFeedback.textContent = currentLang === 'en' ? 
-                        `Incorrect. The correct answer is: ${document.querySelector('.quiz-option[data-correct="true"]').textContent}` : 
-                        `ผิดค่ะ คำตอบที่ถูกคือ: ${document.querySelector('.quiz-option[data-correct="true"]').textContent}`;
-                    quizFeedback.classList.add('feedback-incorrect');
-                }
+                // Example pronunciation
+                exampleThai.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'I') {
+                        playPronunciation(cardElement, exp.example, exp.lang);
+                    }
+                });
                 
-                quizFeedback.style.display = 'block';
-                nextQuestionBtn.style.display = 'block';
+                // Header button pronunciation
+                headerBtn.addEventListener('click', () => {
+                    playPronunciation(cardElement, exp.thai, exp.lang);
+                });
+            });
+            
+            // Update results count
+            const countText = translations[currentLang].resultsCount
+                .replace('{count}', sortedExpressions.length)
+                .replace('{total}', expressions.length);
+            resultsCount.textContent = countText;
+        }
+        
+        // Helper functions for Thai translations
+        function getThaiTitle(category) {
+            if (category === 'thai') return "คำสแลงไทยสมัยใหม่";
+            if (category === 'lanna') return "คำศัพท์ล้านนา";
+            return "วลีชนเผ่าบนดอย";
+        }
+        
+        function getThaiMeaning(exp) {
+            return exp.meaning_th;
+        }
+        
+        function getThaiUsage(exp) {
+            return exp.usage_th || exp.usage;
+        }
+        
+        // Play pronunciation with visual feedback
+        function playPronunciation(cardElement, text, lang) {
+            if (!speechAvailable) return;
+            
+            // Add playing class for visual feedback
+            cardElement.classList.add('playing');
+            
+            // Speak the text
+            speakText(text, lang);
+            
+            // Remove playing class after speech ends
+            setTimeout(() => {
+                cardElement.classList.remove('playing');
+            }, 2000);
+        }
+        
+        // Filter and search functionality
+        function filterAndSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            
+            let filteredExpressions = expressions;
+            
+            // Apply category filter
+            if (activeFilter !== 'all') {
+                filteredExpressions = expressions.filter(exp => exp.category === activeFilter);
             }
-        });
-        
-        // Next question
-        nextQuestionBtn.addEventListener('click', () => {
-            currentQuestionIndex = (currentQuestionIndex + 1) % yiPengExpressions.length;
-            generateQuizQuestion();
-        });
-        
-        // Reset quiz
-        resetQuizBtn.addEventListener('click', () => {
-            currentQuestionIndex = 0;
-            quizScore = 0;
-            generateQuizQuestion();
-            updatePoints(-userPoints);
-            updatePoints(0);
-        });
+            
+            // Apply search filter
+            if (searchTerm) {
+                filteredExpressions = filteredExpressions.filter(exp => 
+                    exp.thai.toLowerCase().includes(searchTerm) ||
+                    exp.meaning.toLowerCase().includes(searchTerm) ||
+                    exp.meaning_th.toLowerCase().includes(searchTerm) ||
+                    exp.example.toLowerCase().includes(searchTerm) ||
+                    exp.exampleTranslation.toLowerCase().includes(searchTerm) ||
+                    exp.exampleTranslation_th.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            renderExpressions(filteredExpressions);
+        }
         
         // Navigation functionality
-        const navItems = document.querySelectorAll('.nav-item');
-        
         function scrollToSection(id) {
             const section = document.getElementById(id);
             if (section) {
@@ -1745,8 +1878,8 @@
         
         // Update active nav item on scroll
         window.addEventListener('scroll', () => {
-            const sections = ['festival', 'traditions', 'language', 'gamification', 'archives', 'ai-agents', 'about'];
-            const scrollPos = window.scrollY + 120;
+            const sections = ['home', 'search', 'expressions', 'gamification', 'archives', 'about'];
+            const scrollPos = window.scrollY + 100;
             
             for (const sectionId of sections) {
                 const section = document.getElementById(sectionId);
@@ -1763,12 +1896,145 @@
             }
         });
         
+        // Event listeners for search and filters
+        searchBtnMain.addEventListener('click', filterAndSearch);
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                filterAndSearch();
+            }
+        });
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                filterAndSearch();
+            });
+        });
+        
+        sortSelect.addEventListener('change', filterAndSearch);
+        
+        // Gamification functionality
+        let currentFlashcardIndex = 0;
+        const flashcardContainer = document.getElementById('flashcard-container');
+        const flashcard = document.getElementById('flashcard');
+        const flashcardWord = document.getElementById('flashcard-word');
+        const flashcardMeaning = document.getElementById('flashcard-meaning');
+        const nextFlashcardBtn = document.getElementById('next-flashcard');
+        const prevFlashcardBtn = document.getElementById('prev-flashcard');
+        
+        // Initialize flashcard
+        function updateFlashcard() {
+            const exp = expressions[currentFlashcardIndex];
+            flashcardWord.textContent = exp.thai;
+            flashcardMeaning.textContent = currentLang === 'en' ? exp.meaning : exp.meaning_th;
+            flashcard.classList.remove('flipped');
+        }
+        
+        // Flashcard flip functionality
+        flashcardContainer.addEventListener('click', () => {
+            flashcard.classList.toggle('flipped');
+        });
+        
+        // Next flashcard
+        nextFlashcardBtn.addEventListener('click', () => {
+            currentFlashcardIndex = (currentFlashcardIndex + 1) % expressions.length;
+            updateFlashcard();
+            updatePoints(5);
+        });
+        
+        // Previous flashcard
+        prevFlashcardBtn.addEventListener('click', () => {
+            currentFlashcardIndex = (currentFlashcardIndex - 1 + expressions.length) % expressions.length;
+            updateFlashcard();
+        });
+        
+        // Quiz functionality
+        let currentQuestionIndex = 0;
+        let quizScore = 0;
+        const quizQuestion = document.getElementById('quiz-question');
+        const quizOptions = document.getElementById('quiz-options');
+        const nextQuestionBtn = document.getElementById('next-question');
+        const resetQuizBtn = document.getElementById('reset-quiz');
+        
+        // Generate quiz question
+        function generateQuizQuestion() {
+            const exp = expressions[currentQuestionIndex];
+            quizQuestion.textContent = currentLang === 'en' ? 
+                `What does "${exp.thai}" mean?` : 
+                `"${exp.thai}" แปลว่าอะไร?`;
+            
+            // Create options - one correct, three incorrect
+            const correctOption = currentLang === 'en' ? exp.meaning : exp.meaning_th;
+            let incorrectOptions = [];
+            
+            while (incorrectOptions.length < 3) {
+                const randomExp = expressions[Math.floor(Math.random() * expressions.length)];
+                const randomMeaning = currentLang === 'en' ? randomExp.meaning : randomExp.meaning_th;
+                if (randomMeaning !== correctOption && !incorrectOptions.includes(randomMeaning)) {
+                    incorrectOptions.push(randomMeaning);
+                }
+            }
+            
+            const allOptions = [correctOption, ...incorrectOptions];
+            allOptions.sort(() => Math.random() - 0.5);
+            
+            quizOptions.innerHTML = '';
+            allOptions.forEach(option => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'quiz-option';
+                optionEl.textContent = option;
+                optionEl.dataset.correct = option === correctOption ? 'true' : 'false';
+                quizOptions.appendChild(optionEl);
+            });
+            
+            // Add event listeners to options
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', handleOptionClick);
+            });
+            
+            nextQuestionBtn.style.display = 'none';
+        }
+        
+        function handleOptionClick(e) {
+            const selectedOption = e.target;
+            const isCorrect = selectedOption.dataset.correct === 'true';
+            
+            // Disable further selections
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+            
+            if (isCorrect) {
+                selectedOption.classList.add('correct');
+                quizScore++;
+                updatePoints(10);
+            } else {
+                selectedOption.classList.add('incorrect');
+                // Highlight correct answer
+                document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+            }
+            
+            nextQuestionBtn.style.display = 'block';
+        }
+        
+        nextQuestionBtn.addEventListener('click', () => {
+            currentQuestionIndex = (currentQuestionIndex + 1) % expressions.length;
+            generateQuizQuestion();
+        });
+        
+        resetQuizBtn.addEventListener('click', () => {
+            currentQuestionIndex = 0;
+            quizScore = 0;
+            generateQuizQuestion();
+        });
+        
         // Initialize the app
         document.body.className = `lang-${currentLang}`;
+        renderExpressions(expressions);
         updateFlashcard();
         generateQuizQuestion();
         updateTranslations();
-        updateContentFromPDF();
     </script>
 </body>
 </html>
