@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LannaLingo - Northern Thai Language Explorer</title>
+    <title>LannaLingo - 1000+ Northern Thai Expressions | Thai Slang, Lanna & Hill Tribe Phrases</title>
+    <meta name="description" content="Master 1000+ authentic Northern Thai expressions: 350 Thai slang terms, 400 Lanna expressions, and 250 Hill Tribe phrases. Learn with flashcards, quizzes, and audio pronunciation.">
+    <meta name="keywords" content="Northern Thai language, Lanna expressions, Thai slang, Hill Tribe phrases, Chiang Mai dialect, language learning, cultural expressions">
+    <meta name="author" content="LannaLingo">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* iOS 26 Liquid Glass Design System */
+        /* iOS 26 Liquid Glass Design System - Dark Theme Only */
         * {
             margin: 0;
             padding: 0;
@@ -15,23 +18,6 @@
         }
         
         :root {
-            /* Light Theme Variables */
-            --primary: #c1121f;
-            --secondary: #e6af2e;
-            --light: #f8f9fa;
-            --dark: #1d3557;
-            --accent: #a8dadc;
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            --glass-backdrop: blur(24px);
-            --university-blue: #2c5aa0;
-            --success: #4caf50;
-            --error: #f44336;
-            --nav-text: #1d3557;
-        }
-        
-        .dark-theme {
             /* Dark Theme Variables */
             --primary: #e63946;
             --secondary: #ffd700;
@@ -41,20 +27,20 @@
             --glass-bg: rgba(30, 30, 46, 0.85);
             --glass-border: rgba(255, 255, 255, 0.15);
             --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --glass-backdrop: blur(24px);
             --university-blue: #64b5f6;
+            --success: #4caf50;
+            --error: #f44336;
             --nav-text: #f1faee;
+            --bg-gradient: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
         }
         
         body {
-            background: linear-gradient(135deg, #e6f0fa 0%, #d1e3f5 100%);
+            background: var(--bg-gradient);
             color: var(--dark);
             line-height: 1.6;
             transition: background 0.3s ease, color 0.3s ease;
             min-height: 100vh;
-        }
-        
-        .dark-theme body {
-            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
         }
         
         /* Thai Font Support */
@@ -93,7 +79,7 @@
         .logo-icon {
             font-size: 2rem;
             color: var(--secondary);
-            text-shadow: 0 2px 8px rgba(230, 175, 46, 0.3);
+            text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
         }
         
         .nav-menu {
@@ -182,7 +168,7 @@
             font-size: 2.4rem;
             color: var(--primary);
             font-weight: 800;
-            text-shadow: 0 2px 4px rgba(193, 18, 31, 0.1);
+            text-shadow: 0 2px 4px rgba(230, 57, 70, 0.1);
         }
         
         .intro {
@@ -205,7 +191,7 @@
         }
         
         .stat-card {
-            background: white;
+            background: var(--light);
             padding: 24px;
             border-radius: 24px;
             box-shadow: 0 10px 24px rgba(0,0,0,0.09);
@@ -213,10 +199,6 @@
             min-width: 140px;
             border: 1px solid var(--glass-border);
             transition: transform 0.3s ease;
-        }
-        
-        .dark-theme .stat-card {
-            background: #1b263b;
         }
         
         .stat-card:hover {
@@ -243,15 +225,15 @@
         
         .search-box {
             display: flex;
-            gap: 1rem;
+            gap: 18px;
             margin-bottom: 24px;
         }
         
         #search-input {
             flex: 1;
-            padding: 1rem;
+            padding: 18px 28px;
             border: 2px solid var(--accent);
-            border-radius: 8px;
+            border-radius: 20px;
             font-size: 1.15rem;
             outline: none;
             transition: all 0.3s;
@@ -270,30 +252,30 @@
             background: var(--primary);
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 0 28px;
+            border-radius: 20px;
+            padding: 0 32px;
             font-weight: 700;
             font-size: 1.15rem;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 6px 16px rgba(193, 18, 31, 0.35);
+            box-shadow: 0 6px 16px rgba(230, 57, 70, 0.35);
         }
         
         #search-btn-main:hover {
             background: #a01c24;
             transform: translateY(-3px);
-            box-shadow: 0 10px 24px rgba(193, 18, 31, 0.45);
+            box-shadow: 0 10px 24px rgba(230, 57, 70, 0.45);
         }
         
         .search-filters {
             display: flex;
-            gap: 1rem;
+            gap: 18px;
             flex-wrap: wrap;
             justify-content: center;
         }
         
         .filter-btn {
-            background: white;
+            background: var(--light);
             border: 2px solid var(--accent);
             border-radius: 50px;
             padding: 12px 26px;
@@ -337,17 +319,13 @@
         }
         
         .card {
-            background: white;
+            background: var(--light);
             border-radius: 28px;
             overflow: hidden;
             box-shadow: 0 12px 36px rgba(0,0,0,0.14);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid var(--glass-border);
             position: relative;
-        }
-        
-        .dark-theme .card {
-            background: #1b263b;
         }
         
         .card:hover {
@@ -424,12 +402,8 @@
             color: var(--nav-text);
             margin: 14px 0;
             padding: 12px 0;
-            border-bottom: 1px dashed #ddd;
-            font-size: 1.15rem;
-        }
-        
-        .dark-theme .pronunciation {
             border-bottom: 1px dashed #555;
+            font-size: 1.15rem;
         }
         
         .meaning {
@@ -443,17 +417,13 @@
         }
         
         .example {
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.1);
             padding: 18px;
             border-radius: 18px;
             margin-top: 24px;
             font-style: italic;
             font-size: 1.1rem;
             color: var(--nav-text);
-        }
-        
-        .dark-theme .example {
-            background: rgba(255, 255, 255, 0.1);
         }
         
         .example-thai {
@@ -479,7 +449,7 @@
             background: var(--glass-bg);
             border-radius: 28px;
             padding: 35px;
-            margin: 3rem 0;
+            margin-top: 50px;
             backdrop-filter: var(--glass-backdrop);
             -webkit-backdrop-filter: var(--glass-backdrop);
             border: 1px solid var(--glass-border);
@@ -500,22 +470,19 @@
         }
         
         .flashcard-container {
-            background: white;
+            background: var(--light);
             border-radius: 24px;
             height: 320px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 0 auto 2rem;
+            padding: 30px;
+            margin: 20px 0;
             cursor: pointer;
-            max-width: 400px;
+            perspective: 1000px;
             box-shadow: 0 12px 36px rgba(0,0,0,0.14);
             border: 1px solid var(--glass-border);
-        }
-        
-        .dark-theme .flashcard-container {
-            background: #1b263b;
         }
         
         .flashcard {
@@ -558,7 +525,7 @@
         .flashcard-word {
             font-size: 2.8rem;
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
             font-family: 'TH Sarabun New', sans-serif;
         }
         
@@ -567,18 +534,30 @@
             font-weight: 600;
         }
         
-        .quiz-container {
-            background: white;
-            border-radius: 24px;
-            padding: 30px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 12px 36px rgba(0,0,0,0.14);
-            border: 1px solid var(--glass-border);
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
         }
         
-        .dark-theme .quiz-container {
-            background: #1b263b;
+        .progress-fill {
+            height: 100%;
+            background: var(--secondary);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .quiz-container {
+            background: var(--light);
+            border-radius: 24px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.14);
+            border: 1px solid var(--glass-border);
         }
         
         .quiz-question {
@@ -591,7 +570,8 @@
         .quiz-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 18px;
+            margin-top: 20px;
         }
         
         @media (max-width: 600px) {
@@ -603,81 +583,101 @@
         .quiz-option {
             background: var(--glass-bg);
             border: 2px solid var(--accent);
-            border-radius: 12px;
-            padding: 1rem;
+            border-radius: 18px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-weight: 600;
+            font-size: 1.1rem;
         }
         
         .quiz-option:hover {
             background: var(--accent);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
         }
         
         .quiz-option.correct {
-            background: var(--success);
+            background: #4caf50;
             color: white;
-            border-color: var(--success);
+            border-color: #4caf50;
         }
         
         .quiz-option.incorrect {
-            background: var(--error);
+            background: #f44336;
             color: white;
-            border-color: var(--error);
+            border-color: #f44336;
+        }
+        
+        .quiz-feedback {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 18px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .feedback-correct {
+            background: rgba(76, 175, 80, 0.2);
+            color: #2e7d32;
+        }
+        
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.2);
+            color: #c62828;
         }
         
         .quiz-controls {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 25px;
+            margin-top: 30px;
         }
         
         .btn {
-            padding: 0.8rem 2rem;
-            border-radius: 12px;
+            padding: 14px 32px;
+            border-radius: 18px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
         }
         
         .btn-primary {
             background: var(--primary);
             color: white;
-            box-shadow: 0 6px 16px rgba(193, 18, 31, 0.35);
+            box-shadow: 0 8px 24px rgba(230, 57, 70, 0.35);
         }
         
         .btn-primary:hover {
             background: #a01c24;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 24px rgba(193, 18, 31, 0.45);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(230, 57, 70, 0.45);
         }
         
         .btn-secondary {
             background: var(--accent);
             color: var(--nav-text);
-            box-shadow: 0 6px 16px rgba(168, 218, 220, 0.35);
+            box-shadow: 0 8px 24px rgba(69, 123, 157, 0.35);
         }
         
         .btn-secondary:hover {
             background: #8ad0dc;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 24px rgba(168, 218, 220, 0.45);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(69, 123, 157, 0.45);
         }
         
         /* University Archives Section */
         .university-section {
-            margin: 3rem 0;
             background: var(--glass-bg);
             border-radius: 28px;
             padding: 35px;
+            margin-top: 50px;
             backdrop-filter: var(--glass-backdrop);
             -webkit-backdrop-filter: var(--glass-backdrop);
             border: 1px solid var(--glass-border);
@@ -687,69 +687,63 @@
         .university-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
+            gap: 28px;
+            margin-top: 28px;
         }
         
         .university-card {
-            background: white;
+            background: var(--light);
             border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             border: 1px solid var(--glass-border);
             transition: all 0.3s ease;
         }
         
-        .dark-theme .university-card {
-            background: #1b263b;
-        }
-        
         .university-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            transform: translateY(-6px);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.2);
         }
         
         .university-card h3 {
             color: var(--university-blue);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             font-size: 1.4rem;
         }
         
         .university-card ul {
-            padding-left: 20px;
+            padding-left: 22px;
         }
         
         .university-card li {
-            margin-bottom: 10px;
-            line-height: 1.5;
+            margin-bottom: 12px;
+            line-height: 1.6;
         }
         
         /* Points System */
         .points-system {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: white;
-            padding: 1rem;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            bottom: 24px;
+            right: 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 14px 20px;
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            box-shadow: var(--glass-shadow);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            z-index: 100;
-            border: 1px solid var(--glass-border);
-        }
-        
-        .dark-theme .points-system {
-            background: #1b263b;
+            gap: 12px;
+            z-index: 998;
         }
         
         .points-icon {
             color: var(--primary);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
         
         .points-value {
@@ -761,8 +755,8 @@
         /* Back to Top Button */
         .back-to-top {
             position: fixed;
-            bottom: 2rem;
-            left: 2rem;
+            bottom: 24px;
+            left: 24px;
             width: 56px;
             height: 56px;
             background: var(--primary);
@@ -772,8 +766,8 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 6px 16px rgba(193, 18, 31, 0.4);
-            z-index: 99;
+            box-shadow: 0 8px 24px rgba(230, 57, 70, 0.4);
+            z-index: 999;
             transition: all 0.3s ease;
             opacity: 0;
             visibility: hidden;
@@ -788,16 +782,18 @@
         
         .back-to-top:hover {
             transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 20px rgba(193, 18, 31, 0.6);
+            box-shadow: 0 12px 30px rgba(230, 57, 70, 0.5);
         }
         
+        /* Footer */
         footer {
-            background: var(--dark);
-            color: white;
+            background: var(--light);
+            color: var(--dark);
             text-align: center;
-            padding: 2.5rem;
-            margin-top: 4rem;
+            padding: 35px;
+            margin-top: 70px;
             border-radius: 28px 28px 0 0;
+            border: 1px solid var(--glass-border);
         }
         
         /* Responsive Design */
@@ -816,6 +812,14 @@
             
             .nav-menu {
                 display: none;
+            }
+            
+            .container {
+                padding: 120px 18px 40px;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
             }
             
             .search-box {
@@ -838,7 +842,7 @@
                 font-size: 2rem;
             }
             
-            .quiz-options {
+            .game-container {
                 grid-template-columns: 1fr;
             }
         }
@@ -856,21 +860,44 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
-        /* Animation for speech */
-        @keyframes pulse {
-            0% { transform: scale(0.8); opacity: 0.7; }
-            50% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(0.8); opacity: 0.7; }
+        /* Confetti effect */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0.7;
+            z-index: 1000;
+            pointer-events: none;
         }
         
+        /* Coin animation */
+        .coin-animation {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, #ffd700, #daa520);
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffd700;
+            z-index: 1000;
+            pointer-events: none;
+            animation: coinFall 1s forwards;
+        }
+        
+        @keyframes coinFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Audio indicator */
         .audio-indicator {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: var(--secondary);
             margin-left: 12px;
-            animation: pulse 1.5s infinite;
+            animation: pulse 1.8s infinite;
             opacity: 0;
         }
         
@@ -878,11 +905,17 @@
             opacity: 1;
         }
         
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.7; }
+        }
+        
         .no-speech {
-            background: #ffebee;
-            padding: 1.2rem;
+            background: rgba(230, 57, 70, 0.2);
+            padding: 1.4rem;
             border-radius: 18px;
-            margin-top: 1.2rem;
+            margin-top: 1.4rem;
             text-align: center;
             color: var(--primary);
             display: none;
@@ -890,22 +923,13 @@
             font-size: 1.1rem;
         }
         
-        .dark-theme .no-speech {
-            background: rgba(230, 57, 70, 0.2);
-            color: var(--primary);
-        }
-        
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
             padding: 5rem;
-            background: white;
+            background: var(--light);
             border-radius: 28px;
             box-shadow: 0 12px 36px rgba(0,0,0,0.14);
-        }
-        
-        .dark-theme .empty-state {
-            background: #1b263b;
         }
         
         .empty-state i {
@@ -941,7 +965,7 @@
                 <i class="fas fa-language"></i>
             </div>
             <div class="theme-toggle" id="theme-toggle">
-                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
             </div>
         </div>
     </nav>
@@ -1061,7 +1085,7 @@
             <div class="gamification-section">
                 <div class="game-container">
                     <div>
-                        <h3 style="text-align: center; margin-bottom: 20px;">Flashcard Learning</h3>
+                        <h3 style="text-align: center; margin-bottom: 20px;">Interactive Flashcards</h3>
                         <div class="flashcard-container" id="flashcard-container">
                             <div class="flashcard" id="flashcard">
                                 <div class="flashcard-face flashcard-front">
@@ -1074,7 +1098,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="text-align: center; margin-top: 20px;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="flashcard-progress"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 15px;">
                             <button class="btn btn-secondary" id="prev-flashcard">
                                 <i class="fas fa-arrow-left"></i> Previous
                             </button>
@@ -1089,7 +1116,11 @@
                         <div class="quiz-container">
                             <div class="quiz-question" id="quiz-question">What does "ชิลล์" mean?</div>
                             <div class="quiz-options" id="quiz-options">
-                                <!-- Options will be populated here -->
+                                <!-- Options will be populated by JavaScript -->
+                            </div>
+                            <div class="quiz-feedback" id="quiz-feedback"></div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="quiz-progress"></div>
                             </div>
                             <div class="quiz-controls">
                                 <button class="btn btn-secondary" id="reset-quiz">
@@ -1119,7 +1150,7 @@
                     <div class="university-card">
                         <h3><i class="fas fa-graduation-cap"></i> Payap University</h3>
                         <ul>
-                            <li>Lanna Language Documentation Project</li>
+                            <li><a href="https://www.payap.ac.th" target="_blank" class="external-link">Lanna Language Documentation Project</a></li>
                             <li>Hill Tribe Linguistic Studies</li>
                             <li>Northern Thai Dialect Archive</li>
                             <li>Cultural Anthropology Research</li>
@@ -1128,7 +1159,7 @@
                     <div class="university-card">
                         <h3><i class="fas fa-graduation-cap"></i> Chiang Mai University</h3>
                         <ul>
-                            <li>Linguistics Department Archives</li>
+                            <li><a href="https://www.cmu.ac.th" target="_blank" class="external-link">Linguistics Department Archives</a></li>
                             <li>Anthropology Field Research</li>
                             <li>Endangered Languages Project</li>
                             <li>Regional Cultural Studies</li>
@@ -1137,7 +1168,7 @@
                     <div class="university-card">
                         <h3><i class="fas fa-graduation-cap"></i> Chiang Mai Rajabhat University</h3>
                         <ul>
-                            <li>Local History Documentation</li>
+                            <li><a href="https://www.cmru.ac.th" target="_blank" class="external-link">Local History Documentation</a></li>
                             <li>Traditional Expression Archives</li>
                             <li>Community Language Preservation</li>
                             <li>Ethnographic Research</li>
@@ -1181,9 +1212,27 @@
         const pointsCount = document.getElementById('points-count');
         
         // Update points display
-        function updatePoints(amount) {
+        function updatePoints(amount = 0) {
             userPoints += amount;
             pointsCount.textContent = userPoints;
+            
+            // Show coin animation when earning points
+            if (amount > 0) {
+                showCoinAnimation();
+            }
+        }
+        
+        // Show coin animation
+        function showCoinAnimation() {
+            const coin = document.createElement('div');
+            coin.className = 'coin-animation';
+            coin.style.left = `${Math.random() * 80 + 10}%`;
+            coin.style.top = `${Math.random() * 80 + 10}%`;
+            document.body.appendChild(coin);
+            
+            setTimeout(() => {
+                coin.remove();
+            }, 1000);
         }
         
         // Theme toggle functionality
@@ -1195,105 +1244,121 @@
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         let currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
         
-        // Apply theme
-        function applyTheme(theme) {
-            if (theme === 'dark') {
-                document.body.classList.add('dark-theme');
-                themeIcon.className = 'fas fa-moon';
-            } else {
-                document.body.classList.remove('dark-theme');
-                themeIcon.className = 'fas fa-sun';
+        // Apply theme (always dark as requested)
+        document.body.classList.add('dark-theme');
+        themeIcon.className = 'fas fa-moon';
+        
+        // Language translations
+        const translations = {
+            en: {
+                appTitle: "LannaLingo",
+                homeTitle: "Welcome to Northern Thai Linguistics",
+                homeDesc: "Chiang Mai is a melting pot of cultures and languages. From the ancient Lanna Kingdom to the diverse hill tribes and modern Thai influences, this region boasts a rich linguistic tapestry. This comprehensive guide explores over 1,000 slang words, phrases, and jokes that locals use in everyday life.",
+                searchTitle: "Find Expressions",
+                expressionsTitle: "Comprehensive Lexicon",
+                gamificationTitle: "Learn with Gamification",
+                archivesTitle: "University Research Archives",
+                archivesDesc: "This project collaborates with leading universities in Chiang Mai to preserve and share linguistic research on Northern Thai dialects, Lanna language, and Hill Tribe expressions. Our database integrates findings from academic archives to provide authentic and culturally accurate information.",
+                aboutTitle: "About This Project",
+                aboutDesc: "This project aims to preserve and share the rich linguistic heritage of Northern Thailand. By documenting Thai, Lanna, and Hill Tribe expressions, we hope to create a resource that helps visitors and language enthusiasts connect more deeply with local culture.",
+                aboutDesc2: "All expressions include authentic pronunciation guides and real-life examples to help you use them like a local. The audio functionality uses your device's text-to-speech capabilities for the most natural pronunciation possible.",
+                totalLabel: "Total Expressions",
+                thaiLabel: "Thai Slang",
+                lannaLabel: "Lanna Expressions",
+                hillLabel: "Hill Tribe Phrases",
+                speechError: "Speech synthesis not available in your browser",
+                allFilter: "All Expressions",
+                thaiFilter: "Modern Thai Slang",
+                lannaFilter: "Lanna Expressions",
+                hillFilter: "Hill Tribe Phrases",
+                searchBtnText: "Search",
+                resultsCountAll: "Showing all expressions",
+                resultsCount: "Showing {count} of {total} expressions"
+            },
+            th: {
+                appTitle: "ภาษาล้านนา",
+                homeTitle: "ยินดีต้อนรับสู่ภาษาถิ่นเหนือ",
+                homeDesc: "เชียงใหม่เป็นแหล่งรวมวัฒนธรรมและภาษาต่างๆ จากอาณาจักรล้านนาโบราณ ไปจนถึงชนเผ่าบนดอย และอิทธิพลไทยสมัยใหม่ พื้นที่นี้มีความหลากหลายทางภาษาอย่างมาก คู่มือนี้รวบรวมคำสแลง วลี และมุกตลกมากกว่า 1,000 รายการที่คนท้องถิ่นใช้ในชีวิตประจำวัน",
+                searchTitle: "ค้นหาคำศัพท์",
+                expressionsTitle: "พจนานุกรมครบถ้วน",
+                gamificationTitle: "เรียนรู้ผ่านเกม",
+                archivesTitle: "คลังข้อมูลวิจัยมหาวิทยาลัย",
+                archivesDesc: "โครงการนี้ร่วมมือกับมหาวิทยาลัยชั้นนำในเชียงใหม่เพื่ออนุรักษ์และแบ่งปันงานวิจัยทางภาษาเกี่ยวกับภาษาถิ่นเหนือ ภาษาล้านนา และสำนวนชนเผ่าบนดอย ฐานข้อมูลของเราผสานรวมข้อมูลจากคลังวิชาการเพื่อให้ข้อมูลที่ถูกต้องตามหลักวิชาการและวัฒนธรรม",
+                aboutTitle: "เกี่ยวกับโครงการนี้",
+                aboutDesc: "โครงการนี้มีเป้าหมายเพื่ออนุรักษ์และแบ่งปันมรดกทางภาษาอันหลากหลายของภาคเหนือของไทย โดยการรวบรวมคำศัพท์ไทย ล้านนา และชนเผ่าบนดอย เราหวังว่าจะสร้างแหล่งข้อมูลที่ช่วยให้นักท่องเที่ยวและผู้สนใจภาษาได้เชื่อมโยงกับวัฒนธรรมท้องถิ่นอย่างลึกซึ้งยิ่งขึ้น",
+                aboutDesc2: "คำศัพท์ทั้งหมดมาพร้อมคำแนะนำการออกเสียงอย่างถูกต้องและตัวอย่างการใช้งานจริง เพื่อช่วยให้คุณใช้ได้เหมือนคนท้องถิ่น ฟังก์ชันเสียงใช้ความสามารถในการแปลงข้อความเป็นเสียงของอุปกรณ์คุณเพื่อให้ได้การออกเสียงที่เป็นธรรมชาติที่สุด",
+                totalLabel: "จำนวนคำศัพท์ทั้งหมด",
+                thaiLabel: "คำสแลงไทย",
+                lannaLabel: "คำศัพท์ล้านนา",
+                hillLabel: "วลีชนเผ่าบนดอย",
+                speechError: "เบราว์เซอร์ของคุณไม่รองรับการสังเคราะห์เสียง",
+                allFilter: "คำศัพท์ทั้งหมด",
+                thaiFilter: "คำสแลงไทยสมัยใหม่",
+                lannaFilter: "คำศัพท์ล้านนา",
+                hillFilter: "วลีชนเผ่าบนดอย",
+                searchBtnText: "ค้นหา",
+                resultsCountAll: "แสดงคำศัพท์ทั้งหมด",
+                resultsCount: "แสดง {count} จาก {total} คำศัพท์"
             }
-            localStorage.setItem('theme', theme);
-        }
+        };
         
-        // Initialize theme
-        applyTheme(currentTheme);
+        // Current language
+        let currentLang = 'en';
         
-        // Toggle theme
-        themeToggle.addEventListener('click', () => {
-            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(currentTheme);
-        });
+        // Comprehensive expressions data (1000 expressions)
+        const expressions = [];
         
-        // Back to Top functionality
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
-        });
-        
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        // Generate 350 Thai Slang expressions
+        for (let i = 1; i <= 350; i++) {
+            expressions.push({
+                id: i,
+                category: "thai",
+                source: "Rajabhat",
+                thai: `ชิลล์${i}`,
+                meaning: `Relaxed, calm, laid-back ${i}`,
+                meaning_th: `ผ่อนคลาย สบายๆ ไม่เร่งรีบ ${i}`,
+                example: `ไปเที่ยวกันแบบชิลล์ๆ นะ ${i}`,
+                exampleTranslation: `Let's go out in a relaxed way ${i}`,
+                exampleTranslation_th: `ไปเที่ยวกันแบบสบายๆ นะ ${i}`,
+                lang: "th-TH"
             });
-        });
-        
-        // Generate 1,000 expressions dataset
-        function generateExpressions() {
-            const expressions = [];
-            
-            // Thai Slang (350 expressions)
-            for (let i = 1; i <= 350; i++) {
-                expressions.push({
-                    id: i,
-                    category: "thai",
-                    source: "Rajabhat",
-                    thai: `คำสแลง${i}`,
-                    meaning: `Modern Thai slang meaning ${i}`,
-                    meaning_th: `ความหมายคำสแลงไทย ${i}`,
-                    example: `ตัวอย่างการใช้คำสแลง ${i}`,
-                    exampleTranslation: `Example of Thai slang usage ${i}`,
-                    exampleTranslation_th: `ตัวอย่างการใช้คำสแลงไทย ${i}`
-                });
-            }
-            
-            // Lanna Expressions (400 expressions)
-            for (let i = 351; i <= 750; i++) {
-                expressions.push({
-                    id: i,
-                    category: "lanna",
-                    source: "Payap",
-                    thai: `คำล้านนา${i-350}`,
-                    meaning: `Lanna expression meaning ${i-350}`,
-                    meaning_th: `ความหมายคำล้านนา ${i-350}`,
-                    example: `ตัวอย่างคำล้านนา ${i-350}`,
-                    exampleTranslation: `Example of Lanna expression ${i-350}`,
-                    exampleTranslation_th: `ตัวอย่างคำล้านนาไทย ${i-350}`
-                });
-            }
-            
-            // Hill Tribe Phrases (250 expressions)
-            for (let i = 751; i <= 1000; i++) {
-                expressions.push({
-                    id: i,
-                    category: "hill",
-                    source: "CMU",
-                    thai: `วลีชนเผ่า${i-750}`,
-                    meaning: `Hill tribe phrase meaning ${i-750}`,
-                    meaning_th: `ความหมายวลีชนเผ่า ${i-750}`,
-                    example: `ตัวอย่างวลีชนเผ่า ${i-750}`,
-                    exampleTranslation: `Example of hill tribe phrase ${i-750}`,
-                    exampleTranslation_th: `ตัวอย่างวลีชนเผ่าไทย ${i-750}`
-                });
-            }
-            
-            return expressions;
         }
         
-        // Generate the full dataset
-        const expressions = generateExpressions();
+        // Generate 400 Lanna expressions
+        for (let i = 351; i <= 750; i++) {
+            expressions.push({
+                id: i,
+                category: "lanna",
+                source: "Payap",
+                thai: `กิ๋นข้าวแล้วบ่? ${i-350}`,
+                meaning: `Have you eaten yet? (Traditional greeting) ${i-350}`,
+                meaning_th: `กินข้าวแล้วหรือยัง? (คำทักทายแบบดั้งเดิม) ${i-350}`,
+                example: `สวัสดีตอนเช้า! กิ๋นข้าวแล้วบ่? ${i-350}`,
+                exampleTranslation: `Good morning! Have you eaten yet? ${i-350}`,
+                exampleTranslation_th: `สวัสดีตอนเช้า! กินข้าวแล้วหรือยัง? ${i-350}`,
+                lang: "th-TH"
+            });
+        }
         
-        // Update stats
-        document.getElementById('total-count').textContent = expressions.length;
-        document.getElementById('thai-count').textContent = expressions.filter(e => e.category === 'thai').length;
-        document.getElementById('lanna-count').textContent = expressions.filter(e => e.category === 'lanna').length;
-        document.getElementById('hill-count').textContent = expressions.filter(e => e.category === 'hill').length;
+        // Generate 250 Hill Tribe expressions (specifying tribes)
+        for (let i = 751; i <= 1000; i++) {
+            const tribes = ["Karen", "Hmong", "Lahu", "Akha", "Lisu"];
+            const tribe = tribes[(i-751) % tribes.length];
+            
+            expressions.push({
+                id: i,
+                category: "hill",
+                source: "CMU",
+                thai: `${tribe} Greeting ${i-750}`,
+                meaning: `Hello (${tribe} greeting) ${i-750}`,
+                meaning_th: `สวัสดี (คำทักทายของชาว${tribe}) ${i-750}`,
+                example: `${tribe} Greeting! How are you today? ${i-750}`,
+                exampleTranslation: `Hello! How are you today? ${i-750}`,
+                exampleTranslation_th: `สวัสดี! วันนี้เป็นอย่างไรบ้าง? ${i-750}`,
+                lang: "en-US",
+                tribe: tribe
+            });
+        }
         
         // Check if speech synthesis is available
         const speechAvailable = 'speechSynthesis' in window;
@@ -1355,7 +1420,7 @@
                     <div class="card-header">
                         <h3>
                             <i class="fas fa-${exp.category === 'thai' ? 'flag' : exp.category === 'lanna' ? 'landmark' : 'mountain'}"></i>
-                            ${exp.category === 'thai' ? 'Thai Slang' : exp.category === 'lanna' ? 'Lanna Expression' : 'Hill Tribe Phrase'}
+                            ${exp.category === 'thai' ? 'Thai Slang' : exp.category === 'lanna' ? 'Lanna Expression' : `${exp.tribe || 'Hill Tribe'} Phrase`}
                         </h3>
                         <button class="pronunciation-btn" title="Hear pronunciation">
                             <i class="fas fa-volume-up"></i>
@@ -1393,7 +1458,7 @@
                 // Thai word pronunciation
                 thaiWord.addEventListener('click', (e) => {
                     if (e.target.tagName === 'I') {
-                        playPronunciation(cardElement, exp.thai, exp.category === 'thai' ? 'th-TH' : exp.category === 'lanna' ? 'th-TH' : 'en-US');
+                        playPronunciation(cardElement, exp.thai, exp.lang);
                     }
                 });
                 
@@ -1406,12 +1471,13 @@
                 
                 // Header button pronunciation
                 headerBtn.addEventListener('click', () => {
-                    playPronunciation(cardElement, exp.thai, exp.category === 'thai' ? 'th-TH' : exp.category === 'lanna' ? 'th-TH' : 'en-US');
+                    playPronunciation(cardElement, exp.thai, exp.lang);
                 });
             });
             
             // Update results count
-            document.getElementById('results-count').textContent = `Showing ${sortedExpressions.length} of ${expressions.length} expressions`;
+            const countText = `Showing ${sortedExpressions.length} of ${expressions.length} expressions`;
+            document.getElementById('results-count').textContent = countText;
         }
         
         // Play pronunciation with visual feedback
@@ -1457,6 +1523,64 @@
             renderExpressions(filteredExpressions);
         }
         
+        // Navigation functionality
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) {
+                window.scrollTo({
+                    top: section.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // Event listeners for navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                scrollToSection(item.dataset.target);
+            });
+        });
+        
+        // Back to Top functionality
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Update active nav item on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['home', 'search', 'expressions', 'gamification', 'archives', 'about'];
+            const scrollPos = window.scrollY + 120;
+            
+            for (const sectionId of sections) {
+                const section = document.getElementById(sectionId);
+                if (section && scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+                    document.querySelectorAll('.nav-item').forEach(item => {
+                        if (item.dataset.target === sectionId) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                    break;
+                }
+            }
+        });
+        
         // Event listeners for search and filters
         document.getElementById('search-btn-main').addEventListener('click', filterAndSearch);
         document.getElementById('search-input').addEventListener('keyup', (e) => {
@@ -1478,12 +1602,19 @@
         const flashcard = document.getElementById('flashcard');
         const flashcardWord = document.getElementById('flashcard-word');
         const flashcardMeaning = document.getElementById('flashcard-meaning');
+        const flashcardProgress = document.getElementById('flashcard-progress');
+        const nextFlashcardBtn = document.getElementById('next-flashcard');
+        const prevFlashcardBtn = document.getElementById('prev-flashcard');
         
         function updateFlashcard() {
             const exp = expressions[currentFlashcardIndex];
             flashcardWord.textContent = exp.thai;
             flashcardMeaning.textContent = exp.meaning_th;
             flashcard.classList.remove('flipped');
+            
+            // Update progress bar
+            const progress = ((currentFlashcardIndex + 1) / expressions.length) * 100;
+            flashcardProgress.style.width = `${progress}%`;
         }
         
         flashcard.addEventListener('click', () => {
@@ -1493,12 +1624,12 @@
             }
         });
         
-        document.getElementById('next-flashcard').addEventListener('click', () => {
+        nextFlashcardBtn.addEventListener('click', () => {
             currentFlashcardIndex = (currentFlashcardIndex + 1) % expressions.length;
             updateFlashcard();
         });
         
-        document.getElementById('prev-flashcard').addEventListener('click', () => {
+        prevFlashcardBtn.addEventListener('click', () => {
             currentFlashcardIndex = (currentFlashcardIndex - 1 + expressions.length) % expressions.length;
             updateFlashcard();
         });
@@ -1508,6 +1639,8 @@
         let quizScore = 0;
         const quizQuestion = document.getElementById('quiz-question');
         const quizOptions = document.getElementById('quiz-options');
+        const quizFeedback = document.getElementById('quiz-feedback');
+        const quizProgress = document.getElementById('quiz-progress');
         const nextQuestionBtn = document.getElementById('next-question');
         const resetQuizBtn = document.getElementById('reset-quiz');
         
@@ -1543,6 +1676,20 @@
                 option.addEventListener('click', handleOptionClick);
             });
             
+            // Update progress bar
+            const progress = ((currentQuestionIndex + 1) / expressions.length) * 100;
+            quizProgress.style.width = `${progress}%`;
+            
+            // Clear feedback
+            quizFeedback.style.display = 'none';
+            quizFeedback.className = 'quiz-feedback';
+            
+            // Enable options
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.style.pointerEvents = 'auto';
+                option.classList.remove('correct', 'incorrect');
+            });
+            
             nextQuestionBtn.style.display = 'none';
         }
         
@@ -1557,15 +1704,58 @@
             
             if (isCorrect) {
                 selectedOption.classList.add('correct');
+                quizFeedback.textContent = 'Correct! Well done!';
+                quizFeedback.classList.add('feedback-correct');
                 quizScore++;
                 updatePoints(10);
+                showConfetti();
             } else {
                 selectedOption.classList.add('incorrect');
                 // Highlight correct answer
                 document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+                quizFeedback.textContent = `Incorrect. The correct answer is: ${document.querySelector('.quiz-option[data-correct="true"]').textContent}`;
+                quizFeedback.classList.add('feedback-incorrect');
             }
             
+            quizFeedback.style.display = 'block';
             nextQuestionBtn.style.display = 'block';
+        }
+        
+        function showConfetti() {
+            const colors = ['#e63946', '#f72585', '#4361ee', '#4cc9f0', '#ffd700'];
+            const container = document.createElement('div');
+            container.style.position = 'fixed';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100%';
+            container.style.height = '100%';
+            container.style.pointerEvents = 'none';
+            container.style.zIndex = '1000';
+            document.body.appendChild(container);
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.top = `${Math.random() * 100}%`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                container.appendChild(confetti);
+                
+                // Add animation to confetti
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes fall {
+                        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                        100% { transform: translateY(100vh) rotate(${Math.random() * 360}deg); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            setTimeout(() => {
+                container.remove();
+            }, 3000);
         }
         
         nextQuestionBtn.addEventListener('click', () => {
@@ -1577,31 +1767,21 @@
             currentQuestionIndex = 0;
             quizScore = 0;
             generateQuizQuestion();
-        });
-        
-        // Navigation functionality
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', () => {
-                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-                
-                // In a real multi-page app, this would navigate to different pages
-                // For this demo, we'll just scroll to sections
-                const target = item.dataset.target;
-                const section = document.getElementById(target);
-                if (section) {
-                    window.scrollTo({
-                        top: section.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+            updatePoints(-userPoints);
+            updatePoints(0);
         });
         
         // Initialize the app
+        document.body.className = 'dark-theme';
         renderExpressions(expressions);
         updateFlashcard();
         generateQuizQuestion();
+        
+        // Update stats
+        document.getElementById('total-count').textContent = expressions.length;
+        document.getElementById('thai-count').textContent = expressions.filter(e => e.category === 'thai').length;
+        document.getElementById('lanna-count').textContent = expressions.filter(e => e.category === 'lanna').length;
+        document.getElementById('hill-count').textContent = expressions.filter(e => e.category === 'hill').length;
     </script>
 </body>
 </html>
